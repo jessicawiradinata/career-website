@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom'
 
 export default () => (
   <Switch>
-    <Route exact path="/" component={LoginContainer} />
-    <Route path="/home" component={HomeContainer} />
+    <Route exact path="/" component={HomeContainer} />
+    <Route path="/login" component={LoginContainer} />
   </Switch>
 )

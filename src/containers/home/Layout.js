@@ -1,17 +1,22 @@
 import React, { Component } from 'react'
 import { Paper, FlatButton } from 'material-ui'
 import collaboration from '../../assets/collaboration.png'
+import Header from '../../components/Header'
 
 export default class HomeLayout extends Component {
   render() {
+    const { history } = this.props
     return (
-      <Paper style={styles.form} zDepth={1}>
+      <div>
+        <Header history={history} />
+        <Paper style={styles.form} zDepth={1}>
         <h1>Welcome to Career Website</h1>
-        <img src={collaboration} style={styles.picture} alt="Collaboration Image" />
+        <img src={collaboration} style={styles.picture} alt="Collaboration" />
         <p>We help you find the right internship opportunities</p>
         <FlatButton label="Find Internships" primary={true} />
         <FlatButton label="CW For Employers" secondary={true} />
       </Paper>
+      </div>
     )
   }
 }

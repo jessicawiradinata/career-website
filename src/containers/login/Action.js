@@ -20,7 +20,7 @@ export const authenticate = (email, password, history) => (dispatch, _) => (asyn
       window.localStorage.setItem('token', responseJson.token)
       window.localStorage.setItem('id', responseJson.id)
       dispatch(loginSuccess())
-      history.push('/home')
+      history.push('/')
     }
   } catch (e) {
     console.log(e)
