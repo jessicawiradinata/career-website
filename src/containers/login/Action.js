@@ -14,8 +14,6 @@ export const authenticate = (email, password, history) => (dispatch, _) => (asyn
       })
     })
     const responseJson = await response.json()
-    const userAuth = { token: responseJson.token, id: responseJson.id }
-    console.log(responseJson)
     if (responseJson.token !== null) {
       window.localStorage.setItem('token', responseJson.token)
       window.localStorage.setItem('id', responseJson.id)
@@ -23,7 +21,6 @@ export const authenticate = (email, password, history) => (dispatch, _) => (asyn
       history.push('/')
     }
   } catch (e) {
-    console.log(e)
     dispatch(loginFailed())
   }
   

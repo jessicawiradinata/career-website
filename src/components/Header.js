@@ -2,16 +2,19 @@ import React, { Component } from 'react'
 import { FlatButton, ToolbarGroup, Toolbar } from 'material-ui'
 
 export default class Header extends Component {
+  
   render() {
-    console.log(this.props)
-    const { history } = this.props
+    const { history, isLoggedIn, logout } = this.props
     return (
       <Toolbar>
         <ToolbarGroup firstChild={true}>
-          <FlatButton label="Career Website" primary={true} />
+          <FlatButton label="Career Website" primary={true} onClick={() => history.push('/')} />
         </ToolbarGroup>
         <ToolbarGroup lastChild={true}>
-          <FlatButton label="Login" onClick={ () => history.push('/login') } />
+          {isLoggedIn ?
+            <FlatButton label="Logout" onClick={logout(history)} /> : 
+            <FlatButton label="Login" onClick={() => history.push('/login')} />
+          }      
         </ToolbarGroup>
       </Toolbar>
     )

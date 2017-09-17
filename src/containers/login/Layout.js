@@ -11,7 +11,6 @@ export default class LoginLayout extends Component {
   }
 
   render() {
-    console.log(this.props)
     const { authenticate, login } = this.props
 
     return (

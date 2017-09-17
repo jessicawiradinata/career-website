@@ -5,10 +5,11 @@ import Header from '../../components/Header'
 
 export default class HomeLayout extends Component {
   render() {
-    const { history } = this.props
+    const { history, logout } = this.props
+    const isLoggedIn = localStorage.token != null
     return (
       <div>
-        <Header history={history} />
+        <Header history={history} isLoggedIn={isLoggedIn} logout={logout} />
         <Paper style={styles.form} zDepth={1}>
         <h1>Welcome to Career Website</h1>
         <img src={collaboration} style={styles.picture} alt="Collaboration" />
@@ -23,13 +24,13 @@ export default class HomeLayout extends Component {
 
 const styles = {
   form: {
-      margin: 40,
-      padding: 40,
-      textAlign: 'center'
+    margin: 40,
+    padding: 40,
+    textAlign: 'center'
   },
   picture: {
-      height: 150,
-      width: 150,
-      margin: 20,
+    height: 150,
+    width: 150,
+    margin: 20,
   }
 }
