@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux'
+import * as ActionTypes from '../constants/ActionTypes'
 
 const login = (state = false, action = {}) => {
   switch(action.type) {
-    case 'LOGIN_REQUEST':
+    case ActionTypes.LOGIN_REQUESTED:
       return true
-    case 'LOGIN_SUCCESS':
-    case 'LOGIN_FAILED':
+    case ActionTypes.LOGIN_SUCCESS:
+    case ActionTypes.LOGIN_FAILED:
       return false
     default:
       return state
@@ -13,5 +14,5 @@ const login = (state = false, action = {}) => {
 }
 
 export default combineReducers({
-  login,
+  login
 })

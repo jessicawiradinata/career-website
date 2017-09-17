@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FlatButton, ToolbarGroup, Toolbar, ToolbarTitle, Paper, TextField, RaisedButton } from 'material-ui'
+import { Paper, TextField, RaisedButton } from 'material-ui'
 
 export default class LoginLayout extends Component {
   constructor(props) {
@@ -11,6 +11,9 @@ export default class LoginLayout extends Component {
   }
 
   render() {
+    console.log(this.props)
+    const { authenticate, login } = this.props
+
     return (
       <Paper style={styles.loginContainer} zDepth={1}>
         <h1>Login</h1>
@@ -26,9 +29,10 @@ export default class LoginLayout extends Component {
           onChange={(password) => this.setState({ password: password.target.value })}
         />
         <RaisedButton 
-          label="Submit" 
+          label={login ? 'Loading...' : 'Login'}
           primary={true} 
           style={styles.submitBtn} 
+          onClick={authenticate(this.state.email, this.state.password, this.props.history)}
         />
       </Paper>
     )
@@ -37,17 +41,17 @@ export default class LoginLayout extends Component {
 
 const styles = {
   loginContainer: {
-      margin: 20,
-      padding: 40,
-      display: 'flex',
-      flex: 1,
-      flexDirection: 'column',
-      alignItems: 'center'
+    margin: 20,
+    padding: 40,
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   textField: {
-      width: '40%',
+    width: '40%',
   },
   submitBtn: {
-      marginTop: 40,
+    marginTop: 40,
   }
 }
