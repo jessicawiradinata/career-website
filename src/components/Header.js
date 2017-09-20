@@ -13,7 +13,10 @@ export default class Header extends Component {
         <ToolbarGroup lastChild={true}>
           {isLoggedIn ?
             <FlatButton label="Logout" onClick={logout(history)} /> : 
-            <FlatButton label="Login" onClick={() => history.push('/login')} />
+            <ToolbarGroup>
+              <FlatButton label="Signup" onClick={() => history.push('/signup')} />
+              <FlatButton label="Login" onClick={() => history.push('/login')} />
+            </ToolbarGroup>        
           }      
         </ToolbarGroup>
       </Toolbar>
