@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Paper, TextField, RaisedButton } from 'material-ui'
+import Header from '../../components/Header'
 
 export default class LoginLayout extends Component {
   constructor(props) {
@@ -11,29 +12,33 @@ export default class LoginLayout extends Component {
   }
 
   render() {
-    const { authenticate, login } = this.props
+    const { authenticate, login, history } = this.props
 
     return (
-      <Paper style={styles.loginContainer} zDepth={1}>
-        <h1>Login</h1>
-        <TextField 
-          floatingLabelText="Email" 
-          style={styles.textField}
-          onChange={(email) => this.setState({ email: email.target.value })}
-        />
-        <TextField 
-          floatingLabelText="Password" 
-          type="password" 
-          style={styles.textField}
-          onChange={(password) => this.setState({ password: password.target.value })}
-        />
-        <RaisedButton 
-          label={login ? 'Loading...' : 'Login'}
-          primary={true} 
-          style={styles.submitBtn} 
-          onClick={authenticate(this.state.email, this.state.password, this.props.history)}
-        />
-      </Paper>
+      <div>
+        <Header history={history} isLoggedIn={false} />
+        <Paper style={styles.loginContainer} zDepth={1}>
+          <h1>Login</h1>
+          <TextField 
+            floatingLabelText="Email" 
+            style={styles.textField}
+            onChange={(email) => this.setState({ email: email.target.value })}
+          />
+          <TextField 
+            floatingLabelText="Password" 
+            type="password" 
+            style={styles.textField}
+            onChange={(password) => this.setState({ password: password.target.value })}
+          />
+          <RaisedButton 
+            label={login ? 'Loading...' : 'Login'}
+            primary={true} 
+            style={styles.submitBtn} 
+            onClick={authenticate(this.state.email, this.state.password, this.props.history)}
+          />
+        </Paper>
+      </div>
+      
     )
   }
 }

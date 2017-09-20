@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Paper, TextField, RaisedButton } from 'material-ui'
+import Header from '../../components/Header'
 
 export default class SignupLayout extends Component {
   constructor(props) {
@@ -12,34 +13,37 @@ export default class SignupLayout extends Component {
   }
 
   render() {
-    const { signup, createUser } = this.props
+    const { signup, createUser, history } = this.props
 
     return (
-      <Paper style={styles.signupContainer} zDepth={1}>
-        <h1>Sign Up</h1>
-        <TextField 
-          floatingLabelText="Email" 
-          style={styles.textField}
-          onChange={(email) => this.setState({ email: email.target.value })}
-        />
-        <TextField 
-          floatingLabelText="Password" 
-          type="password" 
-          style={styles.textField}
-          onChange={(password) => this.setState({ password: password.target.value })}
-        />
-        <TextField 
-          floatingLabelText="Name" 
-          style={styles.textField}
-          onChange={(name) => this.setState({ name: name.target.value })}
-        />
-        <RaisedButton 
-          label={signup ? 'Loading...' : 'Sign Up'}
-          primary={true} 
-          style={styles.submitBtn} 
-          onClick={createUser(this.state.email, this.state.password, this.state.name, this.props.history)}
-        />
-      </Paper>
+      <div>
+        <Header history={history} isLoggedIn={false} />
+        <Paper style={styles.signupContainer} zDepth={1}>
+          <h1>Sign Up</h1>
+          <TextField 
+            floatingLabelText="Email" 
+            style={styles.textField}
+            onChange={(email) => this.setState({ email: email.target.value })}
+          />
+          <TextField 
+            floatingLabelText="Password" 
+            type="password" 
+            style={styles.textField}
+            onChange={(password) => this.setState({ password: password.target.value })}
+          />
+          <TextField 
+            floatingLabelText="Name" 
+            style={styles.textField}
+            onChange={(name) => this.setState({ name: name.target.value })}
+          />
+          <RaisedButton 
+            label={signup ? 'Loading...' : 'Sign Up'}
+            primary={true} 
+            style={styles.submitBtn} 
+            onClick={createUser(this.state.email, this.state.password, this.state.name, this.props.history)}
+          />
+        </Paper>
+      </div>
     )
   }
 }
