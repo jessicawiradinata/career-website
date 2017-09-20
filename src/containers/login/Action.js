@@ -8,10 +8,14 @@ export const authenticate = (email, password, history) => (dispatch, _) => (asyn
     password: password
   })
   .then(response => {
-    window.localStorage.setItem('token', response.data.token)
-    window.localStorage.setItem('id', response.data.id)
-    dispatch(loginSuccess())
-    history.push('/')
+    if (response.data.token != null) {
+      window.localStorage.setItem('token', response.data.token)
+      window.localStorage.setItem('id', response.data.id)
+      dispatch(loginSuccess())
+      history.push('/')
+    } else {
+      dispatch(loginFailed())
+    }
   })
   .catch(error => {
     dispatch(loginFailed())
