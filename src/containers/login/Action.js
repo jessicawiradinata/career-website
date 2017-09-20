@@ -1,28 +1,21 @@
 import * as ActionTypes from '../../constants/ActionTypes'
 import * as Config from '../../constants/config'
+import axios from 'axios'
 
 export const authenticate = (email, password, history) => (dispatch, _) => (async () => {
-  try {
-    dispatch(loginRequested())
-    const response = await fetch(`${Config.API_ENDPOINT}/auth/login`, {
-      method: Config.POST,
-      headers: Config.HEADER,
-      mode: 'cors',
-      body: JSON.stringify({
-        email: email,
-        password: password
-      })
-    })
-    const responseJson = await response.json()
-    if (responseJson.token !== null) {
-      window.localStorage.setItem('token', responseJson.token)
-      window.localStorage.setItem('id', responseJson.id)
-      dispatch(loginSuccess())
-      history.push('/')
-    }
-  } catch (e) {
+  axios.post(`${Config.API_ENDPOINT}/auth/login`, {
+    email: email,
+    password: password
+  })
+  .then(response => {
+    window.localStorage.setItem('token', response.data.token)
+    window.localStorage.setItem('id', response.data.id)
+    dispatch(loginSuccess())
+    history.push('/')
+  })
+  .catch(error => {
     dispatch(loginFailed())
-  }
+  })
   
 })
 
