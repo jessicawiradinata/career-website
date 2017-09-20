@@ -2,4 +2,8 @@ export const LOGIN_REQUESTED = 'LOGIN_REQUESTED'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILED = 'LOGIN_FAILED'
 
+export const SIGNUP_REQUESTED = 'SIGNUP_REQUESTED'
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
+export const SIGNUP_FAILED = 'FAILED'
+
 export const LOGOUT = 'LOGOUT'
