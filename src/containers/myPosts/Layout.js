@@ -18,7 +18,7 @@ export default class MyPostsLayout extends Component {
             Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
           </CardText>
           <CardActions>
-            <FlatButton label="Edit" />
+            <FlatButton label="Edit" primary />
             <FlatButton label="Delete" secondary />
           </CardActions>
         </Card> 
