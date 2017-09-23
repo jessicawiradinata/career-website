@@ -34,7 +34,7 @@ export default class LoginLayout extends Component {
             label={loginStatus ? 'Loading...' : 'Login'}
             primary={true} 
             style={styles.submitBtn} 
-            onClick={login(this.state.email, this.state.password, this.props.history)}
+            onClick={() => login(this.state.email, this.state.password, this.props.history)}
           />
         </Paper>
       </div>
@@ -53,7 +53,7 @@ const styles = {
     alignItems: 'center'
   },
   textField: {
-    width: '40%',
+    width: '50%',
   },
   submitBtn: {
     marginTop: 40,

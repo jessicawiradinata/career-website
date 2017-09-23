@@ -21,7 +21,7 @@ export const login = (email, password, history) => (dispatch, _) => (async () =>
   .catch(error => {
     dispatch(loginFailed())
   })
-})
+})()
 
 export const loginRequested = () => {
   return { type: ActionTypes.LOGIN_REQUESTED }

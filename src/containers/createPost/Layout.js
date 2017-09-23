@@ -37,7 +37,7 @@ export default class CreatePostLayout extends Component {
             label={createPostStatus ? 'Loading...' : 'Submit'}
             primary={true} 
             style={styles.submitBtn} 
-            onClick={createPost(this.state.title, this.state.description, window.localStorage.id, this.props.history)}
+            onClick={() => createPost(this.state.title, this.state.description, window.localStorage.id, this.props.history)}
           />
         </Paper>
       </div>

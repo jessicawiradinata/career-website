@@ -20,7 +20,7 @@ export const signup = (email, password, name, history) => (dispatch, _) => (asyn
   .catch(error => {
     dispatch(signupFailed())
   })
-})
+})()
 
 export const signupRequested = () => {
   return { type: ActionTypes.SIGNUP_REQUESTED }

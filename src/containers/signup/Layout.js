@@ -40,7 +40,7 @@ export default class SignupLayout extends Component {
             label={signupStatus ? 'Loading...' : 'Sign Up'}
             primary={true} 
             style={styles.submitBtn} 
-            onClick={signup(this.state.email, this.state.password, this.state.name, this.props.history)}
+            onClick={() => signup(this.state.email, this.state.password, this.state.name, this.props.history)}
           />
         </Paper>
       </div>
@@ -58,7 +58,7 @@ const styles = {
     alignItems: 'center'
   },
   textField: {
-    width: '40%',
+    width: '50%',
   },
   submitBtn: {
     marginTop: 40,
