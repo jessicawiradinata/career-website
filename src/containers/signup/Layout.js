@@ -13,7 +13,7 @@ export default class SignupLayout extends Component {
   }
 
   render() {
-    const { signup, createUser, history } = this.props
+    const { signupStatus, signup, history } = this.props
 
     return (
       <div>
@@ -37,10 +37,10 @@ export default class SignupLayout extends Component {
             onChange={(name) => this.setState({ name: name.target.value })}
           />
           <RaisedButton 
-            label={signup ? 'Loading...' : 'Sign Up'}
+            label={signupStatus ? 'Loading...' : 'Sign Up'}
             primary={true} 
             style={styles.submitBtn} 
-            onClick={createUser(this.state.email, this.state.password, this.state.name, this.props.history)}
+            onClick={signup(this.state.email, this.state.password, this.state.name, this.props.history)}
           />
         </Paper>
       </div>

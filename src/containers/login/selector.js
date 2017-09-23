@@ -1,9 +1,9 @@
 import { createStructuredSelector } from 'reselect'
 
-const login = (state) => {
+const loginStatus = (state) => {
   return state.authentication.login
 }
 
 export default createStructuredSelector({
-  login
+  loginStatus
 })

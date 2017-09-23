@@ -2,7 +2,7 @@ import * as ActionTypes from '../../constants/ActionTypes'
 import * as Config from '../../constants/config'
 import axios from 'axios'
 
-export const createUser = (email, password, name, history) => (dispatch, _) => (async () => {
+export const signup = (email, password, name, history) => (dispatch, _) => (async () => {
   dispatch(signupRequested())
   axios.post(`${Config.API_ENDPOINT}/users`, {
     email: email,

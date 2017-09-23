@@ -12,7 +12,7 @@ export default class LoginLayout extends Component {
   }
 
   render() {
-    const { authenticate, login, history } = this.props
+    const { login, loginStatus, history } = this.props
 
     return (
       <div>
@@ -31,10 +31,10 @@ export default class LoginLayout extends Component {
             onChange={(password) => this.setState({ password: password.target.value })}
           />
           <RaisedButton 
-            label={login ? 'Loading...' : 'Login'}
+            label={loginStatus ? 'Loading...' : 'Login'}
             primary={true} 
             style={styles.submitBtn} 
-            onClick={authenticate(this.state.email, this.state.password, this.props.history)}
+            onClick={login(this.state.email, this.state.password, this.props.history)}
           />
         </Paper>
       </div>

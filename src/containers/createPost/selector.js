@@ -1,9 +1,9 @@
 import { createStructuredSelector } from 'reselect'
 
-const signupStatus = (state) => {
-  return state.user.signupStatus
+const createPostStatus = (state) => {
+  return state.post.createPostStatus
 }
 
 export default createStructuredSelector({
-  signupStatus
+  createPostStatus
 })

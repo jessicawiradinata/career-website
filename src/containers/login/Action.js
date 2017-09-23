@@ -2,7 +2,7 @@ import * as ActionTypes from '../../constants/ActionTypes'
 import * as Config from '../../constants/config'
 import axios from 'axios'
 
-export const authenticate = (email, password, history) => (dispatch, _) => (async () => {
+export const login = (email, password, history) => (dispatch, _) => (async () => {
   dispatch(loginRequested())
   axios.post(`${Config.API_ENDPOINT}/auth/login`, {
     email: email,

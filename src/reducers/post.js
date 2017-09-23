@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
 import * as ActionTypes from '../constants/ActionTypes'
 
-const loginStatus = (state = false, action = {}) => {
+const createPostStatus = (state = false, action = {}) => {
   switch(action.type) {
-    case ActionTypes.LOGIN_REQUESTED:
+    case ActionTypes.CREATE_POST_REQUESTED:
       return true
-    case ActionTypes.LOGIN_SUCCESS:
-    case ActionTypes.LOGIN_FAILED:
+    case ActionTypes.CREATE_POST_SUCCESS:
+    case ActionTypes.CREATE_POST_FAILED:
       return false
     default:
       return state
@@ -14,5 +14,5 @@ const loginStatus = (state = false, action = {}) => {
 }
 
 export default combineReducers({
-  loginStatus
+  createPostStatus
 })
