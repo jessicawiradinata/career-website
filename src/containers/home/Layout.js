@@ -8,7 +8,7 @@ export default class HomeLayout extends Component {
     const { history, logout } = this.props
     const isLoggedIn = localStorage.token != null
     return (
-      <div>
+      <div style={styles.wholePage}>
         <Header history={history} isLoggedIn={isLoggedIn} logout={logout} />
         <Paper style={styles.form} zDepth={1}>
         <h1>Welcome to Career Website</h1>
@@ -23,6 +23,9 @@ export default class HomeLayout extends Component {
 }
 
 const styles = {
+  wholePage: {
+    backgroundColor: '#ff0'
+  },
   form: {
     margin: 40,
     padding: 40,
