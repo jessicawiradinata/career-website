@@ -18,7 +18,7 @@ export default class CreatePostLayout extends Component {
       <div>
         <Header history={history} isLoggedIn={true} logout={logout} />
         <Paper style={styles.form} zDepth={1}>
-          <h1>Edit Post</h1>
+          <h1>Create Job Post</h1>
           <TextField 
             floatingLabelText="Title" 
             floatingLabelFixed={true}
