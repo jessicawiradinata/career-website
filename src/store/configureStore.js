@@ -4,6 +4,7 @@ import { routerMiddleware } from 'react-router-redux'
 import { createLogger } from 'redux-logger'
 import { composeWithDevTools } from 'remote-redux-devtools'
 import RootReducer from '../reducers/index'
+import { autoRehydrate } from 'redux-persist'
 
 const isDebuggingInChrome = !!window.navigator.userAgent
 
@@ -19,6 +20,6 @@ export default function (initialState = {}, history) {
         collapsed: true,
         duration: true,
       })
-    ))
+    ), autoRehydrate())
   )
 }

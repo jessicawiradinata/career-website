@@ -13,6 +13,18 @@ const signupStatus = (state = false, action = {}) => {
   }
 }
 
+const userPosts = (state = false, action = {}) => {
+  switch(action.type) {
+    case ActionTypes.GET_USER_POSTS:
+      return action.payload
+    case ActionTypes.LOGOUT:
+      return {}
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
-  signupStatus
+  signupStatus,
+  userPosts
 })
