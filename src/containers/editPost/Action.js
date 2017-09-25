@@ -14,20 +14,22 @@ export const logoutAction = () => {
 }
 
 export const getPostDetails = (postId) => (dispatch, _) => (async () => {
+  dispatch(getPostDetailsRequested())
   axios.get(`${Config.API_ENDPOINT}/posts/${postId}`)
-  .then(response => {
-    dispatch(getPostDetailsAction(response.data))
+  .then(async (response) => {
+    await dispatch(getPostDetailsAction(response.data))
+    dispatch(getPostDetailsSuccess())
   })
   .catch(error => {
     console.log(error)
+    dispatch(getPostDetailsFailed())
   })
 })()
 
 export const getPostDetailsAction = (payload) => ({
   type: ActionTypes.GET_POST_DETAILS,
   payload
-}) 
-
+})
 
 export const updatePost = (title, description, history, postId) => (dispatch, _) => (async () => {
   dispatch(updatePostRequested())
@@ -54,4 +56,16 @@ export const updatePostSuccess = () => {
 
 export const updatePostFailed = () => {
   return { type: ActionTypes.UPDATE_POST_FAILED }
+}
+
+export const getPostDetailsRequested = () => {
+  return { type: ActionTypes.GET_POST_DETAILS_REQUESTED }
+}
+
+export const getPostDetailsSuccess = () => {
+  return { type: ActionTypes.GET_POST_DETAILS_SUCCESS }
+}
+
+export const getPostDetailsFailed = () => {
+  return { type: ActionTypes.GET_POST_DETAILS_FAILED }
 }

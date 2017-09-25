@@ -8,18 +8,16 @@ export default class EditPostLayout extends Component {
     this.state = {
       title: '',
       description: '',
-      titleValue: '',
-      descriptionValue: ''
     }
   }
 
   componentWillMount() {
-    const { getPostDetails } = this.props
+    const { getPostDetails, postDetails } = this.props
     getPostDetails(this.props.match.params.postId)
   }
 
   render() {
-    const { history, logout, updatePost } = this.props
+    const { history, logout, updatePost, postDetails, postDetailsStatus } = this.props
 
     return (
       <div>
@@ -31,6 +29,7 @@ export default class EditPostLayout extends Component {
             floatingLabelFixed={true}
             style={styles.textField}
             onChange={(title) => this.setState({ title: title.target.value })}
+            hintText={postDetails.title}
           />
           <TextField 
             floatingLabelText="Description" 
@@ -39,6 +38,7 @@ export default class EditPostLayout extends Component {
             multiLine={true}
             rows={4}
             onChange={(description) => this.setState({ description: description.target.value })}
+            hintText={postDetails.description}
           />
           <RaisedButton 
             label="Update"

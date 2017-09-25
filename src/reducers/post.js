@@ -36,6 +36,18 @@ const postDetails = (state = false, action = {}) => {
   }
 }
 
+const postDetailsStatus = (state = false, action = {}) => {
+  switch(action.type) {
+    case ActionTypes.GET_POST_DETAILS_REQUESTED:
+      return true
+    case ActionTypes.GET_POST_DETAILS_SUCCESS:
+    case ActionTypes.GET_POST_DETAILS_FAILED:
+      return false
+    default:
+      return state
+  }
+}
+
 const updatePostStatus = (state = false, action = {}) => {
   switch(action.type) {
     case ActionTypes.UPDATE_POST_REQUESTED:
