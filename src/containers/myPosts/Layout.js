@@ -5,21 +5,28 @@ import { map } from 'lodash'
 
 export default class MyPostsLayout extends Component {
   renderData = () => {
-    const { userPosts } = this.props
+    const { userPosts, deletePost, history } = this.props
     return map(userPosts, (post) => {
       return (
-        <Card style={styles.postCard}>
-          <CardTitle title={post.title} subtitle={post.authorId} />
-          <CardText>
-            {post.description}
-          </CardText>
-          <CardActions>
-            <FlatButton label="Edit" primary />
-            <FlatButton label="Delete" secondary />
-          </CardActions>
-        </Card> 
+        <div style={styles.postCard} key={post._id}>
+          <Card>
+            <CardTitle title={post.title} subtitle={post.authorId} />
+            <CardText>
+              {post.description}
+            </CardText>
+            <CardActions>
+              <FlatButton label="Edit" primary />
+              <FlatButton label="Delete" secondary onClick={() => deletePost(post._id, history)} />
+            </CardActions>
+          </Card> 
+        </div>
       )
     })
+  }
+
+  componentWillMount() {
+    const { getUserPosts } = this.props
+    getUserPosts(window.localStorage.id)
   }
 
   render() {

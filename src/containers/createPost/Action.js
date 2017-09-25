@@ -9,11 +9,10 @@ export const createPost = (title, description, authorId, history) => (dispatch, 
     description: description,
     authorId: authorId
   })
-  .then(async (response) => {
+  .then(response => {
     if (response.data.message != null) {
-      await dispatch(getUserPosts(window.localStorage.id))
       dispatch(createPostSuccess())
-      history.push('/')
+      history.push('/myposts')
     } else {
       dispatch(createPostFailed())
     }
@@ -45,19 +44,3 @@ export const createPostSuccess = () => {
 export const createPostFailed = () => {
   return { type: ActionTypes.CREATE_POST_FAILED }
 }
-
-export const getUserPosts = (userId) => (dispatch, _) => (async () => {
-  axios.get(`${Config.API_ENDPOINT}/posts/users/${userId}`)
-    .then(response => {
-      console.log(response)
-      dispatch(getUserPostsAction(response.data))
-    })
-    .catch(error => {
-      console.log(error)
-    })
-})()
-
-export const getUserPostsAction = (payload) => ({
-  type: ActionTypes.GET_USER_POSTS,
-  payload
-}) 
