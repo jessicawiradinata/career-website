@@ -40,7 +40,6 @@ export const deletePostFailed = () => {
 export const getUserPosts = (userId) => (dispatch, _) => (async () => {
   axios.get(`${Config.API_ENDPOINT}/posts/users/${userId}`)
     .then(response => {
-      console.log(response)
       dispatch(getUserPostsAction(response.data))
     })
     .catch(error => {

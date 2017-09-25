@@ -2,23 +2,30 @@ import React, { Component } from 'react'
 import { Paper, TextField, RaisedButton } from 'material-ui'
 import Header from '../../components/Header'
 
-export default class CreatePostLayout extends Component {
+export default class EditPostLayout extends Component {
   constructor(props) {
     super(props)
     this.state = {
       title: '',
-      description: ''
+      description: '',
+      titleValue: '',
+      descriptionValue: ''
     }
   }
 
+  componentWillMount() {
+    const { getPostDetails } = this.props
+    getPostDetails(this.props.match.params.postId)
+  }
+
   render() {
-    const { history, logout, createPost, createPostStatus } = this.props
-    
+    const { history, logout, updatePost } = this.props
+
     return (
       <div>
         <Header history={history} isLoggedIn={true} logout={logout} />
         <Paper style={styles.form} zDepth={1}>
-          <h1>Edit Post</h1>
+          <h1>Edit Job Post</h1>
           <TextField 
             floatingLabelText="Title" 
             floatingLabelFixed={true}
@@ -34,10 +41,10 @@ export default class CreatePostLayout extends Component {
             onChange={(description) => this.setState({ description: description.target.value })}
           />
           <RaisedButton 
-            label={createPostStatus ? 'Loading...' : 'Submit'}
+            label="Update"
             primary={true} 
-            style={styles.submitBtn} 
-            onClick={() => createPost(this.state.title, this.state.description, window.localStorage.id, this.props.history)}
+            style={styles.submitBtn}
+            onClick={() => updatePost(this.state.title, this.state.description, history, this.props.match.params.postId)}
           />
         </Paper>
       </div>

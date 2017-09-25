@@ -15,7 +15,7 @@ export default class MyPostsLayout extends Component {
               {post.description}
             </CardText>
             <CardActions>
-              <FlatButton label="Edit" primary />
+              <FlatButton label="Edit" primary onClick={() => history.push(`/editpost/${post._id}`)} />
               <FlatButton label="Delete" secondary onClick={() => deletePost(post._id, history)} />
             </CardActions>
           </Card> 
@@ -30,7 +30,6 @@ export default class MyPostsLayout extends Component {
   }
 
   render() {
-    console.log(this.props)
     const { history, logout } = this.props
 
     return (
