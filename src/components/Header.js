@@ -33,6 +33,7 @@ export default class Header extends Component {
         </ToolbarGroup>
         {isLoggedIn ?
           <ToolbarGroup lastChild={true}>
+            <FlatButton label="Internships" onClick={() => history.push('/internships')} />
             <FlatButton
               onClick={this.handleTouchTap}
               label="Posts"
@@ -52,7 +53,8 @@ export default class Header extends Component {
             </Popover>
             <FlatButton label="Logout" onClick={() => logout(history)} />
           </ToolbarGroup> :
-          <ToolbarGroup>
+          <ToolbarGroup lastChild={true}>
+            <FlatButton label="Internships" onClick={() => history.push('/internships')} />
             <FlatButton label="Signup" onClick={() => history.push('/signup')} />
             <FlatButton label="Login" onClick={() => history.push('/login')} />
           </ToolbarGroup> 

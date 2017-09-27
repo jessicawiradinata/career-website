@@ -12,12 +12,12 @@ export default class EditPostLayout extends Component {
   }
 
   componentWillMount() {
-    const { getPostDetails, postDetails } = this.props
+    const { getPostDetails } = this.props
     getPostDetails(this.props.match.params.postId)
   }
 
   render() {
-    const { history, logout, updatePost, postDetails, postDetailsStatus } = this.props
+    const { history, logout, updatePost, postDetails } = this.props
 
     return (
       <div>

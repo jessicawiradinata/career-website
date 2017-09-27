@@ -60,9 +60,20 @@ const updatePostStatus = (state = false, action = {}) => {
   }
 }
 
+const posts = (state = false, action = {}) => {
+  switch(action.type) {
+    case ActionTypes.GET_POSTS:
+      return action.payload
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   createPostStatus,
   deletePostStatus,
   postDetails,
-  updatePostStatus
+  postDetailsStatus,
+  updatePostStatus,
+  posts
 })
