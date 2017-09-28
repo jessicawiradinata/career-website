@@ -104,7 +104,7 @@ const styles = {
       alignItems: 'center'
   },
   textField: {
-      width: '50%',
+      width: '60%',
   },
   submitBtn: {
       marginTop: 40,
