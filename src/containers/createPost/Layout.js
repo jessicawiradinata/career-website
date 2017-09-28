@@ -8,8 +8,9 @@ export default class CreatePostLayout extends Component {
     this.state = {
       title: '',
       remuneration: '',
-      description: '',
       workType: '',
+      closingDate: '',
+      description: '',
       howToApply: '',
     }
   }
@@ -54,6 +55,7 @@ export default class CreatePostLayout extends Component {
               mode="landscape" 
               style={{ marginLeft: '55%' }}
               textFieldStyle={{ width: '100%' }}
+              onChange={(event, value) => this.setState({ closingDate: value })}
             />
           </div>
           <TextField 
@@ -75,7 +77,16 @@ export default class CreatePostLayout extends Component {
             label={createPostStatus ? 'Loading...' : 'Submit'}
             primary
             style={styles.submitBtn} 
-            onClick={() => createPost(this.state.title, this.state.description, window.localStorage.id, this.props.history)}
+            onClick={() => createPost(
+              this.state.title, 
+              this.state.remuneration,
+              this.state.workType,
+              this.state.closingDate,
+              this.state.description, 
+              this.state.howToApply,
+              window.localStorage.id, 
+              this.props.history
+            )}
           />
         </Paper>
       </div>
