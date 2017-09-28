@@ -10,8 +10,8 @@ export default class PostsLayout extends Component {
       return (
         <div style={styles.postCard} key={post._id}>
           <Card>
-            <CardTitle title={post.title} subtitle={post.authorId} />
-            <CardText>
+            <CardTitle title={post.title} subtitle={post.authorId} actAsExpander showExpandableButton />
+            <CardText expandable>
               {post.description}
             </CardText>
           </Card> 
