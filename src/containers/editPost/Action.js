@@ -13,17 +13,8 @@ export const logoutAction = () => {
   return { type: ActionTypes.LOGOUT }
 }
 
-export const getPostDetails = (postId) => (dispatch, _) => (async () => {
-  dispatch(getPostDetailsRequested())
-  axios.get(`${Config.API_ENDPOINT}/posts/${postId}`)
-  .then(async (response) => {
-    await dispatch(getPostDetailsAction(response.data))
-    dispatch(getPostDetailsSuccess())
-  })
-  .catch(error => {
-    console.log(error)
-    dispatch(getPostDetailsFailed())
-  })
+export const getPostDetails = (postDetails) => (dispatch, _) => (() => {
+  dispatch(getPostDetailsAction(postDetails))
 })()
 
 export const getPostDetailsAction = (payload) => ({
@@ -31,11 +22,15 @@ export const getPostDetailsAction = (payload) => ({
   payload
 })
 
-export const updatePost = (title, description, history, postId) => (dispatch, _) => (async () => {
+export const updatePost = (title, remuneration, workType, closingDate, description, howToApply, history, postId) => (dispatch, _) => (async () => {
   dispatch(updatePostRequested())
   axios.put(`${Config.API_ENDPOINT}/posts/${postId}`, {
     title: title,
+    remuneration: remuneration,
+    workType: workType,
+    closingDate: closingDate,
     description: description,
+    howToApply: howToApply,
   })
   .then(response => {
     dispatch(updatePostSuccess())

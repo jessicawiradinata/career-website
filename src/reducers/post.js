@@ -25,11 +25,12 @@ const deletePostStatus = (state = false, action = {}) => {
   }
 }
 
-const postDetails = (state = false, action = {}) => {
+const postDetailsBackUp = (state = false, action = {}) => {
   switch(action.type) {
     case ActionTypes.GET_POST_DETAILS:
       return action.payload
     case ActionTypes.LOGOUT:
+    case ActionTypes.GET_POST_DETAILS_REQUESTED:
       return {}
     default:
       return state
@@ -72,7 +73,7 @@ const posts = (state = false, action = {}) => {
 export default combineReducers({
   createPostStatus,
   deletePostStatus,
-  postDetails,
+  postDetailsBackUp,
   postDetailsStatus,
   updatePostStatus,
   posts

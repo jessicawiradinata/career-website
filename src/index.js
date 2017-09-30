@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { createBrowserHistory } from 'history'
 import registerServiceWorker from './registerServiceWorker'
@@ -12,19 +12,38 @@ import { persistStore } from 'redux-persist'
 
 const history = createBrowserHistory()
 const store = configureStore({}, history)
-const persistor = persistStore(store)
 
-const App = () => (
-  <MuiThemeProvider>
-    <Provider store={store} persistor={persistor}>
-      <ConnectedRouter history={history}>
-        <div>
-          <Routes />
-        </div>
-      </ConnectedRouter>
-    </Provider>
-  </MuiThemeProvider>
-)
+export default class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      rehydrated: false
+    }
+  }
+
+  componentWillMount() {
+    persistStore(store, {}, () => {
+      this.setState({ rehydrated: true })
+    })
+  }
+
+  render() {
+    if (!this.state.rehydrated) {
+      return <div>Loading...</div>
+    }
+    return (
+      <MuiThemeProvider>
+        <Provider store={store}>
+          <ConnectedRouter history={history}>
+            <div>
+              <Routes />
+            </div>
+          </ConnectedRouter>
+        </Provider>
+      </MuiThemeProvider>
+    )
+  }
+}
 
 injectTapEventPlugin()
 ReactDOM.render(<App />, document.getElementById('root'))

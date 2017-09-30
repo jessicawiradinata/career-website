@@ -1,7 +1,18 @@
-import { createStructuredSelector } from 'reselect'
+import { createStructuredSelector, createSelector } from 'reselect'
+import { find } from 'lodash'
 
-const postDetails = state => state.post.postDetails
+const postDetailsStatus = state => state.post.postDetailsStatus
+
+const postDetailsBackUp = state => state.post.postDetailsBackUp
+
+const postDetails = createSelector(
+  state => state.user.userPosts,
+  (_, props) => props.match.params.postId,
+  (userPosts, postId) => find(userPosts, { '_id': postId })
+)
 
 export default createStructuredSelector({
-  postDetails
+  postDetails,
+  postDetailsStatus,
+  postDetailsBackUp
 })
