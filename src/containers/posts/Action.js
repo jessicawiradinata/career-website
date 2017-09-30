@@ -12,6 +12,21 @@ export const getPosts = () => (dispatch, _) => (async () => {
     })
 })()
 
+export const getUsers = () => (dispatch, _) => (async () => {
+  axios.get(`${Config.API_ENDPOINT}/users`)
+    .then(response => {
+      dispatch(getUsersAction(response.data))
+    })
+    .catch(error => {
+      console.log(error)
+    })
+})()
+
+export const getUsersAction = (payload) => ({
+  type: ActionTypes.GET_USERS,
+  payload
+}) 
+
 export const getPostsAction = (payload) => ({
   type: ActionTypes.GET_POSTS,
   payload

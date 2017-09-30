@@ -10,7 +10,7 @@ export default class PostsLayout extends Component {
       return (
         <div style={styles.postCard} key={post._id}>
           <Card>
-            <CardTitle title={post.title} subtitle={post.authorId} actAsExpander showExpandableButton />
+            <CardTitle title={post.title} subtitle={`posted by ${post.authorName}`} actAsExpander showExpandableButton />
             <CardText expandable>
               {post.description}
             </CardText>
@@ -21,8 +21,9 @@ export default class PostsLayout extends Component {
   }
 
   componentWillMount() {
-    const { getPosts } = this.props
+    const { getPosts, getUsers } = this.props
     getPosts()
+    getUsers()
   }
 
   render() {

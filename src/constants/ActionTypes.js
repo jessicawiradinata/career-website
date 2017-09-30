@@ -12,6 +12,7 @@ export const CREATE_POST_FAILED = 'CREATE_POST_FAILED'
 
 export const GET_USER = 'GET_USER'
 export const GET_USER_POSTS = 'GET_USER_POSTS'
+export const GET_USERS = 'GET_USERS'
 
 export const GET_POSTS = 'GET_POSTS'
 
