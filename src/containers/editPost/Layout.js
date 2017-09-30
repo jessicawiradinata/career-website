@@ -46,7 +46,7 @@ export default class EditPostLayout extends Component {
   }
 
   render() {
-    const { history, logout, updatePost, postDetails, postDetailsStatus } = this.props
+    const { history, logout, updatePost } = this.props
 
     return (
       <div>
@@ -139,7 +139,7 @@ const styles = {
       alignItems: 'center'
   },
   textField: {
-      width: '50%',
+      width: '55%',
   },
   submitBtn: {
       marginTop: 40,

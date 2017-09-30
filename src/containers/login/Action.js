@@ -13,6 +13,7 @@ export const login = (email, password, history) => (dispatch, _) => (async () =>
       window.localStorage.setItem('token', response.data.token)
       window.localStorage.setItem('id', response.data.id)
       dispatch(loginSuccess())
+      dispatch(getUser(response.data.id))
       history.push('/')
     } else {
       dispatch(loginFailed())
@@ -22,6 +23,21 @@ export const login = (email, password, history) => (dispatch, _) => (async () =>
     dispatch(loginFailed())
   })
 })()
+
+export const getUser = (userId) => (dispatch, _) => (async () => {
+  axios.get(`${Config.API_ENDPOINT}/users/${userId}`)
+    .then(response => {
+      dispatch(getUserAction(response.data))
+    })
+    .catch(error => {
+      console.log(error)
+    })
+})()
+
+export const getUserAction = (payload) => ({
+  type: ActionTypes.GET_USER,
+  payload
+}) 
 
 export const loginRequested = () => {
   return { type: ActionTypes.LOGIN_REQUESTED }

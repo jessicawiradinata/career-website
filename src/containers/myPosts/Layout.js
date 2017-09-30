@@ -5,12 +5,12 @@ import { map } from 'lodash'
 
 export default class MyPostsLayout extends Component {
   renderData = () => {
-    const { userPosts, deletePost, history } = this.props
+    const { userPosts, deletePost, history, user } = this.props
     return map(userPosts, (post) => {
       return (
         <div style={styles.postCard} key={post._id}>
           <Card>
-            <CardTitle title={post.title} subtitle={post.authorId} actAsExpander showExpandableButton />
+            <CardTitle title={post.title} subtitle={`posted by ${user.name}`} actAsExpander showExpandableButton />
             <CardText expandable>
               {post.description}
             </CardText>
@@ -31,7 +31,6 @@ export default class MyPostsLayout extends Component {
 
   render() {
     const { history, logout } = this.props
-
     return (
       <div>
         <Header history={history} isLoggedIn={true} logout={logout} />
