@@ -7,6 +7,7 @@
     "history": "^4.7.2",
     "lodash": "^4.17.4",
     "material-ui": "^0.19.1",
+    "material-ui-chip-input": "^0.17.2",
     "moment": "^2.18.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",

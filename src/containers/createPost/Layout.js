@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Paper, TextField, RaisedButton, SelectField, MenuItem, DatePicker } from 'material-ui'
 import Header from '../../components/Header'
+import ChipInput from 'material-ui-chip-input'
 
 export default class CreatePostLayout extends Component {
   constructor(props) {
@@ -8,9 +9,11 @@ export default class CreatePostLayout extends Component {
     this.state = {
       title: '',
       remuneration: '',
+      location: '',
       workType: '',
       closingDate: '',
       description: '',
+      skills: '',
       howToApply: '',
     }
   }
@@ -29,13 +32,23 @@ export default class CreatePostLayout extends Component {
             style={styles.textField}
             onChange={(title) => this.setState({ title: title.target.value })}
           />
-          <TextField 
-            floatingLabelText="Remuneration" 
-            floatingLabelFixed
-            hintText="e.g. $20 - $25 per hour"
-            style={styles.textField}
-            onChange={(remuneration) => this.setState({ remuneration: remuneration.target.value })}
-          />
+          <div style={styles.textField}>
+            <TextField 
+              floatingLabelText="Remuneration" 
+              floatingLabelFixed
+              hintText="e.g. $20 - $25 per hour"
+              style={{ float: 'left', width: '45%' }}
+              onChange={(remuneration) => this.setState({ remuneration: remuneration.target.value })}
+            />
+            <TextField 
+              floatingLabelText="Location" 
+              floatingLabelFixed
+              hintText="e.g. Sydney, NSW"
+              style={{ width: '45%', marginLeft: '10%' }}
+              onChange={(location) => this.setState({ location: location.target.value })}
+            />
+          </div>
+          
           <div style={styles.textField}>
             <SelectField
               floatingLabelText="Work Type"
@@ -61,10 +74,16 @@ export default class CreatePostLayout extends Component {
           <TextField 
             floatingLabelText="Description" 
             floatingLabelFixed
-            hintText="Job description, requirements, etc."
             style={styles.textField}
             multiLine
             onChange={(description) => this.setState({ description: description.target.value })}
+          />
+          <ChipInput
+            floatingLabelText="Required Skills"
+            floatingLabelFixed
+            hintText="Type here and press 'enter' to submit each skill"
+            style={styles.textField}
+            onChange={(chips) => this.setState({ skills: chips })}
           />
           <TextField 
             floatingLabelText="How to Apply" 
@@ -80,9 +99,11 @@ export default class CreatePostLayout extends Component {
             onClick={() => createPost(
               this.state.title, 
               this.state.remuneration,
+              this.state.location,
               this.state.workType,
               this.state.closingDate,
               this.state.description, 
+              this.state.skills,
               this.state.howToApply,
               window.localStorage.id, 
               this.props.history

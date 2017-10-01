@@ -2,14 +2,16 @@ import * as ActionTypes from '../../constants/ActionTypes'
 import * as Config from '../../constants/config'
 import axios from 'axios'
 
-export const createPost = (title, remuneration, workType, closingDate, description, howToApply, authorId, history) => (dispatch, _) => (async () => {
+export const createPost = (title, remuneration, location, workType, closingDate, description, skills, howToApply, authorId, history) => (dispatch, _) => (async () => {
   dispatch(createPostRequested())
   axios.post(`${Config.API_ENDPOINT}/posts`, {
     title: title,
     remuneration: remuneration,
+    location: location,
     workType: workType,
     closingDate: closingDate,
     description: description,
+    skills: skills,
     howToApply: howToApply,
     authorId: authorId
   })
