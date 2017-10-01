@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Paper, TextField, RaisedButton, SelectField, MenuItem, DatePicker } from 'material-ui'
 import Header from '../../components/Header'
 import moment from 'moment'
+import ChipInput from 'material-ui-chip-input'
+import { pull, concat } from 'lodash'
 
 export default class EditPostLayout extends Component {
   constructor(props) {
@@ -9,37 +11,43 @@ export default class EditPostLayout extends Component {
     this.state = {
       title: '',
       remuneration: '',
+      location: '',
       workType: '',
       closingDate: '',
       description: '',
+      skills: '',
       howToApply: '',
     }
   }
 
   componentWillMount() {
     if (this.props.postDetails !== undefined) {
-      const { title, remuneration, workType, closingDate, description, howToApply } = this.props.postDetails
+      const { title, remuneration, location, workType, closingDate, description, skills, howToApply } = this.props.postDetails
       const date = moment(closingDate).toDate()
       console.log(date)
       this.setState({
         title,
         remuneration,
+        location,
         workType,
         closingDate: date,
         description,
+        skills,
         howToApply
       })
       this.props.getPostDetails(this.props.postDetails)
     } else {
-      const { title, remuneration, workType, closingDate, description, howToApply } = this.props.postDetailsBackUp
+      const { title, remuneration, location, workType, closingDate, description, skills, howToApply } = this.props.postDetailsBackUp
       const date = moment(closingDate).toDate()
       console.log(date)
       this.setState({
         title,
         remuneration,
+        location,
         workType,
         closingDate: date,
         description,
+        skills,
         howToApply
       })
     }
@@ -60,14 +68,24 @@ export default class EditPostLayout extends Component {
             onChange={(title) => this.setState({ title: title.target.value })}
             value={this.state.title}
           />
-          <TextField 
-            floatingLabelText="Remuneration" 
-            floatingLabelFixed
-            hintText="e.g. $20 - $25 per hour"
-            style={styles.textField}
-            onChange={(remuneration) => this.setState({ remuneration: remuneration.target.value })}
-            value={this.state.remuneration}
-          />
+          <div style={styles.textField}>
+            <TextField 
+              floatingLabelText="Remuneration" 
+              floatingLabelFixed
+              hintText="e.g. $20 - $25 per hour"
+              style={{ float: 'left', width: '45%' }}
+              onChange={(remuneration) => this.setState({ remuneration: remuneration.target.value })}
+              value={this.state.remuneration}
+            />
+            <TextField 
+              floatingLabelText="Location" 
+              floatingLabelFixed
+              hintText="e.g. Sydney, NSW"
+              style={{ width: '45%', marginLeft: '10%' }}
+              onChange={(location) => this.setState({ location: location.target.value })}
+              value={this.state.location}
+            />
+          </div>
           <div style={styles.textField}>
             <SelectField
               floatingLabelText="Work Type"
@@ -100,6 +118,15 @@ export default class EditPostLayout extends Component {
             onChange={(description) => this.setState({ description: description.target.value })}
             value={this.state.description}
           />
+          <ChipInput
+            floatingLabelText="Required Skills"
+            floatingLabelFixed
+            hintText="Type here and press 'enter' to submit each skill"
+            style={styles.textField}
+            onRequestAdd={(chip) => this.setState({ skills: concat(this.state.skills, chip) })}
+            onRequestDelete={(chip, index) => this.setState({ skills: pull(this.state.skills, chip) })}
+            value={this.state.skills}
+          />
           <TextField 
             floatingLabelText="How to Apply" 
             floatingLabelFixed
@@ -115,9 +142,11 @@ export default class EditPostLayout extends Component {
             onClick={() => updatePost(
               this.state.title, 
               this.state.remuneration,
+              this.state.location,
               this.state.workType,
               this.state.closingDate,
               this.state.description, 
+              this.state.skills,
               this.state.howToApply,
               history, 
               this.props.match.params.postId

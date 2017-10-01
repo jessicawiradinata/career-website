@@ -22,14 +22,16 @@ export const getPostDetailsAction = (payload) => ({
   payload
 })
 
-export const updatePost = (title, remuneration, workType, closingDate, description, howToApply, history, postId) => (dispatch, _) => (async () => {
+export const updatePost = (title, remuneration, location, workType, closingDate, description, skills, howToApply, history, postId) => (dispatch, _) => (async () => {
   dispatch(updatePostRequested())
   axios.put(`${Config.API_ENDPOINT}/posts/${postId}`, {
     title: title,
     remuneration: remuneration,
+    location: location,
     workType: workType,
     closingDate: closingDate,
     description: description,
+    skills: skills,
     howToApply: howToApply,
   })
   .then(response => {
