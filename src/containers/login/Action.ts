@@ -27,13 +27,12 @@ export const login = (email: string, password: string, history: History) => (dis
 })()
 
 export const getUser = (userId: string) => (dispatch: Dispatch<any>) => (async () => {
-  axios.get(`${Config.API_ENDPOINT}/users/${userId}`)
-    .then(response => {
-      dispatch(getUserAction(response.data))
-    })
-    .catch(error => {
-      console.log(error)
-    })
+  try {
+    const response = await axios.get(`${Config.API_ENDPOINT}/users/${userId}`)
+    dispatch(getUserAction(response.data))
+  } catch (error) {
+    console.log(error)
+  }
 })()
 
 export const getUserAction = (payload: User) => ({
