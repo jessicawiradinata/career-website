@@ -16,4 +16,17 @@ export default class PostRepository {
       authorId: post.authorId,
     })
   )
+
+  updatePost = (postId: string, post: Post): Promise<any> => (
+    axios.put(`${Config.API_ENDPOINT}/posts/${postId}`, {
+      title: post.title,
+      remuneration: post.remuneration,
+      location: post.location,
+      workType: post.workType,
+      closingDate: post.closingDate,
+      description: post.description,
+      skills: post.skills,
+      howToApply: post.howToApply,
+    })
+  )
 }

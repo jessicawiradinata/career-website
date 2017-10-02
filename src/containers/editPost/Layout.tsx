@@ -3,25 +3,16 @@ import { Paper, TextField, RaisedButton, SelectField, MenuItem, DatePicker } fro
 import Header from '../../components/Header'
 import moment from 'moment'
 import { History } from 'history'
+import { Post } from '../../domain/model/Post'
 
 interface Props {
   postDetails: any
-  getPostDetails: (postDetails: any) => any
   history: History
-  logout: (history: History) => any
-  updatePost: (title: string,
-    remuneration: string,
-    location: string,
-    workType: string,
-    closingDate: any,
-    description: string,
-    skills: string[],
-    howToApply: string,
-    history: History,
-    postId: string,
-  ) => any
   match: any
   postDetailsBackUp: any
+  getPostDetails: (postDetails: any) => any
+  logout: (history: History) => any
+  updatePost: (post: Post, history: History, postId: string) => any
 }
 
 interface State {
@@ -54,6 +45,19 @@ export default class EditPostLayout extends Component<Props, State> {
 
   render() {
     const { history, logout, updatePost } = this.props
+    const post: Post = {
+      _id: '',
+      title: this.state.title,
+      remuneration: this.state.remuneration,
+      location: this.state.location,
+      workType: this.state.workType,
+      closingDate: this.state.closingDate,
+      description: this.state.description,
+      skills: this.state.skills,
+      howToApply: this.state.howToApply,
+      authorId: window.localStorage.id,
+    }
+
     return (
       <div>
         <Header history={history} isLoggedIn={true} logout={logout} />
@@ -128,18 +132,7 @@ export default class EditPostLayout extends Component<Props, State> {
             label='Update'
             primary={true}
             style={styles.submitBtn}
-            onClick={() => updatePost(
-              this.state.title,
-              this.state.remuneration,
-              this.state.location,
-              this.state.workType,
-              this.state.closingDate,
-              this.state.description,
-              this.state.skills,
-              this.state.howToApply,
-              history,
-              this.props.match.params.postId,
-            )}
+            onClick={() => updatePost(post, history, this.props.match.params.postId)}
           />
         </Paper>
       </div>
