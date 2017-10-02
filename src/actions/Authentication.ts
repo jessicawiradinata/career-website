@@ -5,8 +5,8 @@ import { Dispatch } from 'redux'
 
 const authenticationService = new AuthenticationService()
 
-export const logout = (history: History) => (dispatch: Dispatch<any>) => (() => {
-  authenticationService.logout()
+export const logout = (history: History) => (dispatch: Dispatch<any>) => (async () => {
+  await authenticationService.logout()
   dispatch(logoutAction())
   history.push('/')
 })()

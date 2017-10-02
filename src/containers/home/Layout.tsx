@@ -14,7 +14,9 @@ interface State {}
 export default class HomeLayout extends Component<Props, State> {
   render() {
     const { history, logout } = this.props
-    const isLoggedIn = localStorage.token !== null
+    const isLoggedIn = localStorage.token !== undefined
+    console.log(localStorage.token)
+    console.log(isLoggedIn)
     return (
       <div>
         <Header history={history} isLoggedIn={isLoggedIn} logout={logout} />
