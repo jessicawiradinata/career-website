@@ -3,21 +3,12 @@ import { Paper, TextField, RaisedButton, SelectField, MenuItem, DatePicker } fro
 import Header from '../../components/Header'
 import { History } from 'history'
 import moment from 'moment'
+import { Post } from '../../domain/model/Post'
 
 interface Props {
   history: History
   logout: (history: History) => void
-  createPost: (title: string,
-    remuneration: string,
-    location: string,
-    workType: string,
-    closingDate: Date,
-    description: string,
-    skills: string[],
-    howToApply: string,
-    authorId: string,
-    history: History,
-  ) => void
+  createPost: (post: Post, history: History) => void
   createPostStatus: boolean
 }
 
@@ -49,6 +40,19 @@ export default class CreatePostLayout extends Component<Props, State> {
 
   render() {
     const { history, logout, createPost, createPostStatus } = this.props
+    const post: Post = {
+      _id: '',
+      title: this.state.title,
+      remuneration: this.state.remuneration,
+      location: this.state.location,
+      workType: this.state.workType,
+      closingDate: this.state.closingDate,
+      description: this.state.description,
+      skills: this.state.skills,
+      howToApply: this.state.howToApply,
+      authorId: window.localStorage.id,
+    }
+
     return (
       <div>
         <Header history={history} isLoggedIn={true} logout={logout} />
@@ -116,18 +120,7 @@ export default class CreatePostLayout extends Component<Props, State> {
             label={createPostStatus ? 'Loading...' : 'Submit'}
             primary
             style={styles.submitBtn}
-            onClick={() => createPost(
-              this.state.title,
-              this.state.remuneration,
-              this.state.location,
-              this.state.workType,
-              this.state.closingDate,
-              this.state.description,
-              this.state.skills,
-              this.state.howToApply,
-              window.localStorage.id,
-              this.props.history,
-            )}
+            onClick={() => createPost(post, this.props.history)}
           />
         </Paper>
       </div>

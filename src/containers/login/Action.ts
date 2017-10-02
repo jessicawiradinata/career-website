@@ -3,6 +3,7 @@ import * as Config from '../../constants/config'
 import axios from 'axios'
 import { History } from 'history'
 import { Dispatch } from 'redux'
+import { User } from '../../domain/model/User'
 
 export const login = (email: string, password: string, history: History) => (dispatch: Dispatch<any>) => (async () => {
   dispatch(loginRequested())
@@ -36,7 +37,7 @@ export const getUser = (userId: string) => (dispatch: Dispatch<any>) => (async (
     })
 })()
 
-export const getUserAction = (payload: any) => ({
+export const getUserAction = (payload: User) => ({
   type: ActionTypes.GET_USER,
   payload,
 })

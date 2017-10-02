@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import * as ActionTypes from '../constants/ActionTypes'
+import { Post } from '../domain/model/Post'
 
 type createPostStatusAction = {
   type: ActionTypes.CREATE_POST_REQUESTED | ActionTypes.CREATE_POST_SUCCESS | ActionTypes.CREATE_POST_FAILED,
@@ -33,23 +34,6 @@ const deletePostStatus = (state: boolean = false, action: deletePostStatusAction
   }
 }
 
-type postDetailsBackUpAction = {
-  type: ActionTypes.GET_POST_DETAILS | ActionTypes.GET_POST_DETAILS_REQUESTED | ActionTypes.LOGOUT,
-  payload: any,
-}
-
-const postDetailsBackUp = (state: boolean = false, action: postDetailsBackUpAction) => {
-  switch (action.type) {
-    case ActionTypes.GET_POST_DETAILS:
-      return action.payload
-    case ActionTypes.LOGOUT:
-    case ActionTypes.GET_POST_DETAILS_REQUESTED:
-      return {}
-    default:
-      return state
-  }
-}
-
 type updatePostStatusAction = {
   type: ActionTypes.UPDATE_POST_SUCCESS | ActionTypes.UPDATE_POST_REQUESTED | ActionTypes.UPDATE_POST_FAILED,
 }
@@ -68,10 +52,10 @@ const updatePostStatus = (state: boolean = false, action: updatePostStatusAction
 
 type postsAction = {
   type: ActionTypes.GET_POSTS,
-  payload: any,
+  payload: Post[],
 }
 
-const posts = (state: boolean = false, action: postsAction) => {
+const posts = (state: Post[] = [], action: postsAction) => {
   switch (action.type) {
     case ActionTypes.GET_POSTS:
       return action.payload
@@ -83,15 +67,13 @@ const posts = (state: boolean = false, action: postsAction) => {
 export type PostContainer = {
   createPostStatus: boolean,
   deletePostStatus: boolean,
-  postDetailsBackUp: boolean,
   updatePostStatus: boolean,
-  posts: boolean,
+  posts: Post[],
 }
 
 export default combineReducers<PostContainer>({
   createPostStatus,
   deletePostStatus,
-  postDetailsBackUp,
   updatePostStatus,
   posts,
 })

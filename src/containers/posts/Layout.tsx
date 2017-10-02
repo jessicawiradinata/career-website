@@ -37,34 +37,34 @@ export default class PostsLayout extends Component<Props, State> {
       return (
         <Card style={styles.postCard} key={post._id}>
           <CardTitle actAsExpander showExpandableButton>
-            <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
+            <div style={styles.titleContainer as any}>
               <h2>{post.title}</h2>
-              <div style={{ marginRight: 50 }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-                  <FontIcon style={{ marginRight: 5 }} className='material-icons'>location_on</FontIcon>
+              <div style={styles.marginRight50}>
+                <div style={styles.endContainer as any}>
+                  <FontIcon style={styles.marginRight5} className='material-icons'>location_on</FontIcon>
                   <text>{post.location}</text>
                 </div>
               </div>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div style={styles.authorContainer as any}>
               <text>{`Posted by ${post.authorName}`}</text>
-              <div style={{ marginRight: 50 }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+              <div style={styles.marginRight50}>
+                <div style={styles.endContainer as any}>
                   <text>{post.remuneration}</text>
                 </div>
               </div>
             </div>
           </CardTitle>
           <CardText expandable>
-            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 10 }}>
-              <text style={{ marginBottom: 5 }}>{`${post.workType} work`}</text>
-              <text style={{ marginRight: 50 }}>{`Posted on ${postDate}`}</text>
+            <div style={styles.worktypeContainer as any}>
+              <text style={styles.marginRight5}>{`${post.workType} work`}</text>
+              <text style={styles.marginRight50}>{`Posted on ${postDate}`}</text>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', marginBottom: 20 }}>
+            <div style={styles.descriptionContainer as any}>
               <h4>Description</h4>
               <text>{post.description}</text>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', marginBottom: 15 }}>
+            <div style={styles.howContainer as any}>
               <h4>How to Apply</h4>
               <text>{post.howToApply}</text>
             </div>
@@ -104,5 +104,55 @@ const styles = {
     marginTop: 20,
     paddingLeft: 10,
     paddingBottom: 20,
+  },
+
+  endContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
+
+  marginRight5: {
+    marginRight: 5,
+  },
+
+  marginRight50: {
+    marginRight: 50,
+  },
+
+  worktypeContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+
+  descriptionContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    marginBottom: 20,
+  },
+
+  howContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    marginBottom: 15,
+  },
+
+  titleContainer: {
+    display: 'flex',
+    alignItems: 'baseline',
+    justifyContent: 'space-between',
+  },
+
+  authorContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 }

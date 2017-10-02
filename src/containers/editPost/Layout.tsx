@@ -38,52 +38,22 @@ interface State {
 export default class EditPostLayout extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
+    const { title, remuneration, location, workType, closingDate, description, skills, howToApply } = this.props.postDetails
+    const date = moment(closingDate).toDate()
     this.state = {
-      title: '',
-      remuneration: '',
-      location: '',
-      workType: '',
-      closingDate: moment().toDate(),
-      description: '',
-      skills: [],
-      howToApply: '',
-    }
-  }
-
-  componentWillMount() {
-    if (this.props.postDetails !== undefined) {
-      const { title, remuneration, location, workType, closingDate, description, skills, howToApply } = this.props.postDetails
-      const date = moment(closingDate).toDate()
-      this.setState({
-        title,
-        remuneration,
-        location,
-        workType,
-        closingDate: date,
-        description,
-        skills,
-        howToApply,
-      })
-      this.props.getPostDetails(this.props.postDetails)
-    } else {
-      const { title, remuneration, location, workType, closingDate, description, skills, howToApply } = this.props.postDetailsBackUp
-      const date = moment(closingDate).toDate()
-      this.setState({
-        title,
-        remuneration,
-        location,
-        workType,
-        closingDate: date,
-        description,
-        skills,
-        howToApply,
-      })
+      title,
+      remuneration,
+      location,
+      workType,
+      closingDate: date,
+      description,
+      skills,
+      howToApply,
     }
   }
 
   render() {
     const { history, logout, updatePost } = this.props
-
     return (
       <div>
         <Header history={history} isLoggedIn={true} logout={logout} />

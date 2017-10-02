@@ -1,5 +1,8 @@
 import { combineReducers } from 'redux'
+import { User } from '../domain/model/User'
+import { Post } from '../domain/model/Post'
 import * as ActionTypes from '../constants/ActionTypes'
+import moment from 'moment'
 
 type signupStatusAction = {
   type: ActionTypes.SIGNUP_REQUESTED | ActionTypes.SIGNUP_SUCCESS | ActionTypes.SIGNUP_FAILED,
@@ -19,10 +22,10 @@ const signupStatus = (state: boolean = false, action: signupStatusAction) => {
 
 type userPostsAction = {
   type: ActionTypes.GET_USER_POSTS | ActionTypes.LOGOUT
-  payload: any,
+  payload: Post[],
 }
 
-const userPosts = (state: boolean = false, action: userPostsAction) => {
+const userPosts = (state: Post[] = [], action: userPostsAction) => {
   switch (action.type) {
     case ActionTypes.GET_USER_POSTS:
       return action.payload
@@ -35,10 +38,17 @@ const userPosts = (state: boolean = false, action: userPostsAction) => {
 
 type userAction = {
   type: ActionTypes.GET_USER | ActionTypes.LOGOUT,
-  payload: any,
+  payload: User,
 }
 
-const user = (state: boolean = false, action: userAction) => {
+const initialUser: User = {
+  _id: '',
+  email: '',
+  name: '',
+  createdAt: moment().toDate(),
+}
+
+const user = (state: User = initialUser, action: userAction) => {
   switch (action.type) {
     case ActionTypes.GET_USER:
       return action.payload
@@ -51,10 +61,10 @@ const user = (state: boolean = false, action: userAction) => {
 
 type usersAction = {
   type: ActionTypes.GET_USERS | ActionTypes.LOGOUT,
-  payload: any,
+  payload: User[],
 }
 
-const users = (state: boolean = false, action: usersAction) => {
+const users = (state: User[] = [], action: usersAction) => {
   switch (action.type) {
     case ActionTypes.GET_USERS:
       return action.payload
@@ -67,9 +77,9 @@ const users = (state: boolean = false, action: usersAction) => {
 
 export type UserContainer = {
   signupStatus: boolean,
-  userPosts: boolean,
-  user: boolean,
-  users: boolean,
+  userPosts: Post[],
+  user: User,
+  users: User[],
 }
 
 export default combineReducers<UserContainer>({

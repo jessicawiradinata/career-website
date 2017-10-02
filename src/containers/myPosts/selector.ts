@@ -1,10 +1,12 @@
 import { createStructuredSelector } from 'reselect'
 import { State } from '../../store/State'
+import { User } from '../../domain/model/User'
+import { Post } from '../../domain/model/Post'
 
 interface StateProps {
-  userPosts: any
-  deletePostStatus: any
-  user: any
+  userPosts: Post[]
+  deletePostStatus: boolean
+  user: User
 }
 
 const userPosts = (state: State) => state.user.userPosts

@@ -1,8 +1,8 @@
 import * as ActionTypes from '../../constants/ActionTypes'
 import * as Config from '../../constants/config'
 import axios from 'axios'
-import { History } from 'history'
 import { Dispatch } from 'redux'
+import { Post } from '../../domain/model/Post'
 
 export const deletePost = (postId: string) => (dispatch: Dispatch<any>) => (async () => {
   dispatch(deletePostRequested())
@@ -15,17 +15,6 @@ export const deletePost = (postId: string) => (dispatch: Dispatch<any>) => (asyn
       dispatch(deletePostFailed())
     })
 })()
-
-export const logout = (history: History) => (dispatch: Dispatch<any>) => (async () => {
-  localStorage.removeItem('token')
-  localStorage.removeItem('id')
-  dispatch(logoutAction())
-  history.push('/')
-})()
-
-export const logoutAction = () => {
-  return { type: ActionTypes.LOGOUT }
-}
 
 export const deletePostRequested = () => {
   return { type: ActionTypes.DELETE_POST_REQUESTED }
@@ -49,7 +38,7 @@ export const getUserPosts = (userId: string) => (dispatch: Dispatch<any>) => (as
     })
 })()
 
-export const getUserPostsAction = (payload: any) => ({
+export const getUserPostsAction = (payload: Post[]) => ({
   type: ActionTypes.GET_USER_POSTS,
   payload,
 })

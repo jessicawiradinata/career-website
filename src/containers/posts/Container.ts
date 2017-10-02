@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
 import PostsLayout from './Layout'
 import { bindActionCreators } from 'redux'
-import { getPosts, getUsers, logout } from './Action'
+import { getPosts, getUsers } from './Action'
+import { logout } from '../../actions/Authentication'
 import selector from './selector'
 
 export default connect(
