@@ -5,4 +5,8 @@ export default class UserRepository {
   getUser = (userId: string): Promise<any> => (
     axios.get(`${Config.API_ENDPOINT}/users/${userId}`)
   )
+
+  getUsers = (): Promise<any> => (
+    axios.get(`${Config.API_ENDPOINT}/users`)
+  )
 }

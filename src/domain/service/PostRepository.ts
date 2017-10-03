@@ -37,4 +37,8 @@ export default class PostRepository {
   getUserPosts = (userId: string): Promise<any> => (
     axios.get(`${Config.API_ENDPOINT}/posts/users/${userId}`)
   )
+
+  getPosts = (): Promise<any> => (
+    axios.get(`${Config.API_ENDPOINT}/posts`)
+  )
 }
