@@ -3,17 +3,19 @@ import * as Config from '../../constants/config'
 import axios from 'axios'
 import { Dispatch } from 'redux'
 import { Post } from '../../domain/model/Post'
+import PostRepository from '../../domain/service/PostRepository'
+
+const postRepository = new PostRepository()
 
 export const deletePost = (postId: string) => (dispatch: Dispatch<any>) => (async () => {
   dispatch(deletePostRequested())
-  axios.delete(`${Config.API_ENDPOINT}/posts/${postId}`)
-    .then(response => {
-      dispatch(deletePostSuccess())
-      window.location.reload()
-    })
-    .catch(error => {
-      dispatch(deletePostFailed())
-    })
+  try {
+    await postRepository.deletePost(postId)
+    dispatch(deletePostSuccess())
+    window.location.reload()
+  } catch (error) {
+    dispatch(deletePostFailed())
+  }
 })()
 
 export const deletePostRequested = () => {

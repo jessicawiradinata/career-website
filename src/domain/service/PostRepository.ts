@@ -29,4 +29,8 @@ export default class PostRepository {
       howToApply: post.howToApply,
     })
   )
+
+  deletePost = (postId: string): Promise<any> => (
+    axios.delete(`${Config.API_ENDPOINT}/posts/${postId}`)
+  )
 }
