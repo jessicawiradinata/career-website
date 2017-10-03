@@ -9,4 +9,12 @@ export default class UserRepository {
   getUsers = (): Promise<any> => (
     axios.get(`${Config.API_ENDPOINT}/users`)
   )
+
+  createUser = (email: string, password: string, name: string): Promise<any> => (
+    axios.post(`${Config.API_ENDPOINT}/users`, {
+      email: email,
+      password: password,
+      name: name,
+    })
+  )
 }
