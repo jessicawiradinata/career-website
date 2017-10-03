@@ -1,6 +1,4 @@
 import * as ActionTypes from '../../constants/ActionTypes'
-import * as Config from '../../constants/config'
-import axios from 'axios'
 import { Dispatch } from 'redux'
 import { Post } from '../../domain/model/Post'
 import PostRepository from '../../domain/service/PostRepository'
@@ -31,13 +29,12 @@ export const deletePostFailed = () => {
 }
 
 export const getUserPosts = (userId: string) => (dispatch: Dispatch<any>) => (async () => {
-  axios.get(`${Config.API_ENDPOINT}/posts/users/${userId}`)
-    .then(response => {
-      dispatch(getUserPostsAction(response.data))
-    })
-    .catch(error => {
-      console.log(error)
-    })
+  try {
+    const response = await postRepository.getUserPosts(userId)
+    dispatch(getUserPostsAction(response.data))
+  } catch (error) {
+    console.log(error)
+  }
 })()
 
 export const getUserPostsAction = (payload: Post[]) => ({

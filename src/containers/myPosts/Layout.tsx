@@ -140,7 +140,6 @@ const styles = {
     justifyContent: 'space-between',
     marginBottom: 10,
   },
-
   descriptionContainer: {
     display: 'flex',
     flexDirection: 'column',
@@ -148,7 +147,6 @@ const styles = {
     justifyContent: 'flex-start',
     marginBottom: 20,
   },
-
   howContainer: {
     display: 'flex',
     flexDirection: 'column',

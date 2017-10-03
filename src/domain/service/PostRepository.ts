@@ -33,4 +33,8 @@ export default class PostRepository {
   deletePost = (postId: string): Promise<any> => (
     axios.delete(`${Config.API_ENDPOINT}/posts/${postId}`)
   )
+
+  getUserPosts = (userId: string): Promise<any> => (
+    axios.get(`${Config.API_ENDPOINT}/posts/users/${userId}`)
+  )
 }
