@@ -2,23 +2,12 @@ import * as ActionTypes from '../../constants/ActionTypes'
 import { History } from 'history'
 import { Dispatch } from 'redux'
 import { Post } from '../../domain/model/Post'
-import PostRepository from '../../domain/service/PostRepository'
-
-const postRepository = new PostRepository()
-
-export const getPostDetails = (postDetails: any) => (dispatch: Dispatch<any>) => (() => {
-  dispatch(getPostDetailsAction(postDetails))
-})()
-
-export const getPostDetailsAction = (payload: any) => ({
-  type: ActionTypes.GET_POST_DETAILS,
-  payload,
-})
+import { dataLoadService } from '../../index'
 
 export const updatePost = (post: Post, history: History, postId: string) => (dispatch: Dispatch<any>) => (async () => {
   dispatch(updatePostRequested())
   try {
-    await postRepository.updatePost(postId, post)
+    await dataLoadService.getPostRepository().updatePost(postId, post)
     dispatch(updatePostSuccess())
     history.push('/myposts')
   } catch (error) {

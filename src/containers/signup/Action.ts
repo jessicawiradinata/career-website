@@ -1,20 +1,14 @@
 import * as ActionTypes from '../../constants/ActionTypes'
 import { History } from 'history'
 import { Dispatch } from 'redux'
-import UserRepository from '../../domain/service/UserRepository'
-
-const userRepository = new UserRepository()
+import { dataLoadService } from '../../index'
 
 export const signup = (email: string, password: string, name: string, history: History) => (dispatch: Dispatch<any>) => (async () => {
   dispatch(signupRequested())
   try {
-    const response = await userRepository.createUser(email, password, name)
-    if (response.data.message !== null) {
-      dispatch(signupSuccess())
-      history.push('/login')
-    } else {
-      dispatch(signupFailed())
-    }
+    await dataLoadService.getUserRepository().createUser(email, password, name)
+    dispatch(signupSuccess())
+    history.push('/login')
   } catch (error) {
     dispatch(signupFailed())
   }

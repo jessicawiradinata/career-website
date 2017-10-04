@@ -6,7 +6,7 @@ const collaboration = require('../../assets/collaboration.png')
 
 interface Props {
   history: History,
-  logout: (history: History) => any
+  logout: (history: History) => void
 }
 
 interface State {}

@@ -64,7 +64,7 @@ export default class Header extends Component<Props, State> {
                 <MenuItem primaryText='My Posts' onClick={() => history.push('/myposts')} />
               </Menu>
             </Popover>
-            <FlatButton label='Logout' onClick={() => logout ? logout(history) : null} />
+            <FlatButton label='Logout' onClick={() => logout ? logout(history) : ''} />
           </ToolbarGroup> :
           <ToolbarGroup lastChild={true}>
             <FlatButton label='Internships' onClick={() => history.push('/internships')} />

@@ -9,12 +9,11 @@ import { Post } from '../../domain/model/Post'
 
 interface Props {
   history: History
-  logout: (history: History) => any
-  deletePost: (postId: string) => any
-  getUserPosts: (userId: string) => any
   userPosts: Post[]
   deletePostStatus: boolean
   user: User
+  logout: (history: History) => any
+  deletePost: (postId: string) => any
 }
 
 interface State {}
@@ -88,11 +87,6 @@ export default class MyPostsLayout extends Component<Props, State> {
         </Card>
       )
     })
-  }
-
-  componentWillMount() {
-    const { getUserPosts } = this.props
-    getUserPosts(window.localStorage.id)
   }
 
   render() {

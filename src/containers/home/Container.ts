@@ -8,4 +8,4 @@ export default connect(
   dispatch => bindActionCreators({
     logout,
   }, dispatch),
-)(HomeLayout)
+)(HomeLayout as any)

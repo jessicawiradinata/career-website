@@ -7,9 +7,9 @@ import { Post } from '../../domain/model/Post'
 
 interface Props {
   history: History
+  createPostStatus: boolean
   logout: (history: History) => void
   createPost: (post: Post, history: History) => void
-  createPostStatus: boolean
 }
 
 interface State {
@@ -39,7 +39,7 @@ export default class CreatePostLayout extends Component<Props, State> {
   }
 
   render() {
-    const { history, logout, createPost, createPostStatus } = this.props
+    const { history, createPost, createPostStatus, logout } = this.props
     const post: Post = {
       _id: '',
       title: this.state.title,

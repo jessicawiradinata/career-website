@@ -2,7 +2,6 @@ import { combineReducers } from 'redux'
 import { User } from '../domain/model/User'
 import { Post } from '../domain/model/Post'
 import * as ActionTypes from '../constants/ActionTypes'
-import moment from 'moment'
 
 type signupStatusAction = {
   type: ActionTypes.SIGNUP_REQUESTED | ActionTypes.SIGNUP_SUCCESS | ActionTypes.SIGNUP_FAILED,
@@ -20,22 +19,6 @@ const signupStatus = (state: boolean = false, action: signupStatusAction) => {
   }
 }
 
-type userPostsAction = {
-  type: ActionTypes.GET_USER_POSTS | ActionTypes.LOGOUT
-  payload: Post[],
-}
-
-const userPosts = (state: Post[] = [], action: userPostsAction) => {
-  switch (action.type) {
-    case ActionTypes.GET_USER_POSTS:
-      return action.payload
-    case ActionTypes.LOGOUT:
-      return {}
-    default:
-      return state
-  }
-}
-
 type userAction = {
   type: ActionTypes.GET_USER | ActionTypes.LOGOUT,
   payload: User,
@@ -45,7 +28,6 @@ const initialUser: User = {
   _id: '',
   email: '',
   name: '',
-  createdAt: moment().toDate(),
 }
 
 const user = (state: User = initialUser, action: userAction) => {
@@ -84,7 +66,6 @@ export type UserContainer = {
 
 export default combineReducers<UserContainer>({
   signupStatus,
-  userPosts,
   user,
   users,
 })

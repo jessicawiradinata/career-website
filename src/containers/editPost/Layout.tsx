@@ -9,8 +9,6 @@ interface Props {
   postDetails: any
   history: History
   match: any
-  postDetailsBackUp: any
-  getPostDetails: (postDetails: any) => any
   logout: (history: History) => any
   updatePost: (post: Post, history: History, postId: string) => any
 }
@@ -44,7 +42,7 @@ export default class EditPostLayout extends Component<Props, State> {
   }
 
   render() {
-    const { history, logout, updatePost } = this.props
+    const { history, updatePost, logout } = this.props
     const post: Post = {
       _id: '',
       title: this.state.title,

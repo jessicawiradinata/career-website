@@ -7,10 +7,8 @@ import { History } from 'history'
 
 interface Props {
   posts: any
-  getPosts: () => any
-  getUsers: () => any
-  logout: (history: History) => any
   history: History
+  logout: (history: History) => void
 }
 
 interface State {}
@@ -78,12 +76,6 @@ export default class PostsLayout extends Component<Props, State> {
         </Card>
       )
     })
-  }
-
-  componentWillMount() {
-    const { getPosts, getUsers } = this.props
-    getPosts()
-    getUsers()
   }
 
   render() {

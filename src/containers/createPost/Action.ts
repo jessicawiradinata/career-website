@@ -2,20 +2,14 @@ import * as ActionTypes from '../../constants/ActionTypes'
 import { History } from 'history'
 import { Dispatch } from 'redux'
 import { Post } from '../../domain/model/Post'
-import PostRepository from '../../domain/service/PostRepository'
-
-const postRepository = new PostRepository()
+import { dataLoadService } from '../../index'
 
 export const createPost = (post: Post, history: History) => (dispatch: Dispatch<any>) => (async () => {
   dispatch(createPostRequested())
   try {
-    const response = await postRepository.createPost(post)
-    if (response.data.message !== null) {
-      dispatch(createPostSuccess())
-      history.push('/myposts')
-    } else {
-      dispatch(createPostFailed())
-    }
+    await dataLoadService.getPostRepository().createPost(post)
+    dispatch(createPostSuccess())
+    history.push('/myposts')
   } catch (error) {
     dispatch(createPostFailed())
   }
