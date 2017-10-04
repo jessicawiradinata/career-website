@@ -6,6 +6,7 @@ import CreatePostContainer from '../containers/createPost/Container'
 import MyPostsContainer from '../containers/myPosts/Container'
 import EditPostContainer from '../containers/editPost/Container'
 import PostsContainer from '../containers/posts/Container'
+import PageNotFound from '../components/PageNotFound'
 import { Route, Switch } from 'react-router-dom'
 
 export default () => (
@@ -17,5 +18,6 @@ export default () => (
     <Route path='/myposts' component={MyPostsContainer} />
     <Route path='/editpost/:postId' component={EditPostContainer} />
     <Route path='/internships' component={PostsContainer} />
+    <Route component={PageNotFound} />
   </Switch>
 )

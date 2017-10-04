@@ -14,6 +14,7 @@ import PostRepository from './domain/service/PostRepository'
 import UserRepository from './domain/service/UserRepository'
 import { getPostsAction } from './actions/Post'
 import { getUsersAction } from './actions/User'
+import './index.css'
 
 interface Props {}
 
