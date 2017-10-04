@@ -40,6 +40,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     height: '100%',
+    marginTop: '25%',
   },
   titleText: {
     marginBottom: 30,

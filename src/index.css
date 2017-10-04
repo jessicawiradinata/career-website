@@ -8,10 +8,6 @@ html {
   height: 100%;
 }
 
-[data-reactroot] {
-  height: 100% !important;
-}
-
 #root {
   height: 100%;
 }
