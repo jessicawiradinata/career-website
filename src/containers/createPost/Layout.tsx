@@ -102,6 +102,7 @@ export default class CreatePostLayout extends Component<Props, State> {
               mode='landscape'
               style={{ marginLeft: '55%' }}
               textFieldStyle={{ width: '100%' }}
+              minDate={moment().toDate()}
               onChange={(event, value) => this.setState({ closingDate: value })}
             />
           </div>

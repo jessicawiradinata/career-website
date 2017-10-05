@@ -109,6 +109,7 @@ export default class EditPostLayout extends Component<Props, State> {
               style={{ marginLeft: '55%' }}
               textFieldStyle={{ width: '100%' }}
               defaultDate={this.state.closingDate}
+              minDate={moment().toDate()}
               onChange={(event, value) => this.setState({ closingDate: value })}
             />
           </div>
