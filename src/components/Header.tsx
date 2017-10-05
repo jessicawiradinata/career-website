@@ -6,6 +6,7 @@ import { History } from 'history'
 interface Props {
   history: History
   isLoggedIn: boolean
+  isAdmin: boolean
   logout?: (history: History) => void
 }
 
@@ -38,11 +39,16 @@ export default class Header extends Component<Props, State> {
   }
 
   render() {
-    const { history, isLoggedIn, logout } = this.props
+    const { history, isLoggedIn, logout, isAdmin } = this.props
     return (
       <Toolbar>
         <ToolbarGroup firstChild={true}>
-          <FlatButton label='Career Website' primary={true} onClick={() => history.push('/')} />
+          <FlatButton
+            label={isAdmin ? 'Career Website Admin Zone' : 'Career Website'}
+            primary={!isAdmin}
+            secondary={isAdmin}
+            onClick={() => history.push('/')}
+          />
         </ToolbarGroup>
         {isLoggedIn ?
           <ToolbarGroup lastChild={true}>

@@ -12,8 +12,8 @@ interface Props {
   userPosts: Post[]
   deletePostStatus: boolean
   user: User
-  logout: (history: History) => any
-  deletePost: (postId: string) => any
+  logout: (history: History) => void
+  deletePost: (postId: string) => void
 }
 
 interface State {}
@@ -90,10 +90,12 @@ export default class MyPostsLayout extends Component<Props, State> {
   }
 
   render() {
-    const { history, logout } = this.props
+    const { history, logout, user } = this.props
+    const isAdmin = user ? user.isAdmin : false
+
     return (
       <div>
-        <Header history={history} isLoggedIn={true} logout={logout} />
+        <Header history={history} isLoggedIn={true} logout={logout} isAdmin={isAdmin} />
         {this.renderData()}
       </div>
     )

@@ -30,7 +30,7 @@ export default class SignupLayout extends Component<Props, State> {
 
     return (
       <div>
-        <Header history={history} isLoggedIn={false} />
+        <Header history={history} isLoggedIn={false} isAdmin={false} />
         <Paper style={styles.signupContainer as any} zDepth={1}>
           <h1>Sign Up</h1>
           <TextField

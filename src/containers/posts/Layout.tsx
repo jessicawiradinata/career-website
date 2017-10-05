@@ -33,7 +33,7 @@ export default class PostsLayout extends Component<Props, State> {
 
   renderData = () => {
     const { posts, user, history, deletePost } = this.props
-    const isAdmin = user.isAdmin
+    const isAdmin = user ? user.isAdmin : false
 
     return map(posts, (post: any) => {
       const closingDate = moment(post.closingDate).format('DD MMM YYYY')
@@ -91,12 +91,13 @@ export default class PostsLayout extends Component<Props, State> {
   }
 
   render() {
-    const { history, logout } = this.props
+    const { history, logout, user } = this.props
     const isLoggedIn = localStorage.token !== null
+    const isAdmin = user ? user.isAdmin : false
 
     return (
       <div>
-        <Header history={history} isLoggedIn={isLoggedIn} logout={logout} />
+        <Header history={history} isLoggedIn={isLoggedIn} logout={logout} isAdmin={isAdmin} />
         {this.renderData()}
       </div>
     )

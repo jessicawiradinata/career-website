@@ -28,7 +28,7 @@ export default class LoginLayout extends Component<Props, State> {
 
     return (
       <div>
-        <Header history={history} isLoggedIn={false} />
+        <Header history={history} isLoggedIn={false} isAdmin={false} />
         <Paper style={styles.loginContainer as any} zDepth={1}>
           <h1>Login</h1>
           <TextField

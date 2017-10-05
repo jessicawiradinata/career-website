@@ -4,11 +4,13 @@ import Header from '../../components/Header'
 import moment from 'moment'
 import { History } from 'history'
 import { Post } from '../../domain/model/Post'
+import { User } from '../../domain/model/User'
 
 interface Props {
   postDetails: any
   history: History
   match: any
+  user: User
   logout: (history: History) => any
   updatePost: (post: Post, history: History, postId: string) => any
 }
@@ -42,7 +44,8 @@ export default class EditPostLayout extends Component<Props, State> {
   }
 
   render() {
-    const { history, updatePost, logout } = this.props
+    const { history, updatePost, logout, user } = this.props
+    const isAdmin = user ? user.isAdmin : false
     const post: Post = {
       _id: '',
       title: this.state.title,
@@ -58,7 +61,7 @@ export default class EditPostLayout extends Component<Props, State> {
 
     return (
       <div>
-        <Header history={history} isLoggedIn={true} logout={logout} />
+        <Header history={history} isLoggedIn={true} logout={logout} isAdmin={isAdmin} />
         <Paper style={styles.form as any} zDepth={1}>
           <h1>Edit Job Post</h1>
           <TextField

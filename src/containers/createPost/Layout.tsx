@@ -4,10 +4,12 @@ import Header from '../../components/Header'
 import { History } from 'history'
 import moment from 'moment'
 import { Post } from '../../domain/model/Post'
+import { User } from '../../domain/model/User'
 
 interface Props {
   history: History
   createPostStatus: boolean
+  user: User
   logout: (history: History) => void
   createPost: (post: Post, history: History) => void
 }
@@ -39,7 +41,8 @@ export default class CreatePostLayout extends Component<Props, State> {
   }
 
   render() {
-    const { history, createPost, createPostStatus, logout } = this.props
+    const { history, createPost, createPostStatus, logout, user } = this.props
+    const isAdmin = user ? user.isAdmin : false
     const post: Post = {
       _id: '',
       title: this.state.title,
@@ -55,7 +58,7 @@ export default class CreatePostLayout extends Component<Props, State> {
 
     return (
       <div>
-        <Header history={history} isLoggedIn={true} logout={logout} />
+        <Header history={history} isLoggedIn={true} logout={logout} isAdmin={isAdmin} />
         <Paper style={styles.form as any} zDepth={1}>
           <h1>Post an Internship</h1>
           <TextField

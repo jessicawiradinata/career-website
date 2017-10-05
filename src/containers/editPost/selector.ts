@@ -9,6 +9,9 @@ const postDetails = createSelector(
   (userPosts: Post[], postId: string) => find(userPosts, { '_id': postId }),
 )
 
+const user = (state: State) => state.user.user
+
 export default createStructuredSelector({
   postDetails,
+  user,
 })
