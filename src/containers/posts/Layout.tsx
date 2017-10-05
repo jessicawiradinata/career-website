@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
-import { Card, CardTitle, CardText, FontIcon, Chip } from 'material-ui'
+import { Card, CardTitle, CardText, FontIcon, Chip, CardActions, FlatButton } from 'material-ui'
 import { map } from 'lodash'
 import Header from '../../components/Header'
 import moment from 'moment'
 import { History } from 'history'
+import { Post } from '../../domain/model/Post'
+import { User } from '../../domain/model/User'
 
 interface Props {
-  posts: any
+  posts: Post[]
   history: History
+  user: User
   logout: (history: History) => void
+  deletePost: (postId: string) => void
 }
 
 interface State {}
@@ -28,7 +32,9 @@ export default class PostsLayout extends Component<Props, State> {
   }
 
   renderData = () => {
-    const { posts } = this.props
+    const { posts, user, history, deletePost } = this.props
+    const isAdmin = user.isAdmin
+
     return map(posts, (post: any) => {
       const closingDate = moment(post.closingDate).format('DD MMM YYYY')
       const postDate = moment(post.createdAt).format('DD MMM YYYY')
@@ -73,6 +79,12 @@ export default class PostsLayout extends Component<Props, State> {
             </div>
             <text style={{ marginRight: 50 }}>{`Closing on ${closingDate}`}</text>
           </div>
+          { isAdmin &&
+            <CardActions style={styles.cardContainer as any}>
+              <FlatButton label='Edit' primary onClick={() => history.push(`/editpost/${post._id}`)} />
+              <FlatButton label='Delete' secondary onClick={() => deletePost(post._id)} />
+            </CardActions>
+          }
         </Card>
       )
     })
@@ -146,5 +158,11 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+
+  cardContainer: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginRight: 30,
   },
 }

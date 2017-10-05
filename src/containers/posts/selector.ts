@@ -20,6 +20,9 @@ const posts = createSelector(
   (posts: any, users: any) => map(posts, post => assignAuthorName(post, users)),
 )
 
+const user = (state: State) => state.user.user
+
 export default createStructuredSelector({
   posts,
+  user,
 })
