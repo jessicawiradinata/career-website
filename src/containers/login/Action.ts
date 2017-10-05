@@ -9,7 +9,7 @@ export const login = (email: string, password: string, history: History) => (dis
   dispatch(loginRequested())
   try {
     const response = await authenticationService.login(email, password)
-    if (response.data.token !== null) {
+    if (response.data.token !== undefined) {
       window.localStorage.setItem('token', response.data.token)
       window.localStorage.setItem('id', response.data.id)
       dispatch(loginSuccess())
