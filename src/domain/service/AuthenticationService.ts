@@ -13,4 +13,6 @@ export default class AuthenticationService {
     localStorage.removeItem('token')
     localStorage.removeItem('id')
   }
+
+  isLoggedIn = (): boolean => window.localStorage.token !== undefined
 }

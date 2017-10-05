@@ -14,3 +14,10 @@ export const logout = (history: History) => (dispatch: Dispatch<any>) => (async 
 export const logoutAction = () => ({
   type: ActionTypes.LOGOUT,
 })
+
+export const authenticate = (history: History) => (dispatch: Dispatch<any>) => (async () => {
+  const isLoggedIn = await authenticationService.isLoggedIn()
+  if (!isLoggedIn) {
+    history.push('/')
+  }
+})()

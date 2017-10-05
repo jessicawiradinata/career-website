@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import MyPostsLayout from './Layout'
 import { bindActionCreators } from 'redux'
 import selector from './selector'
-import { logout } from '../../actions/Authentication'
+import { logout, authenticate } from '../../actions/Authentication'
 import { deletePost } from '../../actions/Post'
 
 export default connect(
@@ -10,5 +10,6 @@ export default connect(
   dispatch => bindActionCreators({
     deletePost,
     logout,
+    authenticate,
    }, dispatch),
 )(MyPostsLayout as any)

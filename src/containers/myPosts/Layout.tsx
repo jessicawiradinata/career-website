@@ -12,6 +12,7 @@ interface Props {
   userPosts: Post[]
   deletePostStatus: boolean
   user: User
+  authenticate: (history: History) => void
   logout: (history: History) => void
   deletePost: (postId: string) => void
 }
@@ -19,6 +20,11 @@ interface Props {
 interface State {}
 
 export default class MyPostsLayout extends Component<Props, State> {
+  componentWillMount() {
+    const { authenticate, history } = this.props
+    authenticate(history)
+  }
+
   renderSkillsData = (skills: string[]) => {
     return map(skills, (skill) => {
       return (

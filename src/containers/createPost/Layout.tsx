@@ -10,6 +10,7 @@ interface Props {
   history: History
   createPostStatus: boolean
   user: User
+  authenticate: (history: History) => void
   logout: (history: History) => void
   createPost: (post: Post, history: History) => void
 }
@@ -38,6 +39,11 @@ export default class CreatePostLayout extends Component<Props, State> {
       skills: [],
       howToApply: '',
     }
+  }
+
+  componentWillMount() {
+    const { authenticate, history } = this.props
+    authenticate(history)
   }
 
   render() {
