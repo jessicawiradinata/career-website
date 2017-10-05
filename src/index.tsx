@@ -13,7 +13,7 @@ import DataLoadService from './domain/service/DataLoadService'
 import PostRepository from './domain/service/PostRepository'
 import UserRepository from './domain/service/UserRepository'
 import { getPostsAction } from './actions/Post'
-import { getUsersAction } from './actions/User'
+import { getUsersAction, getUserAction } from './actions/User'
 import './index.css'
 
 interface Props {}
@@ -41,10 +41,12 @@ export default class App extends Component<Props, State> {
     persistStore(this.store, {}, () => {
       this.setState({ rehydrated: true })
     })
-    const post$ = postRepository.getPostsSubject()
-    const user$ = userRepository.getUsersSubject()
-    post$.subscribe(payload => this.store.dispatch(getPostsAction(payload)))
-    user$.subscribe(payload => this.store.dispatch(getUsersAction(payload)))
+    const posts$ = postRepository.getPostsSubject()
+    const users$ = userRepository.getUsersSubject()
+    const user$ = userRepository.getUserSubject()
+    posts$.subscribe(payload => this.store.dispatch(getPostsAction(payload)))
+    users$.subscribe(payload => this.store.dispatch(getUsersAction(payload)))
+    user$.subscribe(payload => this.store.dispatch(getUserAction(payload)))
     dataLoadService.loadData()
   }
 

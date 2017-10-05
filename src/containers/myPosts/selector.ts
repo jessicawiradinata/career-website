@@ -1,13 +1,13 @@
 import { createStructuredSelector, createSelector } from 'reselect'
 import { State } from '../../store/State'
-import { User } from '../../domain/model/User'
 import { Post } from '../../domain/model/Post'
-import { filter, find } from 'lodash'
+import { User } from '../../domain/model/User'
+import { filter } from 'lodash'
 
 interface StateProps {
   userPosts: Post[]
   deletePostStatus: boolean
-  user: User | undefined
+  user: User
 }
 
 const userPosts = createSelector(
@@ -16,13 +16,9 @@ const userPosts = createSelector(
   (posts: Post[], userId: string) => filter(posts, { 'authorId': userId }),
 )
 
-const deletePostStatus = (state: State) => state.post.deletePostStatus
+const user = (state: State) => state.user.user
 
-const user = createSelector(
-  (state: State) => state.user.users,
-  (state: State) => localStorage.id,
-  (users: User[], userId: string) => find(users, { '_id': userId }),
-)
+const deletePostStatus = (state: State) => state.post.deletePostStatus
 
 export default createStructuredSelector<State, StateProps>({
   userPosts,

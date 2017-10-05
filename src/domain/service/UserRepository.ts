@@ -4,14 +4,19 @@ import { User } from '../../domain/model/User'
 import Rx from 'rxjs'
 
 export default class UserRepository {
+  user: User
   users: User[] = []
+  userSubject = new Rx.BehaviorSubject<User>({ _id: '', email: '', name: '', isAdmin: false })
   usersSubject = new Rx.BehaviorSubject<User[]>([])
 
+  getUserSubject = () => this.userSubject
   getUsersSubject = () => this.usersSubject
 
-  getUser = (userId: string): Promise<any> => (
-    axios.get(`${Config.API_ENDPOINT}/users/${userId}`)
-  )
+  getUser = async (userId: string) => {
+    const response = await axios.get(`${Config.API_ENDPOINT}/users/${userId}`)
+    this.user = response.data
+    this.userSubject.next(this.user)
+  }
 
   getUsers = async () => {
     const response = await axios.get(`${Config.API_ENDPOINT}/users`)

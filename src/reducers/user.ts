@@ -28,6 +28,7 @@ const initialUser: User = {
   _id: '',
   email: '',
   name: '',
+  isAdmin: false,
 }
 
 const user = (state: User = initialUser, action: userAction) => {
@@ -50,8 +51,6 @@ const users = (state: User[] = [], action: usersAction) => {
   switch (action.type) {
     case ActionTypes.GET_USERS:
       return action.payload
-    case ActionTypes.LOGOUT:
-      return {}
     default:
       return state
   }
