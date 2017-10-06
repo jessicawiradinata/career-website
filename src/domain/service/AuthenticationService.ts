@@ -15,4 +15,6 @@ export default class AuthenticationService {
   }
 
   isLoggedIn = (): boolean => window.localStorage.token !== undefined
+
+  isOwner = (authorId: string): boolean => window.localStorage.id === authorId
 }

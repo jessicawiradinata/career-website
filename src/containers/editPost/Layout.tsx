@@ -7,12 +7,14 @@ import { Post } from '../../domain/model/Post'
 import { User } from '../../domain/model/User'
 
 interface Props {
-  postDetails: any
+  postDetails: Post
   history: History
   match: any
   user: User
-  logout: (history: History) => any
-  updatePost: (post: Post, history: History, postId: string) => any
+  authenticate: (history: History) => void
+  authorize: (history: History, authorId: string, isAdmin: boolean) => void
+  logout: (history: History) => void
+  updatePost: (post: Post, history: History, postId: string) => void
 }
 
 interface State {
@@ -41,6 +43,13 @@ export default class EditPostLayout extends Component<Props, State> {
       skills,
       howToApply,
     }
+  }
+
+  componentWillMount() {
+    const { authenticate, authorize, history, postDetails, user } = this.props
+    const isAdmin = user ? user.isAdmin : false
+    authenticate(history)
+    authorize(history, postDetails.authorId, isAdmin)
   }
 
   render() {

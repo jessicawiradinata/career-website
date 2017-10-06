@@ -21,3 +21,10 @@ export const authenticate = (history: History) => (dispatch: Dispatch<any>) => (
     history.push('/')
   }
 })()
+
+export const authorize = (history: History, authorId: string, isAdmin: boolean) => (dispatch: Dispatch<any>) => (async () => {
+  const isOwner = await authenticationService.isOwner(authorId)
+  if (!isOwner && !isAdmin) {
+    history.push('/')
+  }
+})()
