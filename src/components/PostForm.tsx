@@ -24,7 +24,7 @@ interface State {
   skill: string,
 }
 
-export default class EditPostLayout extends Component<Props, State> {
+export default class PostForm extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     const { title, remuneration, location, workType, closingDate, description, skills, howToApply } = this.props.postDetails
