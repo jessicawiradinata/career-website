@@ -92,7 +92,7 @@ export default class PostsLayout extends Component<Props, State> {
 
   render() {
     const { history, logout, user } = this.props
-    const isLoggedIn = localStorage.token !== null
+    const isLoggedIn = window.localStorage.token !== undefined
     const isAdmin = user ? user.isAdmin : false
 
     return (
