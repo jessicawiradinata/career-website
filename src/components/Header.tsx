@@ -64,7 +64,6 @@ export default class Header extends Component<Props, State> {
               targetOrigin={{horizontal: 'left', vertical: 'top'}}
               onRequestClose={this.handleRequestClose}
               animation={PopoverAnimationVertical}
-              style={{height: 100}}
             >
               <Menu>
                 <MenuItem primaryText='Create Post' onClick={() => history.push('/createpost')} />
