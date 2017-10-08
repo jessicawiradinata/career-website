@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Card, CardTitle, CardActions, FlatButton, CardText, Chip, FontIcon } from 'material-ui'
-import { Post } from '../domain/model/Post'
+import { Post } from '../../domain/model/Post'
 import { map, uniqueId } from 'lodash'
 import moment from 'moment'
 import { History } from 'history'
+import { styles } from './styles'
 
 interface Props {
   post: Post
@@ -79,70 +80,4 @@ export default class PostCard extends Component<Props, State> {
       </Card>
     )
   }
-}
-
-const styles = {
-  postCard: {
-    marginTop: 20,
-    paddingLeft: 10,
-    paddingBottom: 10,
-  },
-
-  actionsContainer: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    marginRight: 35,
-  },
-
-  titleContainer: {
-    display: 'flex',
-    alignItems: 'baseline',
-    justifyContent: 'space-between',
-  },
-
-  contentContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    marginBottom: 20,
-  },
-
-  footerContainer: {
-    display: 'flex',
-    alignItems: 'baseline',
-    justifyContent: 'space-between',
-    marginRight: 66,
-    marginTop: 10,
-  },
-
-  rightColumn: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    marginRight: 50,
-  },
-
-  chip: {
-    marginRight: 5,
-  },
-
-  worktypeContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
-    marginBottom: 15,
-  },
-
-  chipContainer: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    marginTop: 5,
-    marginLeft: 10,
-  },
-
-  bottomPad: {
-    marginBottom: 20,
-  },
 }

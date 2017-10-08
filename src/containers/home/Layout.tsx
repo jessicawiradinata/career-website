@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Paper, FlatButton } from 'material-ui'
-import Header from '../../components/Header'
+import Header from '../../components/Header/Header'
 import { History } from 'history'
 import { User } from '../../domain/model/User'
+import { styles } from './styles'
 const collaboration = require('../../assets/collaboration.png')
 
 interface Props {
@@ -32,17 +33,4 @@ export default class HomeLayout extends Component<Props, State> {
       </div>
     )
   }
-}
-
-const styles = {
-  form: {
-    margin: 40,
-    padding: 40,
-    textAlign: 'center',
-  },
-  picture: {
-    height: 150,
-    width: 150,
-    margin: 20,
-  },
 }

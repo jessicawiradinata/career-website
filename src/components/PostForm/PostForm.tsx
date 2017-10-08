@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { TextField, RaisedButton, SelectField, MenuItem, DatePicker, Chip } from 'material-ui'
 import moment from 'moment'
 import { History } from 'history'
-import { Post } from '../domain/model/Post'
+import { Post } from '../../domain/model/Post'
 import { concat, map, uniqueId, pull, find } from 'lodash'
+import { styles } from './styles'
 
 interface Props {
   postDetails: Post,
@@ -174,48 +175,4 @@ export default class PostForm extends Component<Props, State> {
       </div>
     )
   }
-}
-
-const styles = {
-  form: {
-    margin: 20,
-    padding: 40,
-    display: 'flex',
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  textField: {
-    width: '100%',
-  },
-  submitBtn: {
-    marginTop: 40,
-  },
-  remunerationField: {
-    float: 'left',
-    width: '45%',
-  },
-  datePicker: {
-    marginLeft: '55%',
-  },
-  datePickerField: {
-    width: '100%',
-  },
-  workTypeField: {
-    float: 'left',
-    width: '45%',
-  },
-  locationField: {
-    width: '45%',
-    marginLeft: '10%',
-  },
-  chipWrapper: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    width: '100%',
-    justifyContent: 'flex-start',
-  },
-  chip: {
-    margin: 5,
-  },
 }

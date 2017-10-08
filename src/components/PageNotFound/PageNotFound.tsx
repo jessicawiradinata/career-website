@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { RaisedButton } from 'material-ui'
 import { History } from 'history'
+import { styles } from './styles'
 
 interface Props {
   history: History
@@ -31,24 +32,4 @@ export default class PageNotFound extends Component<Props, State> {
       </div>
     )
   }
-}
-
-const styles = {
-  pageContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%',
-    marginTop: '25%',
-  },
-  titleText: {
-    marginBottom: 30,
-  },
-  buttonsContainer: {
-    marginTop: 20,
-  },
-  button: {
-    marginRight: 10,
-  },
 }

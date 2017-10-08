@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Paper } from 'material-ui'
-import Header from '../../components/Header'
+import Header from '../../components/Header/Header'
 import { History } from 'history'
 import moment from 'moment'
 import { Post } from '../../domain/model/Post'
 import { User } from '../../domain/model/User'
-import PostForm from '../../components/PostForm'
+import PostForm from '../../components/PostForm/PostForm'
+import { styles } from './styles'
 
 interface Props {
   history: History
@@ -57,18 +58,4 @@ export default class CreatePostLayout extends Component<Props, State> {
       </div>
     )
   }
-}
-
-const styles = {
-  form: {
-    margin: 20,
-    padding: 40,
-    display: 'flex',
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  postForm: {
-    width: '70%',
-  },
 }

@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { map } from 'lodash'
-import Header from '../../components/Header'
+import Header from '../../components/Header/Header'
 import { History } from 'history'
 import { Post } from '../../domain/model/Post'
 import { User } from '../../domain/model/User'
-import PostCard from '../../components/PostCard'
+import PostCard from '../../components/PostCard/PostCard'
 
 interface Props {
   posts: Post[]
