@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { TextField, RaisedButton, SelectField, MenuItem, DatePicker } from 'material-ui'
+import { TextField, RaisedButton, SelectField, MenuItem, DatePicker, Chip } from 'material-ui'
 import moment from 'moment'
 import { History } from 'history'
 import { Post } from '../domain/model/Post'
+import { concat, map, uniqueId, pull, find } from 'lodash'
 
 interface Props {
   postDetails: Post,
@@ -19,7 +20,8 @@ interface State {
   closingDate: any
   description: string
   skills: string[]
-  howToApply: string
+  howToApply: string,
+  skill: string,
 }
 
 export default class EditPostLayout extends Component<Props, State> {
@@ -36,7 +38,37 @@ export default class EditPostLayout extends Component<Props, State> {
       description,
       skills,
       howToApply,
+      skill: '',
     }
+  }
+
+  onEnterSkills = (event: any) => {
+    if (event.key === 'Enter') {
+      const { skills, skill } = this.state
+      const isExist = find(skills, (skillItem) => skillItem === skill)
+      if (!isExist) {
+        this.setState({ skills: concat(skills, skill)})
+      }
+      this.setState({ skill: '' })
+    }
+  }
+
+  onDeleteChip = (skill: string) => {
+    this.setState({ skills: pull(this.state.skills, skill) })
+  }
+
+  renderSkillsChip = (skills: string[]) => {
+    return map(skills, (skill) => {
+      return (
+        <Chip
+          key={uniqueId()}
+          style={styles.chip}
+          onRequestDelete={() => this.onDeleteChip(skill)}
+        >
+          {skill}
+        </Chip>
+      )
+    })
   }
 
   render() {
@@ -114,6 +146,18 @@ export default class EditPostLayout extends Component<Props, State> {
           value={this.state.description}
         />
         <TextField
+          floatingLabelText='Required Skills'
+          floatingLabelFixed
+          style={styles.textField}
+          hintText='Enter skill name and press Enter'
+          onChange={(skill) => this.setState({ skill: (skill.target as HTMLTextAreaElement).value })}
+          onKeyPress={this.onEnterSkills}
+          value={this.state.skill}
+        />
+        <div style={styles.chipWrapper as any}>
+          {this.renderSkillsChip(this.state.skills)}
+        </div>
+        <TextField
           floatingLabelText='How to Apply'
           floatingLabelFixed
           style={styles.textField}
@@ -164,5 +208,14 @@ const styles = {
   locationField: {
     width: '45%',
     marginLeft: '10%',
+  },
+  chipWrapper: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    width: '100%',
+    justifyContent: 'flex-start',
+  },
+  chip: {
+    margin: 5,
   },
 }
