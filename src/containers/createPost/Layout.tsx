@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { Paper, TextField, RaisedButton, SelectField, MenuItem, DatePicker } from 'material-ui'
+import { Paper } from 'material-ui'
 import Header from '../../components/Header'
 import { History } from 'history'
 import moment from 'moment'
 import { Post } from '../../domain/model/Post'
 import { User } from '../../domain/model/User'
+import PostForm from '../../components/PostForm'
 
 interface Props {
   history: History
@@ -15,21 +16,20 @@ interface Props {
   createPost: (post: Post, history: History) => void
 }
 
-interface State {
-  title: string
-  remuneration: string
-  location: string
-  workType: string
-  closingDate: Date
-  description: string
-  skills: string[]
-  howToApply: string
-}
+interface State {}
 
 export default class CreatePostLayout extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props)
-    this.state = {
+  componentWillMount() {
+    const { authenticate, history } = this.props
+    authenticate(history)
+  }
+
+  render() {
+    const { history, createPost, logout, user } = this.props
+    const isAdmin = user ? user.isAdmin : false
+    const post: Post = {
+      _id: '',
+      authorId: '',
       title: '',
       remuneration: '',
       location: '',
@@ -39,99 +39,20 @@ export default class CreatePostLayout extends Component<Props, State> {
       skills: [],
       howToApply: '',
     }
-  }
-
-  componentWillMount() {
-    const { authenticate, history } = this.props
-    authenticate(history)
-  }
-
-  render() {
-    const { history, createPost, createPostStatus, logout, user } = this.props
-    const isAdmin = user ? user.isAdmin : false
-    const post: Post = {
-      _id: '',
-      title: this.state.title,
-      remuneration: this.state.remuneration,
-      location: this.state.location,
-      workType: this.state.workType,
-      closingDate: this.state.closingDate,
-      description: this.state.description,
-      skills: this.state.skills,
-      howToApply: this.state.howToApply,
-      authorId: window.localStorage.id,
-    }
 
     return (
       <div>
         <Header history={history} isLoggedIn={true} logout={logout} isAdmin={isAdmin} />
         <Paper style={styles.form as any} zDepth={1}>
           <h1>Post an Internship</h1>
-          <TextField
-            floatingLabelText='Title'
-            floatingLabelFixed
-            style={styles.textField}
-            onChange={(title) => this.setState({ title: (title.target as HTMLTextAreaElement).value })}
-          />
-          <div style={styles.textField}>
-            <TextField
-              floatingLabelText='Remuneration'
-              floatingLabelFixed
-              hintText='e.g. $20 - $25 per hour'
-              style={{ float: 'left', width: '45%' }}
-              onChange={(remuneration) => this.setState({ remuneration: (remuneration.target as HTMLTextAreaElement).value })}
-            />
-            <TextField
-              floatingLabelText='Location'
-              floatingLabelFixed
-              hintText='e.g. Sydney, NSW'
-              style={{ width: '45%', marginLeft: '10%' }}
-              onChange={(location) => this.setState({ location: (location.target as HTMLTextAreaElement).value })}
+          <div style={styles.postForm}>
+            <PostForm
+              postDetails={post}
+              isCreateNew={true}
+              history={history}
+              onSubmit={createPost}
             />
           </div>
-          <div style={styles.textField}>
-            <SelectField
-              floatingLabelText='Work Type'
-              floatingLabelFixed
-              value={this.state.workType}
-              style={{ float: 'left', width: '45%' }}
-              onChange={(event, index, value) => this.setState({ workType: value })}
-            >
-              <MenuItem value='Full Time' primaryText='Full Time' />
-              <MenuItem value='Part Time' primaryText='Part Time' />
-              <MenuItem value='Temporary' primaryText='Temporary' />
-              <MenuItem value='Casual' primaryText='Casual' />
-            </SelectField>
-            <DatePicker
-              floatingLabelText='Closing Date'
-              floatingLabelFixed
-              mode='landscape'
-              style={{ marginLeft: '55%' }}
-              textFieldStyle={{ width: '100%' }}
-              minDate={moment().toDate()}
-              onChange={(event, value) => this.setState({ closingDate: value })}
-            />
-          </div>
-          <TextField
-            floatingLabelText='Description'
-            floatingLabelFixed
-            style={styles.textField}
-            multiLine
-            onChange={(description) => this.setState({ description: (description.target as HTMLTextAreaElement).value })}
-          />
-          <TextField
-            floatingLabelText='How to Apply'
-            floatingLabelFixed
-            style={styles.textField}
-            multiLine
-            onChange={(howToApply) => this.setState({ howToApply: (howToApply.target as HTMLTextAreaElement).value })}
-          />
-          <RaisedButton
-            label={createPostStatus ? 'Loading...' : 'Submit'}
-            primary
-            style={styles.submitBtn}
-            onClick={() => createPost(post, this.props.history)}
-          />
         </Paper>
       </div>
     )
@@ -147,10 +68,7 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
   },
-  textField: {
-    width: '55%',
-  },
-  submitBtn: {
-    marginTop: 40,
+  postForm: {
+    width: '70%',
   },
 }
