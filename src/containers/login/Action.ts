@@ -2,9 +2,10 @@ import * as ActionTypes from '../../constants/ActionTypes'
 import { History } from 'history'
 import { Dispatch } from 'redux'
 import AuthenticationService from '../../domain/service/AuthenticationService'
-import { dataLoadService } from '../../index'
+import UserRepository from '../../domain/service/UserRepository'
 
 const authenticationService = new AuthenticationService()
+const userRepository = new UserRepository()
 
 export const login = (email: string, password: string, history: History) => (dispatch: Dispatch<any>) => (async () => {
   dispatch(loginRequested())
@@ -13,7 +14,7 @@ export const login = (email: string, password: string, history: History) => (dis
     if (response.data.token !== undefined) {
       window.localStorage.setItem('token', response.data.token)
       window.localStorage.setItem('id', response.data.id)
-      await dataLoadService.getUserRepository().getUser(response.data.id)
+      await userRepository.getUser(response.data.id)
       dispatch(loginSuccess())
       history.push('/')
     } else {

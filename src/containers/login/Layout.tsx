@@ -36,12 +36,16 @@ export default class LoginLayout extends Component<Props, State> {
             floatingLabelText='Email'
             style={styles.textField}
             onChange={(email) => this.setState({ email: (email.target as HTMLTextAreaElement).value })}
+            htmlFor='1'
+            id='1'
           />
           <TextField
             floatingLabelText='Password'
             type='password'
             style={styles.textField}
             onChange={(password) => this.setState({ password: (password.target as HTMLTextAreaElement).value })}
+            htmlFor='2'
+            id='2'
           />
           <RaisedButton
             label={loginStatus ? 'Loading...' : 'Login'}

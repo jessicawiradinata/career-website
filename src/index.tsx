@@ -26,7 +26,7 @@ const postRepository = new PostRepository()
 const userRepository = new UserRepository()
 export const dataLoadService = new DataLoadService(postRepository, userRepository)
 
-export default class App extends Component<Props, State> {
+class App extends Component<Props, State> {
   history: History = createBrowserHistory()
   store: any = configureStore({}, this.history)
 
