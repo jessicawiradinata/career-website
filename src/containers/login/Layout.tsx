@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Paper, TextField, RaisedButton } from 'material-ui'
-import Header from '../../components/Header'
+import Header from '../../components/Header/Header'
 import { History } from 'history'
+import { styles } from './styles'
 
 interface Props {
   history: History
@@ -52,21 +53,4 @@ export default class LoginLayout extends Component<Props, State> {
       </div>
     )
   }
-}
-
-const styles = {
-  loginContainer: {
-    margin: 20,
-    padding: 40,
-    display: 'flex',
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  textField: {
-    width: '50%',
-  },
-  submitBtn: {
-    marginTop: 40,
-  },
 }

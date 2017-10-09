@@ -7,7 +7,7 @@ import MyPostsContainer from '../containers/myPosts/Container'
 import MyProfileContainer from '../containers/myProfile/Container'
 import EditPostContainer from '../containers/editPost/Container'
 import PostsContainer from '../containers/posts/Container'
-import PageNotFound from '../components/PageNotFound'
+import PageNotFound from '../components/PageNotFound/PageNotFound'
 import { Route, Switch } from 'react-router-dom'
 
 export default () => (

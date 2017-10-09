@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { FlatButton, ToolbarGroup, Toolbar, Popover, Menu, MenuItem } from 'material-ui'
 import { PopoverAnimationVertical } from 'material-ui/Popover'
 import { History } from 'history'
+import { styles } from './styles'
 
 interface Props {
   history: History
@@ -60,11 +61,10 @@ export default class Header extends Component<Props, State> {
             <Popover
               open={this.state.open}
               anchorEl={this.state.anchorEl}
-              anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-              targetOrigin={{horizontal: 'left', vertical: 'top'}}
+              anchorOrigin={styles.anchorOrigin as any}
+              targetOrigin={styles.targetOrigin as any}
               onRequestClose={this.handleRequestClose}
               animation={PopoverAnimationVertical}
-              style={{height: 100}}
             >
               <Menu>
                 <MenuItem primaryText='Create Post' onClick={() => history.push('/createpost')} />
