@@ -40,6 +40,18 @@ export default class PostRepository {
     this.postsSubject.next(this.posts)
   }
 
+  lockPost = async (postId: string) => {
+    await axios.put(`${Config.API_ENDPOINT}/posts/lock/${postId}`, {
+      isLocked: true,
+    })
+  }
+
+  unlockPost = async (postId: string) => {
+    await axios.put(`${Config.API_ENDPOINT}/posts/lock/${postId}`, {
+      isLocked: false,
+    })
+  }
+
   updateLocalPost = (postId: string, newPost: Post) => {
     this.posts = map(this.posts, (post: Post) => {
       if (post._id === postId) {

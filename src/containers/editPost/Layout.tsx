@@ -16,16 +16,24 @@ interface Props {
   authorize: (history: History, authorId: string, isAdmin: boolean) => void
   logout: (history: History) => void
   updatePost: (post: Post, history: History, postId: string) => void
+  checkLock: (postId: string, history: History) => void
 }
 
 interface State {}
 
 export default class EditPostLayout extends Component<Props, State> {
   componentWillMount() {
-    const { authenticate, authorize, history, postDetails, user } = this.props
+    const { authenticate, authorize, history, postDetails, user, checkLock } = this.props
     const isAdmin = user ? user.isAdmin : false
     authenticate(history)
     authorize(history, postDetails.authorId, isAdmin)
+
+    checkLock(postDetails._id, history)
+    // if(isLocked(postId)) {
+    //  redirect('/')
+    // } else {
+    //  lock(postId)
+    // }
   }
 
   render() {
