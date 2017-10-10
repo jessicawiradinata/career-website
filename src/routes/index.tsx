@@ -4,7 +4,7 @@ import HomeContainer from '../containers/home/Container'
 import SignupContainer from '../containers/signup/Container'
 import CreatePostContainer from '../containers/createPost/Container'
 import MyPostsContainer from '../containers/myPosts/Container'
-import MyProfileContainer from '../containers/myProfile/Container'
+import MyAccountContainer from '../containers/myAccount/Container'
 import EditPostContainer from '../containers/editPost/Container'
 import PostsContainer from '../containers/posts/Container'
 import PageNotFound from '../components/PageNotFound/PageNotFound'
@@ -17,7 +17,7 @@ export default () => (
     <Route path='/signup' component={SignupContainer} />
     <Route path='/createpost' component={CreatePostContainer} />
     <Route path='/myposts' component={MyPostsContainer} />
-    <Route path='/myProfile' component={MyProfileContainer} />
+    <Route path='/myAccount' component={MyAccountContainer} />
     <Route path='/editpost/:postId' component={EditPostContainer} />
     <Route path='/internships' component={PostsContainer} />
     <Route component={PageNotFound} />
