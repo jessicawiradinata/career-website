@@ -11,15 +11,16 @@ interface Props{
 	history: History
 	user: User
 	logout: (history: History) => void
+	authenticate: (history: History) => void
 }
 
 interface State{}
 
-export default class MyProfileLayout extends Component<Props, State>{
-	constructor(props: Props) {
-		super(props)
-		
-	}
+export default class MyAccountLayout extends Component<Props, State>{
+	componentWillMount() {
+    const { authenticate, history } = this.props
+    authenticate(history)
+  }
 
 	render(){
 		const { history, logout, user } = this.props
