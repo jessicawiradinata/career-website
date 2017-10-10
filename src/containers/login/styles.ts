@@ -12,7 +12,12 @@ export const styles = {
     width: '50%',
   },
 
+  forgotField: {
+    width: '50%',
+    marginTop: 20,
+  },
+
   submitBtn: {
-    marginTop: 40,
+    marginTop: 35,
   },
 }
