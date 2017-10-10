@@ -9,6 +9,12 @@ export default class AuthenticationService {
     })
   )
 
+  resetPassword = (email: string) => {
+    axios.post(`${Config.API_ENDPOINT}/auth/resetpassword`, {
+      email: email,
+    })
+  }
+
   logout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('id')
