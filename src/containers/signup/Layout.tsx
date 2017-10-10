@@ -28,7 +28,6 @@ export default class SignupLayout extends Component<Props, State> {
 
   render() {
     const { signupStatus, signup, history } = this.props
-    //console.log(this.props)
 
     return (
       <div>

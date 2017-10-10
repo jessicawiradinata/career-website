@@ -7,6 +7,6 @@ import { authenticate } from '../../actions/Authentication'
 export default connect(
   Selector,
   dispatch => bindActionCreators({
-    authenticate
+    authenticate,
    }, dispatch),
 )(MyAccountLayout as any)
