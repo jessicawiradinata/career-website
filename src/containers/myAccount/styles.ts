@@ -32,6 +32,6 @@ export const styles = {
     marginTop: 40,
   },
   textField: {
-    width: '20%',
+    width: '35%',
   },
 }
