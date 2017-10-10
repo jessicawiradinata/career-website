@@ -24,6 +24,14 @@ export const login = (email: string, password: string, history: History) => (dis
   }
 })()
 
+export const resetPassword = (email: string) => (dispatch: Dispatch<any>) => (async () => {
+  try {
+    await authenticationService.resetPassword(email)
+  } catch (error) {
+    console.log(error)
+  }
+})()
+
 export const loginRequested = () => {
   return { type: ActionTypes.LOGIN_REQUESTED }
 }

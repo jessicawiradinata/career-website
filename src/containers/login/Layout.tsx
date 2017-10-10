@@ -1,19 +1,21 @@
 import React, { Component } from 'react'
-import { Paper, TextField, RaisedButton, Checkbox } from 'material-ui'
+import { Paper, TextField, RaisedButton, Checkbox, Snackbar } from 'material-ui'
 import Header from '../../components/Header/Header'
 import { History } from 'history'
 import { styles } from './styles'
 
 interface Props {
   history: History
-  login: (email: string, password: string, history: History) => any
   loginStatus: boolean
+  login: (email: string, password: string, history: History) => void
+  resetPassword: (email: string) => void
 }
 
 interface State {
   email: string
   password: string
-  isForget: boolean
+  isForgot: boolean
+  showResetBar: boolean
 }
 
 export default class LoginLayout extends Component<Props, State> {
@@ -22,13 +24,28 @@ export default class LoginLayout extends Component<Props, State> {
     this.state = {
       email: '',
       password: '',
-      isForget: false,
+      isForgot: false,
+      showResetBar: false,
+    }
+  }
+
+  onSubmit = () => {
+    const { isForgot, email, password } = this.state
+    const { login, history, resetPassword } = this.props
+    if (isForgot) {
+      resetPassword(email)
+      this.setState({
+        isForgot: false,
+        showResetBar: true,
+      })
+    } else {
+      login(email, password, history)
     }
   }
 
   render() {
-    const { login, loginStatus, history } = this.props
-    const { isForget } = this.state
+    const { loginStatus, history } = this.props
+    const { isForgot, showResetBar } = this.state
 
     return (
       <div>
@@ -40,7 +57,7 @@ export default class LoginLayout extends Component<Props, State> {
             style={styles.textField}
             onChange={(email) => this.setState({ email: (email.target as HTMLTextAreaElement).value })}
           />
-          { !isForget &&
+          {!isForgot &&
             <TextField
               floatingLabelText='Password'
               type='password'
@@ -50,14 +67,21 @@ export default class LoginLayout extends Component<Props, State> {
           }
           <Checkbox
             label='Forgot Password'
-            onCheck={() => this.setState({ isForget: !isForget })}
+            checked={isForgot}
+            onCheck={() => this.setState({ isForgot: !isForgot })}
             style={styles.forgotField}
           />
           <RaisedButton
-            label={isForget ? 'Reset Password' : (loginStatus ? 'Loading...' : 'Login')}
+            label={isForgot ? 'Reset Password' : (loginStatus ? 'Loading...' : 'Login')}
             primary={true}
             style={styles.submitBtn}
-            onClick={() => login(this.state.email, this.state.password, this.props.history)}
+            onClick={this.onSubmit}
+          />
+          <Snackbar
+            open={showResetBar}
+            message={'Password reset email sent!'}
+            autoHideDuration={4000}
+            onRequestClose={() => this.setState({ showResetBar: false })}
           />
         </Paper>
       </div>
