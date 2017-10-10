@@ -1,9 +1,15 @@
 export const styles = {
   searchField: {
-    width: '25%',
+    width: '30%',
   },
 
-  searchTextField: {
-    width: '100%',
+  searchContainer: {
+    paddingLeft: 20,
+    paddingBottom: 10,
+  },
+
+  notFoundContainer: {
+    marginLeft: 20,
+    marginTop: 30,
   },
 }

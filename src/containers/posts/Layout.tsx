@@ -5,7 +5,7 @@ import { History } from 'history'
 import { Post } from '../../domain/model/Post'
 import { User } from '../../domain/model/User'
 import PostCard from '../../components/PostCard/PostCard'
-import { Paper, AutoComplete } from 'material-ui'
+import { Paper, TextField } from 'material-ui'
 import { styles } from './styles'
 
 interface Props {
@@ -37,6 +37,9 @@ export default class PostsLayout extends Component<Props, State> {
     const isAdmin = user ? user.isAdmin : false
     const filteredPosts = this.filterPosts(posts, searchText)
 
+    if (filteredPosts.length === 0)
+      return <h4 style={styles.notFoundContainer}>No posts found</h4>
+
     return map(filteredPosts, (post: any) => {
       return (
         <PostCard
@@ -52,22 +55,18 @@ export default class PostsLayout extends Component<Props, State> {
   }
 
   render() {
-    const { history, logout, user, posts } = this.props
+    const { history, logout, user } = this.props
     const isLoggedIn = window.localStorage.token !== undefined
     const isAdmin = user ? user.isAdmin : false
-    const postTitles = map(posts, (post: Post) => post.title)
 
     return (
       <div>
         <Header history={history} isLoggedIn={isLoggedIn} logout={logout} isAdmin={isAdmin} />
-        <Paper style={{ paddingLeft: 20, paddingBottom: 10 }}>
-          <AutoComplete
+        <Paper style={styles.searchContainer}>
+          <TextField
             hintText='Search'
-            dataSource={postTitles}
-            filter={AutoComplete.caseInsensitiveFilter}
             style={styles.searchField}
-            textFieldStyle={styles.searchTextField}
-            onUpdateInput={(searchText) => this.setState({ searchText })}
+            onChange={(searchText: any) => this.setState({ searchText: searchText.target.value })}
           />
         </Paper>
         {this.renderPostCards()}
