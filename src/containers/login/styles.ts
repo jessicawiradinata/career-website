@@ -21,4 +21,9 @@ export const styles = {
     marginTop: 35,
     width: '50%',
   },
+
+  errorText: {
+    color: 'red',
+    marginTop: 5,
+  },
 }

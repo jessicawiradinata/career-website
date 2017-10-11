@@ -6,7 +6,8 @@ import { styles } from './styles'
 
 interface Props {
   history: History
-  loginStatus: boolean
+  isLoginProcessing: boolean
+  isLoginSuccess: boolean
   validEmail: boolean
   validPassword: boolean
   login: (email: string, password: string, history: History) => void
@@ -78,7 +79,7 @@ export default class LoginLayout extends Component<Props, State> {
   }
 
   render() {
-    const { loginStatus, history, validEmail, validPassword } = this.props
+    const { history, validEmail, validPassword, isLoginProcessing, isLoginSuccess } = this.props
     const { isForgot, showResetBar, email, emailFocused, passwordFocused } = this.state
 
     return (
@@ -110,12 +111,15 @@ export default class LoginLayout extends Component<Props, State> {
             style={styles.forgotField}
           />
           <RaisedButton
-            label={isForgot ? 'Reset Password' : (loginStatus ? 'Loading...' : 'Login')}
+            label={isForgot ? 'Reset Password' : (isLoginProcessing ? 'Loading...' : 'Login')}
             primary={true}
             style={styles.submitBtn}
             onClick={this.onSubmit}
             disabled={isForgot ? (!validEmail || !emailFocused) : (!validEmail || !validPassword || !emailFocused || !passwordFocused)}
           />
+          {!isLoginSuccess &&
+            <text style={styles.errorText}>Login failed. Invalid email or password.</text>
+          }
           <Snackbar
             open={showResetBar}
             message={`Password reset email has been sent to ${email}`}
