@@ -8,9 +8,11 @@ interface Props {
   history: History
   loginStatus: boolean
   validEmail: boolean
+  validPassword: boolean
   login: (email: string, password: string, history: History) => void
   resetPassword: (email: string) => void
   validateEmail: (email: string, page: string) => void
+  isEmpty: (text: string, component: string) => void
 }
 
 interface State {
@@ -19,6 +21,7 @@ interface State {
   isForgot: boolean
   showResetBar: boolean
   emailFocused: boolean
+  passwordFocused: boolean
 }
 
 export default class LoginLayout extends Component<Props, State> {
@@ -30,12 +33,13 @@ export default class LoginLayout extends Component<Props, State> {
       isForgot: false,
       showResetBar: false,
       emailFocused: false,
+      passwordFocused: false,
     }
   }
 
   emailOnChange = (email: any) => {
     const { validateEmail } = this.props
-    validateEmail(email.target.value, 'login')
+    validateEmail(email.target.value, 'LOGIN')
     this.setState({ email: email.target.value })
   }
 
@@ -43,7 +47,20 @@ export default class LoginLayout extends Component<Props, State> {
     const { validateEmail } = this.props
     const { email } = this.state
     this.setState({ emailFocused: true })
-    validateEmail(email, 'login')
+    validateEmail(email, 'LOGIN')
+  }
+
+  passwordOnChange = (password: any) => {
+    const { isEmpty } = this.props
+    isEmpty(password.target.value, 'LOGIN_PASSWORD')
+    this.setState({ password: password.target.value })
+  }
+
+  passwordOnBlur = () => {
+    const { isEmpty } = this.props
+    const { password } = this.state
+    this.setState({ passwordFocused: true })
+    isEmpty(password, 'LOGIN_PASSWORD')
   }
 
   onSubmit = () => {
@@ -61,8 +78,8 @@ export default class LoginLayout extends Component<Props, State> {
   }
 
   render() {
-    const { loginStatus, history, validEmail } = this.props
-    const { isForgot, showResetBar, email, emailFocused } = this.state
+    const { loginStatus, history, validEmail, validPassword } = this.props
+    const { isForgot, showResetBar, email, emailFocused, passwordFocused } = this.state
 
     return (
       <div>
@@ -81,7 +98,9 @@ export default class LoginLayout extends Component<Props, State> {
               floatingLabelText='Password'
               type='password'
               style={styles.textField}
-              onChange={(password) => this.setState({ password: (password.target as HTMLTextAreaElement).value })}
+              onChange={this.passwordOnChange}
+              onBlur={this.passwordOnBlur}
+              errorText={validPassword || !passwordFocused ? '' : 'Password field cannot be empty'}
             />
           }
           <Checkbox
@@ -95,7 +114,7 @@ export default class LoginLayout extends Component<Props, State> {
             primary={true}
             style={styles.submitBtn}
             onClick={this.onSubmit}
-            disabled={!validEmail}
+            disabled={isForgot ? (!validEmail || !emailFocused) : (!validEmail || !validPassword || !emailFocused || !passwordFocused)}
           />
           <Snackbar
             open={showResetBar}

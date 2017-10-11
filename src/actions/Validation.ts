@@ -4,8 +4,18 @@ import validator from 'validator'
 export const validateEmail = (email: string, page: string) => {
   const isValid = validator.isEmail(email)
   switch (page) {
-    case 'login':
+    case 'LOGIN':
       return isValid ? validLoginEmail() : invalidLoginEmail()
+    default:
+      throw Error
+  }
+}
+
+export const isEmpty = (text: string, component: string) => {
+  const isEmpty = validator.isEmpty(text)
+  switch (component) {
+    case 'LOGIN_PASSWORD':
+      return isEmpty ? invalidLoginPassword() : validLoginPassword()
     default:
       throw Error
   }
