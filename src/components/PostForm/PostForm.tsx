@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { TextField, RaisedButton, SelectField, MenuItem, DatePicker, Chip } from 'material-ui'
-import moment from 'moment'
 import { History } from 'history'
 import { Post } from '../../domain/model/Post'
 import { concat, map, uniqueId, pull, find } from 'lodash'
@@ -29,7 +28,7 @@ export default class PostForm extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     const { title, remuneration, location, workType, closingDate, description, skills, howToApply } = this.props.postDetails
-    const date = moment(closingDate).toDate()
+    const date = new Date(closingDate)
     this.state = {
       title,
       remuneration,
@@ -134,7 +133,7 @@ export default class PostForm extends Component<Props, State> {
             style={styles.datePicker}
             textFieldStyle={styles.datePickerField}
             defaultDate={this.state.closingDate}
-            minDate={moment().toDate()}
+            minDate={new Date()}
             onChange={(event, value) => this.setState({ closingDate: value })}
           />
         </div>

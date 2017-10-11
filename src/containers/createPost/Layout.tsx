@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Paper } from 'material-ui'
 import Header from '../../components/Header/Header'
 import { History } from 'history'
-import moment from 'moment'
 import { Post } from '../../domain/model/Post'
 import { User } from '../../domain/model/User'
 import PostForm from '../../components/PostForm/PostForm'
@@ -35,7 +34,7 @@ export default class CreatePostLayout extends Component<Props, State> {
       remuneration: '',
       location: '',
       workType: '',
-      closingDate: moment().toDate(),
+      closingDate: new Date(),
       description: '',
       skills: [],
       howToApply: '',

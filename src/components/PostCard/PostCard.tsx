@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Card, CardTitle, CardActions, FlatButton, CardText, Chip, FontIcon } from 'material-ui'
 import { Post } from '../../domain/model/Post'
 import { map, uniqueId } from 'lodash'
-import moment from 'moment'
 import { History } from 'history'
 import { styles } from './styles'
+import dateformat from 'dateformat'
 
 interface Props {
   post: Post
@@ -29,8 +29,8 @@ export default class PostCard extends Component<Props, State> {
 
   render() {
     const { post, history, onDelete, showActions, authorName } = this.props
-    const closingDate = moment(post.closingDate).format('DD MMM YYYY')
-    const postDate = moment(post.createdAt).format('DD MMM YYYY')
+    const closingDate = dateformat(post.closingDate, 'dd mmm yyyy')
+    const postDate = dateformat(post.createdAt, 'dd mmm yyyy')
 
     return (
       <Card style={styles.postCard} key={post._id}>
