@@ -45,7 +45,7 @@ export default class LoginLayout extends Component<Props, State> {
 
   render() {
     const { loginStatus, history } = this.props
-    const { isForgot, showResetBar } = this.state
+    const { isForgot, showResetBar, email } = this.state
 
     return (
       <div>
@@ -79,8 +79,8 @@ export default class LoginLayout extends Component<Props, State> {
           />
           <Snackbar
             open={showResetBar}
-            message={'Password reset email sent!'}
-            autoHideDuration={4000}
+            message={`Password reset email has been sent to ${email}`}
+            autoHideDuration={6000}
             onRequestClose={() => this.setState({ showResetBar: false })}
           />
         </Paper>
