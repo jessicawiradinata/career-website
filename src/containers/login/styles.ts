@@ -19,5 +19,6 @@ export const styles = {
 
   submitBtn: {
     marginTop: 35,
+    width: '50%',
   },
 }

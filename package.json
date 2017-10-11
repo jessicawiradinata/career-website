@@ -16,6 +16,7 @@
     "@types/react-tap-event-plugin": "0.0.30",
     "@types/redux-logger": "^3.0.4",
     "@types/remote-redux-devtools": "^0.5.1",
+    "@types/validator": "^6.3.0",
     "axios": "^0.16.2",
     "dateformat": "^3.0.2",
     "history": "^4.7.2",
@@ -37,7 +38,8 @@
     "remote-redux-devtools": "^0.5.12",
     "reselect": "^3.0.1",
     "rxjs": "^5.4.3",
-    "typescript": "^2.5.3"
+    "typescript": "^2.5.3",
+    "validator": "^9.0.0"
   },
   "scripts": {
     "start": "react-scripts-ts start",
