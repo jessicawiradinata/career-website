@@ -1928,6 +1928,7 @@ declare namespace __MaterialUI {
       minlength?: string;
       step?: number;
       autoComplete?: string;
+      maxLength?: string;
   }
   export class TextField extends React.Component<TextFieldProps> {
       blur(): void;

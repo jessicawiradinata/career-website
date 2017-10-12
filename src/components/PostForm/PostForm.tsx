@@ -4,6 +4,7 @@ import { History } from 'history'
 import { Post } from '../../domain/model/Post'
 import { concat, map, uniqueId, pull, find } from 'lodash'
 import { styles } from './styles'
+import { isEmpty } from './validation'
 
 interface Props {
   postDetails: Post,
@@ -20,8 +21,14 @@ interface State {
   closingDate: any
   description: string
   skills: string[]
-  howToApply: string,
-  skill: string,
+  howToApply: string
+  skill: string
+  validTitle: boolean
+  titleFocused: boolean
+  validLocation: boolean
+  locationFocused: boolean
+  validHowToApply: boolean
+  howToApplyFocused: boolean
 }
 
 export default class PostForm extends Component<Props, State> {
@@ -33,13 +40,61 @@ export default class PostForm extends Component<Props, State> {
       title,
       remuneration,
       location,
-      workType,
+      workType: workType ? workType : 'Full Time',
       closingDate: date,
       description,
       skills,
       howToApply,
       skill: '',
+      validTitle: false,
+      titleFocused: false,
+      validLocation: false,
+      locationFocused: false,
+      validHowToApply: false,
+      howToApplyFocused: false,
     }
+  }
+
+  titleOnChange = (title: any) => {
+    this.setState({
+      title: title.target.value,
+      validTitle: !isEmpty(title.target.value),
+    })
+  }
+
+  titleOnBlur = () => {
+    this.setState({
+      titleFocused: true,
+      validTitle: !isEmpty(this.state.title),
+    })
+  }
+
+  locationOnChange = (location: any) => {
+    this.setState({
+      location: location.target.value,
+      validLocation: !isEmpty(location.target.value),
+    })
+  }
+
+  locationOnBlur = () => {
+    this.setState({
+      locationFocused: true,
+      validLocation: !isEmpty(this.state.location),
+    })
+  }
+
+  howToApplyOnChange = (howToApply: any) => {
+    this.setState({
+      howToApply: howToApply.target.value,
+      validHowToApply: !isEmpty(howToApply.target.value),
+    })
+  }
+
+  howToApplyOnBlur = (howToApply: any) => {
+    this.setState({
+      howToApplyFocused: true,
+      validHowToApply: !isEmpty(this.state.howToApply),
+    })
   }
 
   onEnterSkills = (event: any) => {
@@ -73,6 +128,7 @@ export default class PostForm extends Component<Props, State> {
 
   render() {
     const { isCreateNew, onSubmit, postDetails, history } = this.props
+    const { validTitle, titleFocused, validLocation, locationFocused, validHowToApply, howToApplyFocused } = this.state
     const post: Post = {
       _id: '',
       title: this.state.title,
@@ -92,25 +148,32 @@ export default class PostForm extends Component<Props, State> {
           floatingLabelText='Title'
           floatingLabelFixed
           style={styles.textField}
-          onChange={(title) => this.setState({ title: (title.target as HTMLTextAreaElement).value })}
           value={this.state.title}
+          maxLength='70'
+          onChange={this.titleOnChange}
+          onBlur={this.titleOnBlur}
+          errorText={validTitle || !titleFocused ? '' : 'Title field cannot be empty'}
         />
         <div style={styles.textField}>
           <TextField
             floatingLabelText='Remuneration'
             floatingLabelFixed
             hintText='e.g. $20 - $25 per hour'
+            maxLength='50'
             style={styles.remunerationField}
-            onChange={(remuneration) => this.setState({ remuneration: (remuneration.target as HTMLTextAreaElement).value })}
             value={this.state.remuneration}
+            onChange={(remuneration: any) => this.setState({ remuneration: remuneration.target.value })}
           />
           <TextField
             floatingLabelText='Location'
             floatingLabelFixed
             hintText='e.g. Sydney, NSW'
             style={styles.locationField}
-            onChange={(location) => this.setState({ location: (location.target as HTMLTextAreaElement).value })}
             value={this.state.location}
+            maxLength='50'
+            onChange={this.locationOnChange}
+            onBlur={this.locationOnBlur}
+            errorText={validLocation || !locationFocused ? '' : 'Location field cannot be empty'}
           />
         </div>
         <div style={styles.textField}>
@@ -142,6 +205,7 @@ export default class PostForm extends Component<Props, State> {
           floatingLabelFixed
           style={styles.textField}
           multiLine
+          maxLength='2000'
           onChange={(description) => this.setState({ description: (description.target as HTMLTextAreaElement).value })}
           value={this.state.description}
         />
@@ -150,6 +214,7 @@ export default class PostForm extends Component<Props, State> {
           floatingLabelFixed
           style={styles.textField}
           hintText='Enter skill name and press Enter'
+          maxLength='70'
           onChange={(skill) => this.setState({ skill: (skill.target as HTMLTextAreaElement).value })}
           onKeyPress={this.onEnterSkills}
           value={this.state.skill}
@@ -162,8 +227,11 @@ export default class PostForm extends Component<Props, State> {
           floatingLabelFixed
           style={styles.textField}
           multiLine
-          onChange={(howToApply) => this.setState({ howToApply: (howToApply.target as HTMLTextAreaElement).value })}
+          maxLength='1000'
           value={this.state.howToApply}
+          onChange={this.howToApplyOnChange}
+          onBlur={this.howToApplyOnBlur}
+          errorText={validHowToApply || !howToApplyFocused ? '' : 'How to Apply field cannot be empty'}
         />
         <RaisedButton
           label={isCreateNew ? 'Submit' : 'Update'}
