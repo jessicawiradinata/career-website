@@ -23,6 +23,16 @@ export const validatePassword = (password: string, page: string) => {
   }
 }
 
+export const validateName = (name: string, page: string) => {
+  const isValid = validator.isLength(name, { min: 3, max: 70 })
+  switch (page) {
+    case 'SIGNUP':
+      return isValid ? validSignupName() : invalidSignupName()
+    default:
+      throw Error
+  }
+}
+
 export const isEmpty = (text: string, component: string) => {
   const isEmpty = validator.isEmpty(text)
   switch (component) {
@@ -58,7 +68,7 @@ export const validSignupPassword = () => {
 }
 
 export const validSignupName = () => {
-  return { type: ActionTypes.INVALID_SIGNUP_NAME }
+  return { type: ActionTypes.VALID_SIGNUP_NAME }
 }
 
 export const invalidSignupEmail = () => {

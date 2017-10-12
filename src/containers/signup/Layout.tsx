@@ -9,9 +9,11 @@ interface Props {
   signupStatus: boolean
   validEmail: boolean
   validPassword: boolean
+  validName: boolean
   signup: (email: string, password: string, name: string, history: History) => void
   validateEmail: (email: string, page: string) => void
   validatePassword: (password: string, page: string) => void
+  validateName: (name: string, page: string) => void
 }
 
 interface State {
@@ -20,6 +22,7 @@ interface State {
   name: string
   emailFocused: boolean
   passwordFocused: boolean
+  nameFocused: boolean
 }
 
 export default class SignupLayout extends Component<Props, State> {
@@ -31,6 +34,7 @@ export default class SignupLayout extends Component<Props, State> {
       name: '',
       emailFocused: false,
       passwordFocused: false,
+      nameFocused: false,
     }
   }
 
@@ -60,9 +64,22 @@ export default class SignupLayout extends Component<Props, State> {
     validatePassword(password, 'SIGNUP')
   }
 
+  nameOnChange = (name: any) => {
+    const { validateName } = this.props
+    validateName(name.target.value, 'SIGNUP')
+    this.setState({ name: name.target.value })
+  }
+
+  nameOnBlur = () => {
+    const { validateName } = this.props
+    const { name } = this.state
+    this.setState({ nameFocused: true })
+    validateName(name, 'SIGNUP')
+  }
+
   render() {
-    const { signupStatus, signup, history, validEmail, validPassword } = this.props
-    const { emailFocused, passwordFocused } = this.state
+    const { signupStatus, signup, history, validEmail, validPassword, validName } = this.props
+    const { emailFocused, passwordFocused, nameFocused } = this.state
 
     return (
       <div>
@@ -87,7 +104,9 @@ export default class SignupLayout extends Component<Props, State> {
           <TextField
             floatingLabelText='Name'
             style={styles.textField}
-            onChange={(name) => this.setState({ name: (name.target as HTMLTextAreaElement).value })}
+            onChange={this.nameOnChange}
+            onBlur={this.nameOnBlur}
+            errorText={validName || !nameFocused ? '' : 'Name length has to be between 3 - 70 characters'}
           />
           <RaisedButton
             label={signupStatus ? 'Loading...' : 'Sign Up'}

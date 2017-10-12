@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import SignupLayout from './Layout'
 import { signup } from './Action'
-import { validateEmail, validatePassword } from '../../actions/Validation'
+import { validateEmail, validatePassword, validateName } from '../../actions/Validation'
 import { bindActionCreators } from 'redux'
 import selector from './selector'
 
@@ -11,5 +11,6 @@ export default connect(
     signup,
     validateEmail,
     validatePassword,
+    validateName,
   }, dispatch),
 )(SignupLayout as any)
