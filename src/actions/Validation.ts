@@ -13,6 +13,16 @@ export const validateEmail = (email: string, page: string) => {
   }
 }
 
+export const validatePassword = (password: string, page: string) => {
+  const isValid = validator.isLength(password, { min: 6, max: 20 })
+  switch (page) {
+    case 'SIGNUP':
+      return isValid ? validSignupPassword() : invalidSignupPassword()
+    default:
+      throw Error
+  }
+}
+
 export const isEmpty = (text: string, component: string) => {
   const isEmpty = validator.isEmpty(text)
   switch (component) {

@@ -8,8 +8,10 @@ interface Props {
   history: History
   signupStatus: boolean
   validEmail: boolean
-  signup: (email: string, password: string, name: string, history: History) => any
-  validateEmail: (email: string, page: string) => any
+  validPassword: boolean
+  signup: (email: string, password: string, name: string, history: History) => void
+  validateEmail: (email: string, page: string) => void
+  validatePassword: (password: string, page: string) => void
 }
 
 interface State {
@@ -17,6 +19,7 @@ interface State {
   password: string
   name: string
   emailFocused: boolean
+  passwordFocused: boolean
 }
 
 export default class SignupLayout extends Component<Props, State> {
@@ -27,6 +30,7 @@ export default class SignupLayout extends Component<Props, State> {
       password: '',
       name: '',
       emailFocused: false,
+      passwordFocused: false,
     }
   }
 
@@ -43,9 +47,22 @@ export default class SignupLayout extends Component<Props, State> {
     validateEmail(email, 'SIGNUP')
   }
 
+  passwordOnChange = (password: any) => {
+    const { validatePassword } = this.props
+    validatePassword(password.target.value, 'SIGNUP')
+    this.setState({ password: password.target.value })
+  }
+
+  passwordOnBlur = () => {
+    const { validatePassword } = this.props
+    const { password } = this.state
+    this.setState({ passwordFocused: true })
+    validatePassword(password, 'SIGNUP')
+  }
+
   render() {
-    const { signupStatus, signup, history, validEmail } = this.props
-    const { emailFocused } = this.state
+    const { signupStatus, signup, history, validEmail, validPassword } = this.props
+    const { emailFocused, passwordFocused } = this.state
 
     return (
       <div>
@@ -63,7 +80,9 @@ export default class SignupLayout extends Component<Props, State> {
             floatingLabelText='Password'
             type='password'
             style={styles.textField}
-            onChange={(password) => this.setState({ password: (password.target as HTMLTextAreaElement).value })}
+            onChange={this.passwordOnChange}
+            onBlur={this.passwordOnBlur}
+            errorText={validPassword || !passwordFocused ? '' : 'Password length has to be between 6 - 20 characters'}
           />
           <TextField
             floatingLabelText='Name'
