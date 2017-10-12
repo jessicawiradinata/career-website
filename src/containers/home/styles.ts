@@ -1,3 +1,6 @@
+/**
+ * A collection of styles for the home page
+ */
 export const styles = {
   form: {
     margin: 40,
