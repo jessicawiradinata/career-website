@@ -1,3 +1,6 @@
+/**
+ * A collection of styles for Page Not Found component
+ */
 export const styles = {
   pageContainer: {
     display: 'flex',

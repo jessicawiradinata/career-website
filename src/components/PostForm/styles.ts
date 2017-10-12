@@ -1,3 +1,6 @@
+/**
+ * A collection of styles for Post Form component
+ */
 export const styles = {
   form: {
     margin: 20,
