@@ -113,6 +113,7 @@ export default class SignupLayout extends Component<Props, State> {
             primary={true}
             style={styles.submitBtn}
             onClick={() => signup(this.state.email, this.state.password, this.state.name, this.props.history)}
+            disabled={!validEmail || !validPassword || !validName || !emailFocused || !passwordFocused || !nameFocused}
           />
         </Paper>
       </div>
