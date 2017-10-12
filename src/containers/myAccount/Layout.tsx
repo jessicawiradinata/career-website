@@ -12,6 +12,7 @@ interface Props {
   user: User
   logout: (history: History) => void
   authenticate: (history: History) => void
+  changePassword: (email: string, currentPass: string, newPass: string) => void
 }
 
 interface State {
@@ -35,61 +36,71 @@ export default class MyAccountLayout extends Component<Props, State> {
     authenticate(history)
   }
 
+  onSubmitPassword = (email: string, currentPass: string, newPass: string) => {
+    const { changePassword } = this.props
+    changePassword(email, currentPass, newPass)
+  }
+
   render() {
-    const { history, logout, user } = this.props
+    const { history, logout, user, changePassword } = this.props
+    const { currentPass, newPass } = this.state
     const isLoggedIn = localStorage.token !== undefined
     const isAdmin = user ? user.isAdmin : false
 
-  return (
-    <div>
-      <Header history={history} isLoggedIn={isLoggedIn} logout={logout} isAdmin={isAdmin}/>
-      <div style={styles.profileLayout as any}>
-        <Avatar src={collaboration} size={100}/>
-        <h3>Manage your account below</h3>
-      </div>
-      <h2 style={styles.titlePaper}>Change Password</h2>
-      <Paper style={styles.profileContainer as any} zDepth={1}>
-        <TextField
-          floatingLabelText='Current Password'
-          floatingLabelFixed={true}
-          type='password'
-          style={styles.textField}
-        />
-        <TextField
-          floatingLabelText='New Password'
-          floatingLabelFixed={true}
-          type='password'
-          style={styles.textField}
-        />
-        <TextField
-          floatingLabelText='Confirm New Password'
-          floatingLabelFixed={true}
-          type='password'
-          style={styles.textField}
-        />
-        <RaisedButton
-          label='Update'
-          primary={true}
-          style={styles.editBtn}
-        />
-      </Paper>
+    return (
+      <div>
+        <Header history={history} isLoggedIn={isLoggedIn} logout={logout} isAdmin={isAdmin}/>
+        <div style={styles.profileLayout as any}>
+          <Avatar src={collaboration} size={100}/>
+          <h3>Manage your account below</h3>
+        </div>
+        <h2 style={styles.titlePaper}>Change Password</h2>
+        <Paper style={styles.profileContainer as any} zDepth={1}>
+          <TextField
+            floatingLabelText='Current Password'
+            floatingLabelFixed={true}
+            type='password'
+            style={styles.textField}
+            onChange={(currentPass: any) => this.setState({ currentPass: currentPass.target.value })}
+          />
+          <TextField
+            floatingLabelText='New Password'
+            floatingLabelFixed={true}
+            type='password'
+            style={styles.textField}
+            onChange={(newPass: any) => this.setState({ newPass: newPass.target.value })}
+          />
+          <TextField
+            floatingLabelText='Confirm New Password'
+            floatingLabelFixed={true}
+            type='password'
+            style={styles.textField}
+            onChange={(confirmNewPass: any) => this.setState({ confirmNewPass: confirmNewPass.target.value })}
+          />
+          <RaisedButton
+            label='Update'
+            primary={true}
+            style={styles.editBtn}
+            onClick={() => changePassword(user.email, currentPass, newPass)}
+          />
+        </Paper>
 
-      <br/>
-      <h2 style={styles.titlePaper}>Change Contact Details </h2>
-      <Paper style={styles.profileContainer as any} zDepth={1}>
-        <TextField
-          floatingLabelText='Name'
-          floatingLabelFixed={true}
-          defaultValue={user.name}
-          style={styles.textField}
-        />
-        <RaisedButton
-          label='Update'
-          primary={true}
-          style={styles.editBtn}
-        />
-      </Paper>
-    </div>
+        <br/>
+        <h2 style={styles.titlePaper}>Change Contact Details</h2>
+        <Paper style={styles.profileContainer as any} zDepth={1}>
+          <TextField
+            floatingLabelText='Name'
+            floatingLabelFixed={true}
+            defaultValue={user.name}
+            style={styles.textField}
+          />
+          <RaisedButton
+            label='Update'
+            primary={true}
+            style={styles.editBtn}
+          />
+        </Paper>
+      </div>
     )
   }
 }

@@ -15,6 +15,14 @@ export default class AuthenticationService {
     })
   }
 
+  changePassword = (email: string, currentPass: string, newPass: string): Promise<any> => (
+    axios.post(`${Config.API_ENDPOINT}/auth/changepassword`, {
+      email: email,
+      password: currentPass,
+      newPassword: newPass,
+    })
+  )
+
   logout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('id')
