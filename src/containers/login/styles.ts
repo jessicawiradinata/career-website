@@ -1,3 +1,6 @@
+/**
+ * A collection of styles for the login page
+ */
 export const styles = {
   loginContainer: {
     margin: 20,
