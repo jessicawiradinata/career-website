@@ -26,7 +26,6 @@ export default class MyAccountLayout extends Component<Props, State> {
     const { history, logout, user } = this.props
     const isLoggedIn = localStorage.token !== undefined
     const isAdmin = user ? user.isAdmin : false
-    console.log(user)
 
   return (
     <div>
@@ -35,34 +34,6 @@ export default class MyAccountLayout extends Component<Props, State> {
         <Avatar src={collaboration} size={100}/>
         <h3>Manage your account below</h3>
       </div>
-
-      <h2 style={styles.titlePaper}>Change Email Address</h2>
-      <Paper style={styles.profileContainer as any} zDepth={1}>
-        <TextField
-          floatingLabelText='Your registered email address'
-          floatingLabelFixed={true}
-          defaultValue={user.email}
-          disabled={true}
-          style={styles.textField}
-        />
-        <TextField
-          floatingLabelText='New email address'
-          floatingLabelFixed={true}
-          style={styles.textField}
-        />
-        <TextField
-          floatingLabelText='Repeat new email address'
-          floatingLabelFixed={true}
-          style={styles.textField}
-        />
-        <RaisedButton
-          label='Save'
-          primary={true}
-          style={styles.editBtn}
-        />
-      </Paper>
-
-      <br/>
       <h2 style={styles.titlePaper}>Change Password</h2>
       <Paper style={styles.profileContainer as any} zDepth={1}>
         <TextField
