@@ -45,7 +45,7 @@ export default class MyAccountLayout extends Component<Props, State> {
   }
 
   /**
-   * Authenticates user when entering My Account page and redirects to home if user is not logged in
+   * Authenticates user when entering My Account page and redirects to home if not logged in
    */
   componentWillMount() {
     const { authenticate, history } = this.props

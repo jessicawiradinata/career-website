@@ -15,6 +15,10 @@ const postDetails = createSelector(
   (userPosts: Post[], postId: string) => find(userPosts, { '_id': postId }),
 )
 
+/**
+ * Takes states from the redux store and maps it as a props for Edit Post page
+ * @param state state from redux store
+ */
 const user = (state: State) => state.user.user
 
 /**
