@@ -1,3 +1,6 @@
+/**
+ * A collection of styles for Signup page
+ */
 export const styles = {
   signupContainer: {
     margin: 20,
