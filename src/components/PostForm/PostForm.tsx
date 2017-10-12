@@ -145,7 +145,7 @@ export default class PostForm extends Component<Props, State> {
     return (
       <div style={styles.form as any}>
         <TextField
-          floatingLabelText='Title'
+          floatingLabelText='Title*'
           floatingLabelFixed
           style={styles.textField}
           value={this.state.title}
@@ -165,7 +165,7 @@ export default class PostForm extends Component<Props, State> {
             onChange={(remuneration: any) => this.setState({ remuneration: remuneration.target.value })}
           />
           <TextField
-            floatingLabelText='Location'
+            floatingLabelText='Location*'
             floatingLabelFixed
             hintText='e.g. Sydney, NSW'
             style={styles.locationField}
@@ -223,7 +223,7 @@ export default class PostForm extends Component<Props, State> {
           {this.renderSkillsChip(this.state.skills)}
         </div>
         <TextField
-          floatingLabelText='How to Apply'
+          floatingLabelText='How to Apply*'
           floatingLabelFixed
           style={styles.textField}
           multiLine
@@ -237,6 +237,7 @@ export default class PostForm extends Component<Props, State> {
           label={isCreateNew ? 'Submit' : 'Update'}
           primary={true}
           style={styles.submitBtn}
+          disabled={!validTitle || !validLocation || !validHowToApply}
           onClick={() => isCreateNew ? onSubmit(post, history) : onSubmit(post, history, postDetails._id)}
         />
       </div>

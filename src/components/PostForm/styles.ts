@@ -14,6 +14,7 @@ export const styles = {
 
   submitBtn: {
     marginTop: 40,
+    width: '100%',
   },
 
   remunerationField: {
