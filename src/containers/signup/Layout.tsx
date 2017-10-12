@@ -6,7 +6,8 @@ import { styles } from './styles'
 
 interface Props {
   history: History
-  signupStatus: boolean
+  isSignupProcessing: boolean
+  isSignupSuccess: boolean
   validEmail: boolean
   validPassword: boolean
   validName: boolean
@@ -78,7 +79,7 @@ export default class SignupLayout extends Component<Props, State> {
   }
 
   render() {
-    const { signupStatus, signup, history, validEmail, validPassword, validName } = this.props
+    const { signup, history, validEmail, validPassword, validName, isSignupProcessing, isSignupSuccess } = this.props
     const { emailFocused, passwordFocused, nameFocused } = this.state
 
     return (
@@ -109,12 +110,15 @@ export default class SignupLayout extends Component<Props, State> {
             errorText={validName || !nameFocused ? '' : 'Name length has to be between 3 - 70 characters'}
           />
           <RaisedButton
-            label={signupStatus ? 'Loading...' : 'Sign Up'}
+            label={isSignupProcessing ? 'Loading...' : 'Sign Up'}
             primary={true}
             style={styles.submitBtn}
             onClick={() => signup(this.state.email, this.state.password, this.state.name, this.props.history)}
             disabled={!validEmail || !validPassword || !validName || !emailFocused || !passwordFocused || !nameFocused}
           />
+          {!isSignupSuccess &&
+            <text style={styles.errorText}>Signup failed. Unable to connect to the server.</text>
+          }
         </Paper>
       </div>
     )
