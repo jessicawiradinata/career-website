@@ -14,9 +14,22 @@ interface Props {
   authenticate: (history: History) => void
 }
 
-interface State {}
+interface State {
+  currentPass: string,
+  newPass: string,
+  confirmNewPass: string,
+}
 
 export default class MyAccountLayout extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props)
+    this.state = {
+      currentPass: '',
+      newPass: '',
+      confirmNewPass: '',
+    }
+  }
+
   componentWillMount() {
     const { authenticate, history } = this.props
     authenticate(history)
@@ -37,24 +50,25 @@ export default class MyAccountLayout extends Component<Props, State> {
       <h2 style={styles.titlePaper}>Change Password</h2>
       <Paper style={styles.profileContainer as any} zDepth={1}>
         <TextField
-          floatingLabelText='Email address'
+          floatingLabelText='Current Password'
           floatingLabelFixed={true}
-          defaultValue={user.email}
-          disabled={true}
+          type='password'
           style={styles.textField}
         />
         <TextField
-          floatingLabelText='New password'
+          floatingLabelText='New Password'
           floatingLabelFixed={true}
+          type='password'
           style={styles.textField}
         />
         <TextField
-          floatingLabelText='Re-enter new password'
+          floatingLabelText='Confirm New Password'
           floatingLabelFixed={true}
+          type='password'
           style={styles.textField}
         />
         <RaisedButton
-          label='Save'
+          label='Update'
           primary={true}
           style={styles.editBtn}
         />
@@ -70,7 +84,7 @@ export default class MyAccountLayout extends Component<Props, State> {
           style={styles.textField}
         />
         <RaisedButton
-          label='Save'
+          label='Update'
           primary={true}
           style={styles.editBtn}
         />
