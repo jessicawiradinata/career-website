@@ -7,13 +7,16 @@ import { styles } from './styles'
 interface Props {
   history: History
   signupStatus: boolean
+  validEmail: boolean
   signup: (email: string, password: string, name: string, history: History) => any
+  validateEmail: (email: string, page: string) => any
 }
 
 interface State {
   email: string
   password: string
   name: string
+  emailFocused: boolean
 }
 
 export default class SignupLayout extends Component<Props, State> {
@@ -23,11 +26,26 @@ export default class SignupLayout extends Component<Props, State> {
       email: '',
       password: '',
       name: '',
+      emailFocused: false,
     }
   }
 
+  emailOnChange = (email: any) => {
+    const { validateEmail } = this.props
+    validateEmail(email.target.value, 'SIGNUP')
+    this.setState({ email: email.target.value })
+  }
+
+  emailOnBlur = () => {
+    const { validateEmail } = this.props
+    const { email } = this.state
+    this.setState({ emailFocused: true })
+    validateEmail(email, 'SIGNUP')
+  }
+
   render() {
-    const { signupStatus, signup, history } = this.props
+    const { signupStatus, signup, history, validEmail } = this.props
+    const { emailFocused } = this.state
 
     return (
       <div>
@@ -37,7 +55,9 @@ export default class SignupLayout extends Component<Props, State> {
           <TextField
             floatingLabelText='Email'
             style={styles.textField}
-            onChange={(email) => this.setState({ email: (email.target as HTMLTextAreaElement).value })}
+            onChange={this.emailOnChange}
+            onBlur={this.emailOnBlur}
+            errorText={validEmail || !emailFocused ? '' : 'Please enter a valid email'}
           />
           <TextField
             floatingLabelText='Password'

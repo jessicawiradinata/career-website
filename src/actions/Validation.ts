@@ -6,6 +6,8 @@ export const validateEmail = (email: string, page: string) => {
   switch (page) {
     case 'LOGIN':
       return isValid ? validLoginEmail() : invalidLoginEmail()
+    case 'SIGNUP':
+      return isValid ? validSignupEmail() : invalidSignupEmail()
     default:
       throw Error
   }
@@ -35,4 +37,28 @@ export const invalidLoginEmail = () => {
 
 export const invalidLoginPassword = () => {
   return { type: ActionTypes.INVALID_LOGIN_PASSWORD }
+}
+
+export const validSignupEmail = () => {
+  return { type: ActionTypes.VALID_SIGNUP_EMAIL }
+}
+
+export const validSignupPassword = () => {
+  return { type: ActionTypes.VALID_SIGNUP_PASSWORD }
+}
+
+export const validSignupName = () => {
+  return { type: ActionTypes.INVALID_SIGNUP_NAME }
+}
+
+export const invalidSignupEmail = () => {
+  return { type: ActionTypes.INVALID_SIGNUP_EMAIL }
+}
+
+export const invalidSignupPassword = () => {
+  return { type: ActionTypes.INVALID_SIGNUP_PASSWORD }
+}
+
+export const invalidSignupName = () => {
+  return { type: ActionTypes.INVALID_SIGNUP_NAME }
 }
