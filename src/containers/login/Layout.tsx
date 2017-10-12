@@ -38,7 +38,7 @@ export default class LoginLayout extends Component<Props, State> {
 
   /**
    * Initializes the login layout states when it is first created
-   * @param props Props passed to this layout
+   * @param props props passed to this layout
    */
   constructor(props: Props) {
     super(props)
