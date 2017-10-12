@@ -1,3 +1,6 @@
+/**
+ * Model for Post with its attributes and types
+ */
 export type Post = {
   _id: string,
   title: string,
