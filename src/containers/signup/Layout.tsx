@@ -3,6 +3,7 @@ import { Paper, TextField, RaisedButton } from 'material-ui'
 import Header from '../../components/Header/Header'
 import { History } from 'history'
 import { styles } from './styles'
+import { strings } from './strings'
 
 interface Props {
   history: History
@@ -41,7 +42,7 @@ export default class SignupLayout extends Component<Props, State> {
 
   emailOnChange = (email: any) => {
     const { validateEmail } = this.props
-    validateEmail(email.target.value, 'SIGNUP')
+    validateEmail(email.target.value, strings.signupConst)
     this.setState({ email: email.target.value })
   }
 
@@ -49,12 +50,12 @@ export default class SignupLayout extends Component<Props, State> {
     const { validateEmail } = this.props
     const { email } = this.state
     this.setState({ emailFocused: true })
-    validateEmail(email, 'SIGNUP')
+    validateEmail(email, strings.signupConst)
   }
 
   passwordOnChange = (password: any) => {
     const { validatePassword } = this.props
-    validatePassword(password.target.value, 'SIGNUP')
+    validatePassword(password.target.value, strings.signupConst)
     this.setState({ password: password.target.value })
   }
 
@@ -62,12 +63,12 @@ export default class SignupLayout extends Component<Props, State> {
     const { validatePassword } = this.props
     const { password } = this.state
     this.setState({ passwordFocused: true })
-    validatePassword(password, 'SIGNUP')
+    validatePassword(password, strings.signupConst)
   }
 
   nameOnChange = (name: any) => {
     const { validateName } = this.props
-    validateName(name.target.value, 'SIGNUP')
+    validateName(name.target.value, strings.signupConst)
     this.setState({ name: name.target.value })
   }
 
@@ -75,7 +76,7 @@ export default class SignupLayout extends Component<Props, State> {
     const { validateName } = this.props
     const { name } = this.state
     this.setState({ nameFocused: true })
-    validateName(name, 'SIGNUP')
+    validateName(name, strings.signupConst)
   }
 
   render() {
@@ -88,29 +89,29 @@ export default class SignupLayout extends Component<Props, State> {
         <Paper style={styles.signupContainer as any} zDepth={1}>
           <h1>Sign Up</h1>
           <TextField
-            floatingLabelText='Email'
+            floatingLabelText={strings.emailText}
             style={styles.textField}
             onChange={this.emailOnChange}
             onBlur={this.emailOnBlur}
-            errorText={validEmail || !emailFocused ? '' : 'Please enter a valid email'}
+            errorText={validEmail || !emailFocused ? '' : strings.emailHint}
           />
           <TextField
-            floatingLabelText='Password'
-            type='password'
+            floatingLabelText={strings.passwordText}
+            type={strings.passwordText}
             style={styles.textField}
             onChange={this.passwordOnChange}
             onBlur={this.passwordOnBlur}
-            errorText={validPassword || !passwordFocused ? '' : 'Password length has to be between 6 - 20 characters'}
+            errorText={validPassword || !passwordFocused ? '' : strings.passwordHint}
           />
           <TextField
-            floatingLabelText='Name'
+            floatingLabelText={strings.nameText}
             style={styles.textField}
             onChange={this.nameOnChange}
             onBlur={this.nameOnBlur}
-            errorText={validName || !nameFocused ? '' : 'Name length has to be between 3 - 70 characters'}
+            errorText={validName || !nameFocused ? '' : strings.nameHint}
           />
           <RaisedButton
-            label={isSignupProcessing ? 'Loading...' : 'Sign Up'}
+            label={isSignupProcessing ? strings.loadingText : strings.signupText}
             primary={true}
             style={styles.submitBtn}
             onClick={() => signup(this.state.email, this.state.password, this.state.name, this.props.history)}

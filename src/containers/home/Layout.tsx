@@ -4,6 +4,7 @@ import Header from '../../components/Header/Header'
 import { History } from 'history'
 import { User } from '../../domain/model/User'
 import { styles } from './styles'
+import { strings } from './strings'
 const collaboration = require('../../assets/collaboration.png')
 
 interface Props {
@@ -24,11 +25,11 @@ export default class HomeLayout extends Component<Props, State> {
       <div>
         <Header history={history} isLoggedIn={isLoggedIn} logout={logout} isAdmin={isAdmin} />
         <Paper style={styles.form} zDepth={1}>
-          <h1>Welcome to Career Website</h1>
-          <img src={collaboration} style={styles.picture} alt='Collaboration' />
-          <p>We help you find the right internship opportunities</p>
-          <FlatButton label='Find Internships' primary={true} onClick={() => history.push('/internships')} />
-          <FlatButton label='CW For Employers' secondary={true} />
+          <h1>{strings.homeTitle}</h1>
+          <img src={collaboration} style={styles.picture} alt={strings.collaboration} />
+          <p>{strings.homeSubtitle}</p>
+          <FlatButton label={strings.findInternship} primary={true} onClick={() => history.push('/internships')} />
+          <FlatButton label={strings.employerLabel} secondary={true} />
         </Paper>
       </div>
     )

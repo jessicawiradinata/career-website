@@ -4,6 +4,7 @@ import Header from '../../components/Header/Header'
 import { History } from 'history'
 import { User } from '../../domain/model/User'
 import { styles } from './styles'
+import { strings } from './strings'
 
 const collaboration = require('../../assets/collaboration.png')
 
@@ -57,28 +58,28 @@ export default class MyAccountLayout extends Component<Props, State> {
         <h2 style={styles.titlePaper}>Change Password</h2>
         <Paper style={styles.profileContainer as any} zDepth={1}>
           <TextField
-            floatingLabelText='Current Password'
+            floatingLabelText={strings.currentPassword}
             floatingLabelFixed={true}
-            type='password'
+            type={strings.password}
             style={styles.textField}
             onChange={(currentPass: any) => this.setState({ currentPass: currentPass.target.value })}
           />
           <TextField
-            floatingLabelText='New Password'
+            floatingLabelText={strings.newPassword}
             floatingLabelFixed={true}
-            type='password'
+            type={strings.password}
             style={styles.textField}
             onChange={(newPass: any) => this.setState({ newPass: newPass.target.value })}
           />
           <TextField
-            floatingLabelText='Confirm New Password'
+            floatingLabelText={strings.ConfirmPassword}
             floatingLabelFixed={true}
-            type='password'
+            type={strings.password}
             style={styles.textField}
             onChange={(confirmNewPass: any) => this.setState({ confirmNewPass: confirmNewPass.target.value })}
           />
           <RaisedButton
-            label='Update'
+            label={strings.updateText}
             primary={true}
             style={styles.editBtn}
             onClick={() => changePassword(user.email, currentPass, newPass)}
@@ -89,13 +90,13 @@ export default class MyAccountLayout extends Component<Props, State> {
         <h2 style={styles.titlePaper}>Change Contact Details</h2>
         <Paper style={styles.profileContainer as any} zDepth={1}>
           <TextField
-            floatingLabelText='Name'
+            floatingLabelText={strings.nameText}
             floatingLabelFixed={true}
             defaultValue={user.name}
             style={styles.textField}
           />
           <RaisedButton
-            label='Update'
+            label={strings.updateText}
             primary={true}
             style={styles.editBtn}
           />

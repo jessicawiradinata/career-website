@@ -7,6 +7,7 @@ import { User } from '../../domain/model/User'
 import PostCard from '../../components/PostCard/PostCard'
 import { Paper, TextField } from 'material-ui'
 import { styles } from './styles'
+import { strings } from './strings'
 
 interface Props {
   posts: Post[]
@@ -64,7 +65,7 @@ export default class PostsLayout extends Component<Props, State> {
         <Header history={history} isLoggedIn={isLoggedIn} logout={logout} isAdmin={isAdmin} />
         <Paper style={styles.searchContainer}>
           <TextField
-            hintText='Search'
+            hintText={strings.searchText}
             style={styles.searchField}
             onChange={(searchText: any) => this.setState({ searchText: searchText.target.value })}
           />

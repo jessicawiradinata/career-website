@@ -6,6 +6,7 @@ import { Post } from '../../domain/model/Post'
 import { User } from '../../domain/model/User'
 import PostForm from '../../components/PostForm/PostForm'
 import { styles } from './styles'
+import { strings } from './strings'
 
 interface Props {
   history: History
@@ -44,7 +45,7 @@ export default class CreatePostLayout extends Component<Props, State> {
       <div>
         <Header history={history} isLoggedIn={true} logout={logout} isAdmin={isAdmin} />
         <Paper style={styles.form as any} zDepth={1}>
-          <h1>Post an Internship</h1>
+          <h1>{strings.internshipTitle}</h1>
           <div style={styles.postForm}>
             <PostForm
               postDetails={post}
