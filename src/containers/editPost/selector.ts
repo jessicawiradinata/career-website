@@ -16,7 +16,7 @@ const postDetails = createSelector(
 )
 
 /**
- * Takes states from the redux store and maps it as a props for Edit Post page
+ * Gets user state from the redux store and maps it to a prop for the Edit Post page
  * @param state state from redux store
  */
 const user = (state: State) => state.user.user

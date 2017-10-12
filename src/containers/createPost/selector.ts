@@ -14,7 +14,7 @@ interface StateProps {
 }
 
 /**
- * Takes states from the redux store and maps it as a props for Create Post page
+ * Takes states from the redux store and maps them as props for Create Post page
  * @param state state from redux store
  */
 const createPostStatus = (state: State) => state.post.createPostStatus

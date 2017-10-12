@@ -15,7 +15,7 @@ interface StateProps {
 }
 
 /**
- * Takes states from the redux store and maps it as a props for the login page
+ * Takes states from the redux store and maps them as props for the login page
  * @param state state from redux store
  */
 const isLoginProcessing = (state: State) => state.authentication.isLoginProcessing

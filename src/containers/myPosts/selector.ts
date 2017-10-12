@@ -26,7 +26,7 @@ const userPosts = createSelector(
 )
 
 /**
- * Takes states from the redux store and maps it as a props for My Posts page
+ * Takes states from the redux store and maps them as props for My Posts page
  * @param state state from redux store
  */
 const user = (state: State) => state.user.user
