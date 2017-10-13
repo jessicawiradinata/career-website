@@ -1,3 +1,6 @@
+/**
+ * A collection of strings for the postform component
+ */
 export const strings = {
   enter : 'Enter',
   titleText : 'Title*',

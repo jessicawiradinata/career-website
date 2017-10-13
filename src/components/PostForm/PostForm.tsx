@@ -8,6 +8,7 @@ import { Post } from '../../domain/model/Post'
 import { concat, map, uniqueId, pull, find } from 'lodash'
 import { styles } from './styles'
 import { strings } from './strings'
+import { dimens } from './dimens'
 import { isEmpty } from './validation'
 
 /**
@@ -212,7 +213,7 @@ export default class PostForm extends Component<Props, State> {
           floatingLabelFixed
           style={styles.textField}
           value={this.state.title}
-          maxLength='70'
+          maxLength={dimens.titleLength}
           onChange={this.titleOnChange}
           onBlur={this.titleOnBlur}
           errorText={validTitle || !titleFocused ? '' : strings.titleHint}
@@ -221,7 +222,7 @@ export default class PostForm extends Component<Props, State> {
           floatingLabelText={strings.remunerationText}
           floatingLabelFixed
           hintText={strings.remunerationHint}
-          maxLength='50'
+          maxLength={dimens.remunerationLength}
           style={styles.textField}
           value={this.state.remuneration}
           onChange={(remuneration: any) => this.setState({ remuneration: remuneration.target.value })}
@@ -232,7 +233,7 @@ export default class PostForm extends Component<Props, State> {
             floatingLabelFixed
             fullWidth
             searchText={this.state.location}
-            maxLength='50'
+            maxLength={dimens.locationLength}
             dataSource={locations}
             filter={AutoComplete.caseInsensitiveFilter}
             onUpdateInput={this.onUpdateLocation}
@@ -269,7 +270,7 @@ export default class PostForm extends Component<Props, State> {
           floatingLabelFixed
           style={styles.textField}
           multiLine
-          maxLength='2000'
+          maxLength={dimens.descriptionLength}
           onChange={(description) => this.setState({ description: (description.target as HTMLTextAreaElement).value })}
           value={this.state.description}
         />
@@ -278,7 +279,7 @@ export default class PostForm extends Component<Props, State> {
           floatingLabelFixed
           style={styles.textField}
           hintText={strings.requiredSkillHint}
-          maxLength='70'
+          maxLength={dimens.skillLength}
           onChange={(skill) => this.setState({ skill: (skill.target as HTMLTextAreaElement).value })}
           onKeyPress={this.onEnterSkills}
           value={this.state.skill}
@@ -291,7 +292,7 @@ export default class PostForm extends Component<Props, State> {
           floatingLabelFixed
           style={styles.textField}
           multiLine
-          maxLength='1000'
+          maxLength={dimens.toApplyLength}
           value={this.state.howToApply}
           onChange={this.howToApplyOnChange}
           onBlur={this.howToApplyOnBlur}
