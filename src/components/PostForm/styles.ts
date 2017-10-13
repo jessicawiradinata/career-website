@@ -20,11 +20,6 @@ export const styles = {
     width: '100%',
   },
 
-  remunerationField: {
-    float: 'left',
-    width: '45%',
-  },
-
   datePicker: {
     marginLeft: '55%',
   },
@@ -36,11 +31,6 @@ export const styles = {
   workTypeField: {
     float: 'left',
     width: '45%',
-  },
-
-  locationField: {
-    width: '45%',
-    marginLeft: '10%',
   },
 
   chipWrapper: {

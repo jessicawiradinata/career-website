@@ -26,6 +26,11 @@ type postsAction = {
   payload: Post[],
 }
 
+type locationsAction = {
+  type: ActionTypes.SEARCH_LOCATION,
+  payload: string[],
+}
+
 /**
  * Notifies whether create post is currently processing
  * @param state state to be returned
@@ -96,6 +101,21 @@ const posts = (state: Post[] = [], action: postsAction) => {
 }
 
 /**
+ * Passes a payload carried by the action which contains locations
+ * @param state a collection of locations to be returned
+ * @param action action which triggers this method
+ * @return payload containing passed locations
+ */
+const locations = (state: string[] = [], action: locationsAction) => {
+  switch (action.type) {
+    case ActionTypes.SEARCH_LOCATION:
+      return action.payload
+    default:
+      return state
+  }
+}
+
+/**
  * Specifies all reducers and their return types
  */
 export type PostContainer = {
@@ -103,6 +123,7 @@ export type PostContainer = {
   deletePostStatus: boolean,
   updatePostStatus: boolean,
   posts: Post[],
+  locations: string[],
 }
 
 /**
@@ -113,4 +134,5 @@ export default combineReducers<PostContainer>({
   deletePostStatus,
   updatePostStatus,
   posts,
+  locations,
 })

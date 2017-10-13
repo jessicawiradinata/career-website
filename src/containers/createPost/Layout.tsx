@@ -17,17 +17,27 @@ interface Props {
   history: History
   createPostStatus: boolean
   user: User
+  locations: string[]
   authenticate: (history: History) => void
   logout: (history: History) => void
   createPost: (post: Post, history: History) => void
+  searchLocation: (searchText: string) => void
 }
 
 /**
  * All states owned by this layout and their types
  */
-interface State {}
+interface State {
+  searchText: string
+}
 
 export default class CreatePostLayout extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props)
+    this.state = {
+      searchText: '',
+    }
+  }
 
   /**
    * Authenticates user when entering the Create Post page
@@ -42,7 +52,7 @@ export default class CreatePostLayout extends Component<Props, State> {
    * Renders the Create Post page layout
    */
   render() {
-    const { history, createPost, logout, user } = this.props
+    const { history, createPost, logout, user, locations, searchLocation } = this.props
     const isAdmin = user ? user.isAdmin : false
     const post: Post = {
       _id: '',
@@ -68,6 +78,8 @@ export default class CreatePostLayout extends Component<Props, State> {
               isCreateNew={true}
               history={history}
               onSubmit={createPost}
+              locations={locations}
+              searchLocation={searchLocation}
             />
           </div>
         </Paper>

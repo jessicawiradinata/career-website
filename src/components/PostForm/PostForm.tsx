@@ -2,7 +2,7 @@
  * A input form component to handle creating and editing of posts
  */
 import React, { Component } from 'react'
-import { TextField, RaisedButton, SelectField, MenuItem, DatePicker, Chip } from 'material-ui'
+import { TextField, RaisedButton, SelectField, MenuItem, DatePicker, Chip, AutoComplete } from 'material-ui'
 import { History } from 'history'
 import { Post } from '../../domain/model/Post'
 import { concat, map, uniqueId, pull, find } from 'lodash'
@@ -13,10 +13,12 @@ import { isEmpty } from './validation'
  * Props that can be passed to this component and their types
  */
 interface Props {
-  postDetails: Post,
-  isCreateNew: boolean,
-  history: History,
+  postDetails: Post
+  isCreateNew: boolean
+  history: History
+  locations: string[]
   onSubmit: (post: Post, history: History, postId?: string) => void
+  searchLocation: (searchText: string) => void
 }
 
 /**
@@ -100,6 +102,19 @@ export default class PostForm extends Component<Props, State> {
   }
 
   /**
+   * Search for location suggestions and validates location field on text change
+   * @param location input for location field
+   */
+  onUpdateLocation = (location: string) => {
+    const { searchLocation } = this.props
+    this.setState({
+      location,
+      validLocation: !isEmpty(location),
+    })
+    searchLocation(this.state.location)
+  }
+
+  /**
    * Validates location field on blur (out of focus)
    */
   locationOnBlur = () => {
@@ -174,7 +189,7 @@ export default class PostForm extends Component<Props, State> {
    * Renders Post Form Component layout
    */
   render() {
-    const { isCreateNew, onSubmit, postDetails, history } = this.props
+    const { isCreateNew, onSubmit, postDetails, history, locations } = this.props
     const { validTitle, titleFocused, validLocation, locationFocused, validHowToApply, howToApplyFocused } = this.state
     const post: Post = {
       _id: '',
@@ -201,24 +216,25 @@ export default class PostForm extends Component<Props, State> {
           onBlur={this.titleOnBlur}
           errorText={validTitle || !titleFocused ? '' : 'Title field cannot be empty'}
         />
+        <TextField
+          floatingLabelText='Remuneration'
+          floatingLabelFixed
+          hintText='e.g. $20 - $25 per hour'
+          maxLength='50'
+          style={styles.textField}
+          value={this.state.remuneration}
+          onChange={(remuneration: any) => this.setState({ remuneration: remuneration.target.value })}
+        />
         <div style={styles.textField}>
-          <TextField
-            floatingLabelText='Remuneration'
-            floatingLabelFixed
-            hintText='e.g. $20 - $25 per hour'
-            maxLength='50'
-            style={styles.remunerationField}
-            value={this.state.remuneration}
-            onChange={(remuneration: any) => this.setState({ remuneration: remuneration.target.value })}
-          />
-          <TextField
+          <AutoComplete
             floatingLabelText='Location*'
             floatingLabelFixed
-            hintText='e.g. Sydney, NSW'
-            style={styles.locationField}
-            value={this.state.location}
+            fullWidth
+            searchText={this.state.location}
             maxLength='50'
-            onChange={this.locationOnChange}
+            dataSource={locations}
+            filter={AutoComplete.caseInsensitiveFilter}
+            onUpdateInput={this.onUpdateLocation}
             onBlur={this.locationOnBlur}
             errorText={validLocation || !locationFocused ? '' : 'Location field cannot be empty'}
           />
