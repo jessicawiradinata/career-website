@@ -1,3 +1,6 @@
+/**
+ * Layout for login page
+ */
 import React, { Component } from 'react'
 import { Paper, TextField, RaisedButton, Checkbox, Snackbar } from 'material-ui'
 import Header from '../../components/Header/Header'
@@ -5,6 +8,9 @@ import { History } from 'history'
 import { styles } from './styles'
 import { strings } from './strings'
 
+/**
+ * Props that can be passed to this layout and their types
+ */
 interface Props {
   history: History
   isLoginProcessing: boolean
@@ -17,6 +23,9 @@ interface Props {
   isEmpty: (text: string, component: string) => void
 }
 
+/**
+ * All states owned by this layout and their types
+ */
 interface State {
   email: string
   password: string
@@ -27,6 +36,11 @@ interface State {
 }
 
 export default class LoginLayout extends Component<Props, State> {
+
+  /**
+   * Initializes the login layout states when it is first created
+   * @param props props passed to this layout
+   */
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -39,12 +53,19 @@ export default class LoginLayout extends Component<Props, State> {
     }
   }
 
+  /**
+   * Validates email field when text is changed
+   * @param email email text input
+   */
   emailOnChange = (email: any) => {
     const { validateEmail } = this.props
     validateEmail(email.target.value, strings.loginConst)
     this.setState({ email: email.target.value })
   }
 
+  /**
+   * Validates email field when it goes out of focus
+   */
   emailOnBlur = () => {
     const { validateEmail } = this.props
     const { email } = this.state
@@ -52,12 +73,19 @@ export default class LoginLayout extends Component<Props, State> {
     validateEmail(email, strings.loginConst)
   }
 
+  /**
+   * Validates password field when text is changed
+   * @param password password text input
+   */
   passwordOnChange = (password: any) => {
     const { isEmpty } = this.props
     isEmpty(password.target.value, strings.emailText)
     this.setState({ password: password.target.value })
   }
 
+  /**
+   * Validates password field when it goes out of focus
+   */
   passwordOnBlur = () => {
     const { isEmpty } = this.props
     const { password } = this.state
@@ -65,6 +93,9 @@ export default class LoginLayout extends Component<Props, State> {
     isEmpty(password, strings.loginPassword)
   }
 
+  /**
+   * When submit button is clicked, log the user in or reset password according to checkbox selection
+   */
   onSubmit = () => {
     const { isForgot, email, password } = this.state
     const { login, history, resetPassword } = this.props
@@ -79,6 +110,9 @@ export default class LoginLayout extends Component<Props, State> {
     }
   }
 
+  /**
+   * Renders the login page layout
+   */
   render() {
     const { history, validEmail, validPassword, isLoginProcessing, isLoginSuccess } = this.props
     const { isForgot, showResetBar, email, emailFocused, passwordFocused } = this.state

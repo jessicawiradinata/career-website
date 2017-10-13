@@ -1,3 +1,6 @@
+/**
+ * A collection of Action Types to be identified by the reducers
+ */
 export type LOGIN_REQUESTED = 'LOGIN_REQUESTED'
 export type LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export type LOGIN_FAILED = 'LOGIN_FAILED'

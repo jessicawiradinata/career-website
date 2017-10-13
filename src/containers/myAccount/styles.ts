@@ -1,3 +1,6 @@
+/**
+ * A collection of styles for My Account page
+ */
 export const styles = {
   profileLayout: {
     margin: 20,
@@ -8,6 +11,7 @@ export const styles = {
     alignItems: 'center',
     textAlign: 'center',
   },
+
   profileContainer: {
     margin: 20,
     padding: 40,
@@ -17,20 +21,25 @@ export const styles = {
     alignItems: 'left',
     textAlign: 'left',
   },
+
   divList: {
     paddingLeft: 40,
   },
+
   titlePaper: {
     marginLeft: 20,
   },
+
   iconText: {
     paddingLeft: 	10,
     position: 'relative',
     bottom: '5px',
   },
+
   editBtn: {
     marginTop: 40,
   },
+
   textField: {
     width: '35%',
   },

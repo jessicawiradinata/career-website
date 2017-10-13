@@ -1,3 +1,6 @@
+/**
+ * Layout for Signup page
+ */
 import React, { Component } from 'react'
 import { Paper, TextField, RaisedButton } from 'material-ui'
 import Header from '../../components/Header/Header'
@@ -5,6 +8,9 @@ import { History } from 'history'
 import { styles } from './styles'
 import { strings } from './strings'
 
+/**
+ * Props that can be passed to this layout and their types
+ */
 interface Props {
   history: History
   isSignupProcessing: boolean
@@ -18,6 +24,9 @@ interface Props {
   validateName: (name: string, page: string) => void
 }
 
+/**
+ * All states owned by this layout and their types
+ */
 interface State {
   email: string
   password: string
@@ -28,6 +37,11 @@ interface State {
 }
 
 export default class SignupLayout extends Component<Props, State> {
+
+  /**
+   * Initializes Signup page states when it is first created
+   * @param props props passed to Signup page
+   */
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -40,12 +54,19 @@ export default class SignupLayout extends Component<Props, State> {
     }
   }
 
+  /**
+   * Validates email field when text is changed
+   * @param email email text input
+   */
   emailOnChange = (email: any) => {
     const { validateEmail } = this.props
     validateEmail(email.target.value, strings.signupConst)
     this.setState({ email: email.target.value })
   }
 
+  /**
+   * Validates email field when it goes out of focus
+   */
   emailOnBlur = () => {
     const { validateEmail } = this.props
     const { email } = this.state
@@ -53,12 +74,19 @@ export default class SignupLayout extends Component<Props, State> {
     validateEmail(email, strings.signupConst)
   }
 
+  /**
+   * Validates password field when text is changed
+   * @param password password text input
+   */
   passwordOnChange = (password: any) => {
     const { validatePassword } = this.props
     validatePassword(password.target.value, strings.signupConst)
     this.setState({ password: password.target.value })
   }
 
+  /**
+   * Validates password field when it goes out of focus
+   */
   passwordOnBlur = () => {
     const { validatePassword } = this.props
     const { password } = this.state
@@ -66,12 +94,19 @@ export default class SignupLayout extends Component<Props, State> {
     validatePassword(password, strings.signupConst)
   }
 
+  /**
+   * Validates name field when text is changed
+   * @param name name text input
+   */
   nameOnChange = (name: any) => {
     const { validateName } = this.props
     validateName(name.target.value, strings.signupConst)
     this.setState({ name: name.target.value })
   }
 
+  /**
+   * Validates name field when it goes out of focus
+   */
   nameOnBlur = () => {
     const { validateName } = this.props
     const { name } = this.state
@@ -79,6 +114,9 @@ export default class SignupLayout extends Component<Props, State> {
     validateName(name, strings.signupConst)
   }
 
+  /**
+   * Renders Signup page layout
+   */
   render() {
     const { signup, history, validEmail, validPassword, validName, isSignupProcessing, isSignupSuccess } = this.props
     const { emailFocused, passwordFocused, nameFocused } = this.state

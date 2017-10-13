@@ -1,3 +1,6 @@
+/**
+ * A collection of styles for Post Card Component
+ */
 export const styles = {
   postCard: {
     marginTop: 20,

@@ -1,3 +1,6 @@
+/**
+ * A input form component to handle creating and editing of posts
+ */
 import React, { Component } from 'react'
 import { TextField, RaisedButton, SelectField, MenuItem, DatePicker, Chip } from 'material-ui'
 import { History } from 'history'
@@ -6,6 +9,9 @@ import { concat, map, uniqueId, pull, find } from 'lodash'
 import { styles } from './styles'
 import { isEmpty } from './validation'
 
+/**
+ * Props that can be passed to this component and their types
+ */
 interface Props {
   postDetails: Post,
   isCreateNew: boolean,
@@ -13,6 +19,9 @@ interface Props {
   onSubmit: (post: Post, history: History, postId?: string) => void
 }
 
+/**
+ * States owned by this component and their types
+ */
 interface State {
   title: string
   remuneration: string
@@ -32,6 +41,11 @@ interface State {
 }
 
 export default class PostForm extends Component<Props, State> {
+
+  /**
+   * Initializes component attributes when it is first created
+   * @param props props passed to this component
+   */
   constructor(props: Props) {
     super(props)
     const { title, remuneration, location, workType, closingDate, description, skills, howToApply } = this.props.postDetails
@@ -55,6 +69,9 @@ export default class PostForm extends Component<Props, State> {
     }
   }
 
+  /**
+   * Validates title field on change
+   */
   titleOnChange = (title: any) => {
     this.setState({
       title: title.target.value,
@@ -62,6 +79,9 @@ export default class PostForm extends Component<Props, State> {
     })
   }
 
+  /**
+   * Validates title field on blur (out of focus)
+   */
   titleOnBlur = () => {
     this.setState({
       titleFocused: true,
@@ -69,6 +89,9 @@ export default class PostForm extends Component<Props, State> {
     })
   }
 
+  /**
+   * Validates location field on change
+   */
   locationOnChange = (location: any) => {
     this.setState({
       location: location.target.value,
@@ -76,6 +99,9 @@ export default class PostForm extends Component<Props, State> {
     })
   }
 
+  /**
+   * Validates location field on blur (out of focus)
+   */
   locationOnBlur = () => {
     this.setState({
       locationFocused: true,
@@ -83,6 +109,9 @@ export default class PostForm extends Component<Props, State> {
     })
   }
 
+  /**
+   * Validates how to apply field on change
+   */
   howToApplyOnChange = (howToApply: any) => {
     this.setState({
       howToApply: howToApply.target.value,
@@ -90,6 +119,9 @@ export default class PostForm extends Component<Props, State> {
     })
   }
 
+  /**
+   * Validates how to apply field on blur (out of focus)
+   */
   howToApplyOnBlur = (howToApply: any) => {
     this.setState({
       howToApplyFocused: true,
@@ -97,6 +129,9 @@ export default class PostForm extends Component<Props, State> {
     })
   }
 
+  /**
+   * Pushes a new skill to the skills array when it is entered
+   */
   onEnterSkills = (event: any) => {
     if (event.key === 'Enter') {
       const { skills, skill } = this.state
@@ -108,10 +143,19 @@ export default class PostForm extends Component<Props, State> {
     }
   }
 
+  /**
+   * Removes skill from the skills array when delete button is clicked
+   * @param skill the skill to be deleted
+   */
   onDeleteChip = (skill: string) => {
     this.setState({ skills: pull(this.state.skills, skill) })
   }
 
+  /**
+   * Converts a skill array to skills chips
+   * @param skills array of skills to be converted
+   * @returns a collection of skills chips
+   */
   renderSkillsChip = (skills: string[]) => {
     return map(skills, (skill) => {
       return (
@@ -126,6 +170,9 @@ export default class PostForm extends Component<Props, State> {
     })
   }
 
+  /**
+   * Renders Post Form Component layout
+   */
   render() {
     const { isCreateNew, onSubmit, postDetails, history } = this.props
     const { validTitle, titleFocused, validLocation, locationFocused, validHowToApply, howToApplyFocused } = this.state

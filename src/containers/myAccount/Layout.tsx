@@ -1,3 +1,6 @@
+/**
+ * Layout for My Account page
+ */
 import React, { Component } from 'react'
 import { Paper, Avatar, RaisedButton, TextField } from 'material-ui'
 import Header from '../../components/Header/Header'
@@ -8,6 +11,9 @@ import { strings } from './strings'
 
 const collaboration = require('../../assets/collaboration.png')
 
+/**
+ * Props that can be passed to this layout and their types
+ */
 interface Props {
   history: History
   user: User
@@ -16,6 +22,9 @@ interface Props {
   changePassword: (email: string, currentPass: string, newPass: string) => void
 }
 
+/**
+ * All states owned by this layout and their types
+ */
 interface State {
   currentPass: string,
   newPass: string,
@@ -23,6 +32,11 @@ interface State {
 }
 
 export default class MyAccountLayout extends Component<Props, State> {
+
+  /**
+   * Initializes the My Account page states when it is first created
+   * @param props props passed to this layout
+   */
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -32,16 +46,17 @@ export default class MyAccountLayout extends Component<Props, State> {
     }
   }
 
+  /**
+   * Authenticates user when entering My Account page and redirects to home if not logged in
+   */
   componentWillMount() {
     const { authenticate, history } = this.props
     authenticate(history)
   }
 
-  onSubmitPassword = (email: string, currentPass: string, newPass: string) => {
-    const { changePassword } = this.props
-    changePassword(email, currentPass, newPass)
-  }
-
+  /**
+   * Renders the My Account page layout
+   */
   render() {
     const { history, logout, user, changePassword } = this.props
     const { currentPass, newPass } = this.state

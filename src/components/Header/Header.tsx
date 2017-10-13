@@ -1,9 +1,15 @@
+/**
+ * A Navigation Bar Component
+ */
 import React, { Component } from 'react'
 import { FlatButton, ToolbarGroup, Toolbar, Popover, Menu, MenuItem } from 'material-ui'
 import { PopoverAnimationVertical } from 'material-ui/Popover'
 import { History } from 'history'
 import { styles } from './styles'
 
+/**
+ * Props that can be passed to this component and their types
+ */
 interface Props {
   history: History
   isLoggedIn: boolean
@@ -11,6 +17,9 @@ interface Props {
   logout?: (history: History) => void
 }
 
+/**
+ * All states owned by this component and their types
+ */
 interface State {
   open: boolean
   anchorEl: any
@@ -25,6 +34,9 @@ export default class Header extends Component<Props, State> {
     }
   }
 
+  /**
+   * Shows popover when a currently closed 'Posts' tab is clicked
+   */
   handleTouchTap = (event: any) => {
     event.preventDefault()
     this.setState({
@@ -33,12 +45,18 @@ export default class Header extends Component<Props, State> {
     })
   }
 
+  /**
+   * Closes popover when cursor is clicked outside of the popover
+   */
   handleRequestClose = () => {
     this.setState({
       open: false,
     })
   }
 
+  /**
+   * Renders header component layout
+   */
   render() {
     const { history, isLoggedIn, logout, isAdmin } = this.props
     return (

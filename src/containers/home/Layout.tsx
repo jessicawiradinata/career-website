@@ -1,3 +1,6 @@
+/**
+ * Layout for home page
+ */
 import React, { Component } from 'react'
 import { Paper, FlatButton } from 'material-ui'
 import Header from '../../components/Header/Header'
@@ -7,15 +10,25 @@ import { styles } from './styles'
 import { strings } from './strings'
 const collaboration = require('../../assets/collaboration.png')
 
+/**
+ * Props that can be passed to this layout and their types
+ */
 interface Props {
   history: History
   user: User
   logout: (history: History) => void
 }
 
+/**
+ * All states owned by this layout and their types
+ */
 interface State {}
 
 export default class HomeLayout extends Component<Props, State> {
+
+  /**
+   * Renders the home page layout
+   */
   render() {
     const { history, logout, user } = this.props
     const isLoggedIn = localStorage.token !== undefined

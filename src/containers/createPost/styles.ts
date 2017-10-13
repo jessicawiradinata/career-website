@@ -1,3 +1,6 @@
+/**
+ * A collection of styles for the Create Post page
+ */
 export const styles = {
   form: {
     margin: 20,

@@ -1,3 +1,6 @@
+/**
+ * A Card Component to display each post
+ */
 import React, { Component } from 'react'
 import { Card, CardTitle, CardActions, FlatButton, CardText, Chip, FontIcon } from 'material-ui'
 import { Post } from '../../domain/model/Post'
@@ -6,6 +9,9 @@ import { History } from 'history'
 import { styles } from './styles'
 import dateformat from 'dateformat'
 
+/**
+ * Props that can be passed to this component and their types
+ */
 interface Props {
   post: Post
   authorName: string
@@ -14,9 +20,18 @@ interface Props {
   onDelete: (postId: string) => void
 }
 
+/**
+ * States owned by this component and their types
+ */
 interface State {}
 
 export default class PostCard extends Component<Props, State> {
+
+  /**
+   * Maps each skill in an array to return it as a Skill Chip
+   * @param skills am array of skills to be mapped
+   * @return a collection of skills chips
+   */
   renderSkillsChip = (skills: string[]) => {
     return map(skills, (skill) => {
       return (
@@ -27,6 +42,9 @@ export default class PostCard extends Component<Props, State> {
     })
   }
 
+  /**
+   * Renders Post Card layout
+   */
   render() {
     const { post, history, onDelete, showActions, authorName } = this.props
     const closingDate = dateformat(post.closingDate, 'dd mmm yyyy')

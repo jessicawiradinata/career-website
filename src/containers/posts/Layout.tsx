@@ -1,3 +1,6 @@
+/**
+ * Layout for posts page
+ */
 import React, { Component } from 'react'
 import { map } from 'lodash'
 import Header from '../../components/Header/Header'
@@ -9,6 +12,9 @@ import { Paper, TextField } from 'material-ui'
 import { styles } from './styles'
 import { strings } from './strings'
 
+/**
+ * Props that can be passed to this layout and their types
+ */
 interface Props {
   posts: Post[]
   history: History
@@ -17,11 +23,19 @@ interface Props {
   deletePost: (postId: string) => void
 }
 
+/**
+ * All states owned by this layout and their types
+ */
 interface State {
   searchText: string
 }
 
 export default class PostsLayout extends Component<Props, State> {
+
+  /**
+   * Initializes posts page states when it is first created
+   * @param props props passed to posts page
+   */
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -29,9 +43,17 @@ export default class PostsLayout extends Component<Props, State> {
     }
   }
 
+  /**
+   * Filters posts collection based on the post titles
+   * @param posts collection of posts to be filtered
+   * @param searchText text to be compared with existing post titles
+   */
   filterPosts = (posts: Post[], searchText: string) =>
     posts.filter((post: Post) => (post.title.toLowerCase().indexOf(searchText.toLowerCase()) !== -1))
 
+  /**
+   * Maps filtered posts to Post Card components, shows a message if no posts are found
+   */
   renderPostCards = () => {
     const { posts, user, history, deletePost } = this.props
     const { searchText } = this.state
@@ -55,6 +77,9 @@ export default class PostsLayout extends Component<Props, State> {
     })
   }
 
+  /**
+   * Renders posts page layout
+   */
   render() {
     const { history, logout, user } = this.props
     const isLoggedIn = window.localStorage.token !== undefined

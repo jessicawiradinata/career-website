@@ -1,3 +1,6 @@
+/**
+ * A collection of styles for Header component
+ */
 export const styles = {
   anchorOrigin: {
     horizontal: 'left',

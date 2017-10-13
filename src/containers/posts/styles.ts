@@ -1,3 +1,6 @@
+/**
+ * A collection of styles for Posts page
+ */
 export const styles = {
   searchField: {
     width: '30%',

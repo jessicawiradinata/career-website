@@ -1,3 +1,6 @@
+/**
+ * Layout for 'Create Post' page
+ */
 import React, { Component } from 'react'
 import { Paper } from 'material-ui'
 import Header from '../../components/Header/Header'
@@ -8,6 +11,9 @@ import PostForm from '../../components/PostForm/PostForm'
 import { styles } from './styles'
 import { strings } from './strings'
 
+/**
+ * Props that can be passed to this layout and their types
+ */
 interface Props {
   history: History
   createPostStatus: boolean
@@ -17,14 +23,25 @@ interface Props {
   createPost: (post: Post, history: History) => void
 }
 
+/**
+ * All states owned by this layout and their types
+ */
 interface State {}
 
 export default class CreatePostLayout extends Component<Props, State> {
+
+  /**
+   * Authenticates user when entering the Create Post page
+   * If user is not logged in, will be redirected to home page
+   */
   componentWillMount() {
     const { authenticate, history } = this.props
     authenticate(history)
   }
 
+  /**
+   * Renders the Create Post page layout
+   */
   render() {
     const { history, createPost, logout, user } = this.props
     const isAdmin = user ? user.isAdmin : false

@@ -1,3 +1,4 @@
+// TODO: might delete this file, validation may not need to involve reducers
 import { combineReducers } from 'redux'
 import * as ActionTypes from '../constants/ActionTypes'
 
