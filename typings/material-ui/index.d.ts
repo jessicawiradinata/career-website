@@ -11,6 +11,7 @@
 //                 Artyom Stukans <https://github.com/artyomsv>
 //                 Dan Jones <https://github.com/dan-j>
 //                 Daisuke Mino <https://github.com/minodisk>
+// Edited by: Jessica <https://github.com/jessicawiradinata>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 // TypeScript Version: 2.3
 

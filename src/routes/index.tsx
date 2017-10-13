@@ -1,3 +1,6 @@
+/**
+ * Provides routings for the application
+ */
 import React from 'react'
 import LoginContainer from '../containers/login/Container'
 import HomeContainer from '../containers/home/Container'
@@ -10,6 +13,9 @@ import PostsContainer from '../containers/posts/Container'
 import PageNotFound from '../components/PageNotFound/PageNotFound'
 import { Route, Switch } from 'react-router-dom'
 
+/**
+ * Directs route paths to the requested pages
+ */
 export default () => (
   <Switch>
     <Route exact path='/' component={HomeContainer} />
