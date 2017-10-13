@@ -4,6 +4,7 @@
 import * as ActionTypes from '../constants/ActionTypes'
 import { Dispatch } from 'redux'
 import { dataLoadService } from '../index'
+import { map } from 'lodash'
 
 /**
  * Deletes a post
@@ -46,5 +47,30 @@ export const deletePostFailed = () => {
  */
 export const getPostsAction = (payload: any) => ({
   type: ActionTypes.GET_POSTS,
+  payload,
+})
+
+/**
+ * Searches location suggestions based on the search text
+ * @param searchText search keyword
+ */
+export const searchLocation = (searchText: string) => (dispatch: Dispatch<any>) => (async () => {
+  if (searchText !== '') {
+    try {
+      const response = await dataLoadService.getPostRepository().searchLocation(searchText)
+      const locations = map(response.data.predictions, (location: any) => location.description)
+      dispatch(searchLocationAction(locations))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+})()
+
+/**
+ * Passes a collection of locations to redux state
+ * @param payload contains locations to be passed
+ */
+export const searchLocationAction = (payload: string[]) => ({
+  type: ActionTypes.SEARCH_LOCATION,
   payload,
 })

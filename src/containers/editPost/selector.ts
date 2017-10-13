@@ -16,10 +16,11 @@ const postDetails = createSelector(
 )
 
 /**
- * Gets user state from the redux store and maps it to a prop for the Edit Post page
+ * Gets states from the redux store and maps them to props for the Edit Post page
  * @param state state from redux store
  */
 const user = (state: State) => state.user.user
+const locations = (state: State) => state.post.locations
 
 /**
  * Exports props to be used by Edit Post page
@@ -27,4 +28,5 @@ const user = (state: State) => state.user.user
 export default createStructuredSelector({
   postDetails,
   user,
+  locations,
 })

@@ -11,6 +11,7 @@ import { User } from '../../domain/model/User'
 interface StateProps {
   createPostStatus: any
   user: User
+  locations: string[]
 }
 
 /**
@@ -19,6 +20,7 @@ interface StateProps {
  */
 const createPostStatus = (state: State) => state.post.createPostStatus
 const user = (state: State) => state.user.user
+const locations = (state: State) => state.post.locations
 
 /**
  * Exports props to be used by Create Post page
@@ -26,4 +28,5 @@ const user = (state: State) => state.user.user
 export default createStructuredSelector<State, StateProps>({
   createPostStatus,
   user,
+  locations,
 })

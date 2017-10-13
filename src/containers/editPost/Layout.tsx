@@ -19,10 +19,12 @@ interface Props {
   history: History
   match: any
   user: User
+  locations: string[]
   authenticate: (history: History) => void
   authorize: (history: History, authorId: string, isAdmin: boolean) => void
   logout: (history: History) => void
   updatePost: (post: Post, history: History, postId: string) => void
+  searchLocation: (searchText: string) => void
 }
 
 /**
@@ -47,7 +49,7 @@ export default class EditPostLayout extends Component<Props, State> {
    * Renders the Edit Post page layout
    */
   render() {
-    const { history, updatePost, logout, user, postDetails } = this.props
+    const { history, updatePost, logout, user, postDetails, locations, searchLocation } = this.props
     const isAdmin = user ? user.isAdmin : false
 
     return (
@@ -61,6 +63,8 @@ export default class EditPostLayout extends Component<Props, State> {
               isCreateNew={false}
               history={history}
               onSubmit={updatePost}
+              locations={locations}
+              searchLocation={searchLocation}
             />
           </div>
         </Paper>

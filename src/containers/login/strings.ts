@@ -1,3 +1,6 @@
+/**
+ * A collection of strings for the login page
+ */
 export const strings = {
   loginConst : 'LOGIN',
   loginPassword : 'LOGIN_PASSWORD',

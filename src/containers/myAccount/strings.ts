@@ -1,3 +1,6 @@
+/**
+ * A collection of strings for the MyAccount page
+ */
 export const strings = {
   currentPassword : 'Current Password',
   changePassword : 'Change Password',

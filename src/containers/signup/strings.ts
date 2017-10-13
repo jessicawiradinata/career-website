@@ -1,3 +1,6 @@
+/**
+ * A collection of strings for the signup page
+ */
 export const strings = {
   signupConst : 'SIGNUP',
   emailText : 'Email',

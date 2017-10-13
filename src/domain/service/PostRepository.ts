@@ -102,4 +102,11 @@ export default class PostRepository {
     this.posts = response.data
     this.postsSubject.next(this.posts)
   }
+
+  /**
+   * Gets location suggestions from the server based on search text
+   * @param searchText text to be searched
+   */
+  searchLocation = async (searchText: string): Promise<any> =>
+    await axios.get(`${Config.API_ENDPOINT}/posts/searchLocation/${searchText}`)
 }
