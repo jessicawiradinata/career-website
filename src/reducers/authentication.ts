@@ -1,6 +1,13 @@
+/**
+ * A collection of reducers related to authentication
+ * Takes a set of states and actions and returns the next state based on the action
+ */
 import { combineReducers } from 'redux'
 import * as ActionTypes from '../constants/ActionTypes'
 
+/**
+ * Specifies the action types which can be included in the action
+ */
 type loginAction = {
   type: ActionTypes.LOGIN_REQUESTED | ActionTypes.LOGIN_SUCCESS | ActionTypes.LOGIN_FAILED,
 }
@@ -13,6 +20,12 @@ type changePassAction = {
   type: ActionTypes.CHANGE_PASSWORD_REQUESTED | ActionTypes.CHANGE_PASSWORD_SUCCESS | ActionTypes.CHANGE_PASSWORD_FAILED,
 }
 
+/**
+ * Notifies whether login is currently processing
+ * @param state state to be returned
+ * @param action action which triggers this method
+ * @return boolean true if login is currently processing, false otherwise
+ */
 const isLoginProcessing = (state: boolean = false, action: loginAction) => {
   switch (action.type) {
     case ActionTypes.LOGIN_REQUESTED:
@@ -25,6 +38,12 @@ const isLoginProcessing = (state: boolean = false, action: loginAction) => {
   }
 }
 
+/**
+ * Notifies whether signup is currently processing
+ * @param state state to be returned
+ * @param action action which triggers this method
+ * @return boolean true if signup is currently processing, false otherwise
+ */
 const isSignupProcessing = (state: boolean = false, action: signupAction) => {
   switch (action.type) {
     case ActionTypes.SIGNUP_REQUESTED:
@@ -37,6 +56,12 @@ const isSignupProcessing = (state: boolean = false, action: signupAction) => {
   }
 }
 
+/**
+ * Notifies whether signup is currently processing
+ * @param state state to be returned
+ * @param action action which triggers this method
+ * @return boolean true if signup is currently processing, false otherwise
+ */
 const isChangePassProcessing = (state: boolean = false, action: changePassAction) => {
   switch (action.type) {
     case ActionTypes.CHANGE_PASSWORD_REQUESTED:
@@ -48,6 +73,12 @@ const isChangePassProcessing = (state: boolean = false, action: changePassAction
   }
 }
 
+/**
+ * Notifies whether login is successful
+ * @param state state to be returned
+ * @param action action which triggers this method
+ * @return boolean true if login is successful, false otherwise
+ */
 const isLoginSuccess = (state: boolean = true, action: loginAction) => {
   switch (action.type) {
     case ActionTypes.LOGIN_SUCCESS:
@@ -59,6 +90,12 @@ const isLoginSuccess = (state: boolean = true, action: loginAction) => {
   }
 }
 
+/**
+ * Notifies whether signup is successful
+ * @param state state to be returned
+ * @param action action which triggers this method
+ * @return boolean true if signup is successful, false otherwise
+ */
 const isSignupSuccess = (state: boolean = true, action: signupAction) => {
   switch (action.type) {
     case ActionTypes.SIGNUP_SUCCESS:
@@ -70,6 +107,12 @@ const isSignupSuccess = (state: boolean = true, action: signupAction) => {
   }
 }
 
+/**
+ * Notifies whether change password is successful
+ * @param state state to be returned
+ * @param action action which triggers this method
+ * @return boolean true if change password is successful, false otherwise
+ */
 const isChangePassSuccess = (state: boolean = true, action: changePassAction) => {
   switch (action.type) {
     case ActionTypes.CHANGE_PASSWORD_SUCCESS:
@@ -81,6 +124,9 @@ const isChangePassSuccess = (state: boolean = true, action: changePassAction) =>
   }
 }
 
+/**
+ * Specifies all reducers and their return types
+ */
 export type AuthenticationContainer = {
   isLoginProcessing: boolean,
   isLoginSuccess: boolean,
@@ -90,6 +136,9 @@ export type AuthenticationContainer = {
   isChangePassSuccess: boolean,
 }
 
+/**
+ * Exports reducers to be used in the application
+ */
 export default combineReducers<AuthenticationContainer>({
   isLoginProcessing,
   isLoginSuccess,

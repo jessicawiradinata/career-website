@@ -1,3 +1,4 @@
+// TODO: might delete this file, validation may not need to involve reducers
 import * as ActionTypes from '../constants/ActionTypes'
 import validator from 'validator'
 
