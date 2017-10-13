@@ -52,4 +52,15 @@ export default class UserRepository {
     })
     this.getUsers()
   }
+
+  /**
+   * Request the server to update a user's name
+   * @param userId the user's account id
+   * @param name the user's newName
+   */
+  changeName = (userId: string, newName: string): Promise<any> => (
+    axios.put(`${Config.API_ENDPOINT}/users/changeName/${userId}`, {
+      name: newName,
+    })
+  )
 }

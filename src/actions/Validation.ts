@@ -40,7 +40,8 @@ export const isEmpty = (text: string, component: string) => {
     case 'LOGIN_PASSWORD':
       return isEmpty ? invalidLoginPassword() : validLoginPassword()
     default:
-      throw Error
+      console.log(Error)
+      return Error
   }
 }
 

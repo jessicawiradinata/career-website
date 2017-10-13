@@ -20,6 +20,7 @@ interface Props {
   logout: (history: History) => void
   authenticate: (history: History) => void
   changePassword: (email: string, currentPass: string, newPass: string) => void
+  changeName: (newName: string) => void
 }
 
 /**
@@ -29,6 +30,7 @@ interface State {
   currentPass: string,
   newPass: string,
   confirmNewPass: string,
+  newName: string,
 }
 
 export default class MyAccountLayout extends Component<Props, State> {
@@ -43,6 +45,7 @@ export default class MyAccountLayout extends Component<Props, State> {
       currentPass: '',
       newPass: '',
       confirmNewPass: '',
+      newName: '',
     }
   }
 
@@ -58,14 +61,13 @@ export default class MyAccountLayout extends Component<Props, State> {
    * Renders the My Account page layout
    */
   render() {
-    const { history, logout, user, changePassword } = this.props
-    const { currentPass, newPass } = this.state
-    const isLoggedIn = localStorage.token !== undefined
+    const { history, logout, user, changePassword, changeName } = this.props
+    const { currentPass, newPass, newName } = this.state
     const isAdmin = user ? user.isAdmin : false
 
     return (
       <div>
-        <Header history={history} isLoggedIn={isLoggedIn} logout={logout} isAdmin={isAdmin}/>
+        <Header history={history} isLoggedIn={true} logout={logout} isAdmin={isAdmin} />
         <div style={styles.profileLayout as any}>
           <Avatar src={collaboration} size={100}/>
           <h3>Manage your account below</h3>
@@ -109,11 +111,13 @@ export default class MyAccountLayout extends Component<Props, State> {
             floatingLabelFixed={true}
             defaultValue={user.name}
             style={styles.textField}
+            onChange={(newName: any) => this.setState({ newName: newName.target.value })}
           />
           <RaisedButton
             label={strings.updateText}
             primary={true}
             style={styles.editBtn}
+            onClick={() => changeName(newName)}
           />
         </Paper>
       </div>
