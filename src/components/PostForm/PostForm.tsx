@@ -7,6 +7,7 @@ import { History } from 'history'
 import { Post } from '../../domain/model/Post'
 import { concat, map, uniqueId, pull, find } from 'lodash'
 import { styles } from './styles'
+import { strings } from './strings'
 import { isEmpty } from './validation'
 
 /**
@@ -56,7 +57,7 @@ export default class PostForm extends Component<Props, State> {
       title,
       remuneration,
       location,
-      workType: workType ? workType : 'Full Time',
+      workType: workType ? workType : strings.fullTime,
       closingDate: date,
       description,
       skills,
@@ -148,7 +149,7 @@ export default class PostForm extends Component<Props, State> {
    * Pushes a new skill to the skills array when it is entered
    */
   onEnterSkills = (event: any) => {
-    if (event.key === 'Enter') {
+    if (event.key === strings.enter) {
       const { skills, skill } = this.state
       const isExist = find(skills, (skillItem) => skillItem === skill)
       if (!isExist) {
@@ -207,19 +208,19 @@ export default class PostForm extends Component<Props, State> {
     return (
       <div style={styles.form as any}>
         <TextField
-          floatingLabelText='Title*'
+          floatingLabelText={strings.titleText}
           floatingLabelFixed
           style={styles.textField}
           value={this.state.title}
           maxLength='70'
           onChange={this.titleOnChange}
           onBlur={this.titleOnBlur}
-          errorText={validTitle || !titleFocused ? '' : 'Title field cannot be empty'}
+          errorText={validTitle || !titleFocused ? '' : strings.titleHint}
         />
         <TextField
-          floatingLabelText='Remuneration'
+          floatingLabelText={strings.remunerationText}
           floatingLabelFixed
-          hintText='e.g. $20 - $25 per hour'
+          hintText={strings.remunerationHint}
           maxLength='50'
           style={styles.textField}
           value={this.state.remuneration}
@@ -227,7 +228,7 @@ export default class PostForm extends Component<Props, State> {
         />
         <div style={styles.textField}>
           <AutoComplete
-            floatingLabelText='Location*'
+            floatingLabelText={strings.locationText}
             floatingLabelFixed
             fullWidth
             searchText={this.state.location}
@@ -236,26 +237,26 @@ export default class PostForm extends Component<Props, State> {
             filter={AutoComplete.caseInsensitiveFilter}
             onUpdateInput={this.onUpdateLocation}
             onBlur={this.locationOnBlur}
-            errorText={validLocation || !locationFocused ? '' : 'Location field cannot be empty'}
+            errorText={validLocation || !locationFocused ? '' : strings.locationHint}
           />
         </div>
         <div style={styles.textField}>
           <SelectField
-            floatingLabelText='Work Type'
+            floatingLabelText={strings.workType}
             floatingLabelFixed
             value={this.state.workType}
             style={styles.workTypeField}
             onChange={(event, index, value) => this.setState({ workType: value })}
           >
-            <MenuItem value='Full Time' primaryText='Full Time' />
-            <MenuItem value='Part Time' primaryText='Part Time' />
-            <MenuItem value='Temporary' primaryText='Temporary' />
-            <MenuItem value='Casual' primaryText='Casual' />
+            <MenuItem value={strings.fullTime} primaryText={strings.fullTime} />
+            <MenuItem value={strings.partTime} primaryText={strings.partTime} />
+            <MenuItem value={strings.temporary} primaryText={strings.temporary} />
+            <MenuItem value={strings.casual} primaryText={strings.casual} />
           </SelectField>
           <DatePicker
-            floatingLabelText='Closing Date'
+            floatingLabelText={strings.closingDate}
             floatingLabelFixed
-            mode='landscape'
+            mode={strings.landScape as any}
             style={styles.datePicker}
             textFieldStyle={styles.datePickerField}
             defaultDate={this.state.closingDate}
@@ -264,7 +265,7 @@ export default class PostForm extends Component<Props, State> {
           />
         </div>
         <TextField
-          floatingLabelText='Description'
+          floatingLabelText={strings.descriptionText}
           floatingLabelFixed
           style={styles.textField}
           multiLine
@@ -273,10 +274,10 @@ export default class PostForm extends Component<Props, State> {
           value={this.state.description}
         />
         <TextField
-          floatingLabelText='Required Skills'
+          floatingLabelText={strings.requiredSkillText}
           floatingLabelFixed
           style={styles.textField}
-          hintText='Enter skill name and press Enter'
+          hintText={strings.requiredSkillHint}
           maxLength='70'
           onChange={(skill) => this.setState({ skill: (skill.target as HTMLTextAreaElement).value })}
           onKeyPress={this.onEnterSkills}
@@ -286,7 +287,7 @@ export default class PostForm extends Component<Props, State> {
           {this.renderSkillsChip(this.state.skills)}
         </div>
         <TextField
-          floatingLabelText='How to Apply*'
+          floatingLabelText={strings.howToApply}
           floatingLabelFixed
           style={styles.textField}
           multiLine
@@ -294,10 +295,10 @@ export default class PostForm extends Component<Props, State> {
           value={this.state.howToApply}
           onChange={this.howToApplyOnChange}
           onBlur={this.howToApplyOnBlur}
-          errorText={validHowToApply || !howToApplyFocused ? '' : 'How to Apply field cannot be empty'}
+          errorText={validHowToApply || !howToApplyFocused ? '' : strings.howToApplyHint}
         />
         <RaisedButton
-          label={isCreateNew ? 'Submit' : 'Update'}
+          label={isCreateNew ? strings.submit : strings.update}
           primary={true}
           style={styles.submitBtn}
           disabled={!validTitle || !validLocation || !validHowToApply}
