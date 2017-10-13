@@ -10,4 +10,5 @@ export const strings = {
   loadingText : 'Loading...',
   loginText : 'Login',
   resetPasswordHint : 'Password reset email has been sent to ',
+  failedPasswordHint : 'Login failed. Invalid email or password.',
 }

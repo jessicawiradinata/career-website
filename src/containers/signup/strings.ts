@@ -8,4 +8,5 @@ export const strings = {
   nameHint : 'Name length has to be between 3 - 70 characters',
   loadingText : 'Loading...',
   signupText : 'Sign Up',
+  failedSignup : 'Signup failed. Unable to connect to the server.',
 }

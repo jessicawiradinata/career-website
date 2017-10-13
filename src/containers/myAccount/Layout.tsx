@@ -70,9 +70,9 @@ export default class MyAccountLayout extends Component<Props, State> {
         <Header history={history} isLoggedIn={true} logout={logout} isAdmin={isAdmin} />
         <div style={styles.profileLayout as any}>
           <Avatar src={collaboration} size={100}/>
-          <h3>Manage your account below</h3>
+          <h3>{strings.myAccountTitle}</h3>
         </div>
-        <h2 style={styles.titlePaper}>Change Password</h2>
+        <h2 style={styles.titlePaper}>{strings.changePassword}</h2>
         <Paper style={styles.profileContainer as any} zDepth={1}>
           <TextField
             floatingLabelText={strings.currentPassword}
@@ -104,7 +104,7 @@ export default class MyAccountLayout extends Component<Props, State> {
         </Paper>
 
         <br/>
-        <h2 style={styles.titlePaper}>Change Contact Details</h2>
+        <h2 style={styles.titlePaper}>{strings.contactDetailsHint}</h2>
         <Paper style={styles.profileContainer as any} zDepth={1}>
           <TextField
             floatingLabelText={strings.nameText}

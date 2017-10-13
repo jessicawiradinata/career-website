@@ -153,7 +153,7 @@ export default class LoginLayout extends Component<Props, State> {
             disabled={isForgot ? (!validEmail || !emailFocused) : (!validEmail || !validPassword || !emailFocused || !passwordFocused)}
           />
           {!isLoginSuccess &&
-            <text style={styles.errorText}>Login failed. Invalid email or password.</text>
+            <text style={styles.errorText}>{strings.failedPasswordHint}</text>
           }
           <Snackbar
             open={showResetBar}

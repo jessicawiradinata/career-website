@@ -125,7 +125,7 @@ export default class SignupLayout extends Component<Props, State> {
       <div>
         <Header history={history} isLoggedIn={false} isAdmin={false} />
         <Paper style={styles.signupContainer as any} zDepth={1}>
-          <h1>Sign Up</h1>
+          <h1>{strings.signupText}</h1>
           <TextField
             floatingLabelText={strings.emailText}
             style={styles.textField}
@@ -156,7 +156,7 @@ export default class SignupLayout extends Component<Props, State> {
             disabled={!validEmail || !validPassword || !validName || !emailFocused || !passwordFocused || !nameFocused}
           />
           {!isSignupSuccess &&
-            <text style={styles.errorText}>Signup failed. Unable to connect to the server.</text>
+            <text style={styles.errorText}>{strings.failedSignup}</text>
           }
         </Paper>
       </div>
