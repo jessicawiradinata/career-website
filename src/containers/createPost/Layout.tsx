@@ -69,11 +69,11 @@ export default class CreatePostLayout extends Component<Props, State> {
     }
 
     return (
-      <div>
+      <div style={styles.pageContainer}>
         <Header history={history} isLoggedIn={true} logout={logout} isAdmin={isAdmin} />
         <Paper style={styles.form as any} zDepth={1}>
           <h1>{strings.internshipTitle}</h1>
-          <div style={styles.postForm}>
+          <div style={styles.postForm as any}>
             <PostForm
               postDetails={post}
               isCreateNew={true}

@@ -8,7 +8,7 @@ import { History } from 'history'
 import { Post } from '../../domain/model/Post'
 import { User } from '../../domain/model/User'
 import PostCard from '../../components/PostCard/PostCard'
-import { Paper, TextField } from 'material-ui'
+import { Paper, TextField, Divider } from 'material-ui'
 import { styles } from './styles'
 import { strings } from './strings'
 
@@ -88,14 +88,20 @@ export default class PostsLayout extends Component<Props, State> {
     return (
       <div>
         <Header history={history} isLoggedIn={isLoggedIn} logout={logout} isAdmin={isAdmin} />
-        <Paper style={styles.searchContainer}>
-          <TextField
-            hintText={strings.searchText}
-            style={styles.searchField}
-            onChange={(searchText: any) => this.setState({ searchText: searchText.target.value })}
-          />
-        </Paper>
-        {this.renderPostCards()}
+        <div style={styles.pageContainer}>
+          <Paper style={styles.searchContainer} zDepth={0}>
+            <h2>Search Opportunities</h2>
+            <TextField
+              hintText={strings.searchText}
+              style={styles.searchField}
+              onChange={(searchText: any) => this.setState({ searchText: searchText.target.value })}
+            />
+          </Paper>
+          <Divider/>
+          <div style={styles.postCardsContainer}>
+            {this.renderPostCards()}
+          </div>
+        </div>
       </div>
     )
   }

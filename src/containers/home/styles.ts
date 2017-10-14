@@ -3,14 +3,42 @@
  */
 export const styles = {
   form: {
-    margin: 40,
-    padding: 40,
+    marginTop: '12.5%',
+    padding: 80,
+    textAlign: 'center',
+    backgroundColor: 'transparent',
+    alignSelf: 'center',
+  },
+
+  homeContainer: {
+    height: '100%',
+    paddingBottom: '10%',
+  },
+
+  welcomeContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    height: '100%',
     textAlign: 'center',
   },
 
-  picture: {
-    height: 150,
-    width: 150,
-    margin: 20,
+  titleText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+
+  subtitleText: {
+    color: 'white',
+    marginBottom: 10,
+  },
+
+  buttonShape: {
+    borderRadius: 25,
+  },
+
+  button: {
+    height: 45,
+    borderRadius: 25,
+    margin: 7,
   },
 }

@@ -2,7 +2,7 @@
  * A Card Component to display each post
  */
 import React, { Component } from 'react'
-import { Card, CardTitle, CardActions, FlatButton, CardText, Chip, FontIcon } from 'material-ui'
+import { Card, CardTitle, CardActions, FlatButton, CardText, Chip, FontIcon, Divider } from 'material-ui'
 import { Post } from '../../domain/model/Post'
 import { map, uniqueId } from 'lodash'
 import { History } from 'history'
@@ -95,6 +95,7 @@ export default class PostCard extends Component<Props, State> {
           </CardActions> :
           <div style={styles.bottomPad} />
         }
+        <Divider style={{marginTop: 20}}/>
       </Card>
     )
   }
