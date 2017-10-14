@@ -77,6 +77,12 @@ const isChangePassProcessing = (state: boolean = false, action: changePassAction
   }
 }
 
+/**
+ * Notifies whether changeName is currently processing
+ * @param state state to be returned
+ * @param action action which triggers this method
+ * @return boolean true if signup is currently processing, false otherwise
+ */
 const isChangeNameProcessing = (state: boolean = false, action: changeNameAction) => {
   switch (action.type) {
     case ActionTypes.CHANGE_NAME_REQUESTED:
@@ -139,6 +145,12 @@ const isChangePassSuccess = (state: boolean = true, action: changePassAction) =>
   }
 }
 
+/**
+ * Notifies whether change name is successful
+ * @param state state to be returned
+ * @param action action which triggers this method
+ * @return boolean true if change password is successful, false otherwise
+ */
 const isChangeNameSuccess = (state: boolean = true, action: changeNameAction) => {
   switch (action.type) {
     case ActionTypes.CHANGE_NAME_SUCCESS:
@@ -146,7 +158,7 @@ const isChangeNameSuccess = (state: boolean = true, action: changeNameAction) =>
     case ActionTypes.CHANGE_NAME_FAILED:
       return false
     default:
-      return true
+      return false
   }
 }
 

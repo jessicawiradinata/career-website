@@ -61,7 +61,7 @@ export default class MyAccountLayout extends Component<Props, State> {
    * Renders the My Account page layout
    */
   render() {
-    const { history, logout, user, changePassword, changeName } = this.props
+    const { history, logout, user, changePassword, changeName, isChangeNameSuccess } = this.props
     const { currentPass, newPass, newName } = this.state
     const isAdmin = user ? user.isAdmin : false
 
@@ -120,6 +120,9 @@ export default class MyAccountLayout extends Component<Props, State> {
               style={styles.editBtn}
               onClick={() => changeName(newName)}
             />
+            {isChangeNameSuccess &&
+              <div style={styles.notificationBorder as any}>Your contact name has been updated</div>
+            }
           </Paper>
         </div>
       </div>
