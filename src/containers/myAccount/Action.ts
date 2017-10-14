@@ -37,7 +37,7 @@ export const changeName = (newName: string) => (dispatch: Dispatch<any>) => (asy
   dispatch(changeNameRequested())
   try {
     const response = await userRepository.changeName(window.localStorage.id, newName)
-    if (response.data !== null) {
+    if (response !== null) {
       dispatch(changeNameSuccess())
     } else {
       dispatch(changeNameFailed())
