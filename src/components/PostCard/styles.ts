@@ -3,9 +3,8 @@
  */
 export const styles = {
   postCard: {
-    marginTop: 20,
-    paddingLeft: 10,
-    paddingBottom: 10,
+    boxShadow: '',
+    backgroundColor: 'white',
   },
 
   actionsContainer: {
@@ -63,6 +62,6 @@ export const styles = {
   },
 
   bottomPad: {
-    marginBottom: 20,
+    marginBottom: 40,
   },
 }
