@@ -145,6 +145,9 @@ export default class LoginLayout extends Component<Props, State> {
             onCheck={() => this.setState({ isForgot: !isForgot })}
             style={styles.forgotField}
           />
+          <div>
+            Don't have account? <a href="#" onClick={() => history.push('/signup')}> Register Here</a>
+          </div>
           <RaisedButton
             label={isForgot ? strings.resetPassword : (isLoginProcessing ? strings.loadingText : strings.loginText)}
             primary={true}

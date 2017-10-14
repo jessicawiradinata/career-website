@@ -10,6 +10,7 @@ export const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     textAlign: 'center',
+    color: 'white',
   },
 
   profileContainer: {
@@ -28,6 +29,7 @@ export const styles = {
 
   titlePaper: {
     marginLeft: 20,
+    color: 'white',
   },
 
   iconText: {
