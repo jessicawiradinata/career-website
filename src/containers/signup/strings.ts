@@ -12,4 +12,6 @@ export const strings = {
   loadingText : 'Loading...',
   signupText : 'Sign Up',
   failedSignup : 'Signup failed. Unable to connect to the server.',
+  logintext: 'Already Have an account? ',
+  loginLink: 'Login Here,'
 }
