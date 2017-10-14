@@ -54,7 +54,7 @@ export default class PostCard extends Component<Props, State> {
       <Card style={styles.postCard} key={post._id}>
         <CardTitle actAsExpander showExpandableButton>
           <div style={styles.titleContainer as any}>
-            <h2>{post.title}</h2>
+            <h3>{post.title}</h3>
             <div style={styles.rightColumn as any}>
               <FontIcon style={styles.chip} className='material-icons'>location_on</FontIcon>
               <text>{post.location}</text>

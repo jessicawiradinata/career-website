@@ -2,7 +2,7 @@
  * Layout for My Account page
  */
 import React, { Component } from 'react'
-import { RaisedButton, TextField, Divider } from 'material-ui'
+import { RaisedButton, TextField, Divider, Paper } from 'material-ui'
 import Header from '../../components/Header/Header'
 import { History } from 'history'
 import { User } from '../../domain/model/User'
@@ -67,59 +67,59 @@ export default class MyAccountLayout extends Component<Props, State> {
       <div>
         <Header history={history} isLoggedIn={true} logout={logout} isAdmin={isAdmin} />
         <div style={styles.pageContainer}>
-        <div style={styles.profileLayout as any}>
-          <h2>{strings.myAccountTitle}</h2>
-        </div>
-        <Divider />
-        <div style={styles.profileContainer as any}>
-          <h3 style={styles.titlePaper}>{strings.changePassword}</h3>
-          <TextField
-            floatingLabelText={strings.currentPassword}
-            floatingLabelFixed={true}
-            type={strings.password}
-            style={styles.textField}
-            onChange={(currentPass: any) => this.setState({ currentPass: currentPass.target.value })}
-          />
-          <TextField
-            floatingLabelText={strings.newPassword}
-            floatingLabelFixed={true}
-            type={strings.password}
-            style={styles.textField}
-            onChange={(newPass: any) => this.setState({ newPass: newPass.target.value })}
-          />
-          <TextField
-            floatingLabelText={strings.ConfirmPassword}
-            floatingLabelFixed={true}
-            type={strings.password}
-            style={styles.textField}
-            onChange={(confirmNewPass: any) => this.setState({ confirmNewPass: confirmNewPass.target.value })}
-          />
-          <RaisedButton
-            label={strings.updateText}
-            primary={true}
-            style={styles.editBtn}
-            onClick={() => changePassword(user.email, currentPass, newPass)}
-          />
-        </div>
+          <Paper style={styles.profileLayout as any}>
+            <h2>{strings.myAccountTitle}</h2>
+          </Paper>
+          <Divider />
+          <Paper style={styles.profileContainer as any} zDepth={0}>
+            <h3 style={styles.titlePaper}>{strings.changePassword}</h3>
+            <TextField
+              floatingLabelText={strings.currentPassword}
+              floatingLabelFixed={true}
+              type={strings.password}
+              style={styles.textField}
+              onChange={(currentPass: any) => this.setState({ currentPass: currentPass.target.value })}
+            />
+            <TextField
+              floatingLabelText={strings.newPassword}
+              floatingLabelFixed={true}
+              type={strings.password}
+              style={styles.textField}
+              onChange={(newPass: any) => this.setState({ newPass: newPass.target.value })}
+            />
+            <TextField
+              floatingLabelText={strings.ConfirmPassword}
+              floatingLabelFixed={true}
+              type={strings.password}
+              style={styles.textField}
+              onChange={(confirmNewPass: any) => this.setState({ confirmNewPass: confirmNewPass.target.value })}
+            />
+            <RaisedButton
+              label={strings.updateText}
+              primary={true}
+              style={styles.editBtn}
+              onClick={() => changePassword(user.email, currentPass, newPass)}
+            />
+          </Paper>
 
-        <br/>
-        <div style={styles.profileContainer as any}>
-          <h3 style={styles.titlePaper}>{strings.contactDetailsHint}</h3>
-          <TextField
-            floatingLabelText={strings.nameText}
-            floatingLabelFixed={true}
-            defaultValue={user.name}
-            style={styles.textField}
-            onChange={(newName: any) => this.setState({ newName: newName.target.value })}
-          />
-          <RaisedButton
-            label={strings.updateText}
-            primary={true}
-            style={styles.editBtn}
-            onClick={() => changeName(newName)}
-          />
+          <br/>
+          <Paper style={styles.profileContainer as any} zDepth={0}>
+            <h3 style={styles.titlePaper}>{strings.contactDetailsHint}</h3>
+            <TextField
+              floatingLabelText={strings.nameText}
+              floatingLabelFixed={true}
+              defaultValue={user.name}
+              style={styles.textField}
+              onChange={(newName: any) => this.setState({ newName: newName.target.value })}
+            />
+            <RaisedButton
+              label={strings.updateText}
+              primary={true}
+              style={styles.editBtn}
+              onClick={() => changeName(newName)}
+            />
+          </Paper>
         </div>
-      </div>
       </div>
     )
   }

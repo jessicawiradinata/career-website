@@ -2,7 +2,7 @@
  * Layout for 'Create Post' page
  */
 import React, { Component } from 'react'
-import { Paper } from 'material-ui'
+import { Paper, Divider } from 'material-ui'
 import Header from '../../components/Header/Header'
 import { History } from 'history'
 import { Post } from '../../domain/model/Post'
@@ -69,21 +69,26 @@ export default class CreatePostLayout extends Component<Props, State> {
     }
 
     return (
-      <div style={styles.pageContainer}>
+      <div>
         <Header history={history} isLoggedIn={true} logout={logout} isAdmin={isAdmin} />
-        <Paper style={styles.form as any} zDepth={1}>
-          <h1>{strings.internshipTitle}</h1>
-          <div style={styles.postForm as any}>
-            <PostForm
-              postDetails={post}
-              isCreateNew={true}
-              history={history}
-              onSubmit={createPost}
-              locations={locations}
-              searchLocation={searchLocation}
-            />
-          </div>
-        </Paper>
+        <div style={styles.pageContainer}>
+          <Paper style={styles.titleContainer as any} zDepth={0}>
+            <h2>{strings.internshipTitle}</h2>
+          </Paper>
+          <Divider />
+          <Paper style={styles.form as any} zDepth={0}>
+            <div style={styles.postForm as any}>
+              <PostForm
+                postDetails={post}
+                isCreateNew={true}
+                history={history}
+                onSubmit={createPost}
+                locations={locations}
+                searchLocation={searchLocation}
+              />
+            </div>
+          </Paper>
+        </div>
       </div>
     )
   }

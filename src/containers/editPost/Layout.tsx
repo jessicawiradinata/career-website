@@ -2,7 +2,7 @@
  * Layout for Edit post page
  */
 import React, { Component } from 'react'
-import { Paper } from 'material-ui'
+import { Paper, Divider } from 'material-ui'
 import Header from '../../components/Header/Header'
 import { History } from 'history'
 import { Post } from '../../domain/model/Post'
@@ -53,21 +53,26 @@ export default class EditPostLayout extends Component<Props, State> {
     const isAdmin = user ? user.isAdmin : false
 
     return (
-      <div style={styles.pageContainer}>
-        <Header history={history} isLoggedIn={true} logout={logout} isAdmin={isAdmin} />
-        <Paper style={styles.form as any} zDepth={1}>
-          <h1>{strings.editInternship}</h1>
-          <div style={styles.postForm as any}>
-            <PostForm
-              postDetails={postDetails}
-              isCreateNew={false}
-              history={history}
-              onSubmit={updatePost}
-              locations={locations}
-              searchLocation={searchLocation}
-            />
-          </div>
-        </Paper>
+      <div>
+      <Header history={history} isLoggedIn={true} logout={logout} isAdmin={isAdmin} />
+        <div style={styles.pageContainer}>
+          <Paper style={styles.titleContainer as any} zDepth={0}>
+            <h2>{strings.editInternship}</h2>
+          </Paper>
+          <Divider />
+          <Paper style={styles.form as any} zDepth={0}>
+            <div style={styles.postForm as any}>
+              <PostForm
+                postDetails={postDetails}
+                isCreateNew={false}
+                history={history}
+                onSubmit={updatePost}
+                locations={locations}
+                searchLocation={searchLocation}
+              />
+            </div>
+          </Paper>
+        </div>
       </div>
     )
   }
