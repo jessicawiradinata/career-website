@@ -5,6 +5,7 @@ import React, { Component } from 'react'
 import { RaisedButton } from 'material-ui'
 import { History } from 'history'
 import { styles } from './styles'
+import { pagenotfoundStrings } from '../../constants/strings'
 
 /**
  * Props that can be passed to this component and their types
@@ -27,17 +28,17 @@ export default class PageNotFound extends Component<Props, State> {
     const { history } = this.props
     return (
       <div style={styles.pageContainer as any}>
-        <h1 style={styles.titleText}>404 Page Not Found</h1>
-        <p>The page you are looking for could not be found.</p>
-        <p>You can redirect to one of the locations below.</p>
+        <h1 style={styles.titleText}>{pagenotfoundStrings.mainTitle}</h1>
+        <p>{pagenotfoundStrings.subTitle1}</p>
+        <p>{pagenotfoundStrings.subTitle2}</p>
         <div style={styles.buttonsContainer}>
           <RaisedButton
-            label='Home'
+            label={pagenotfoundStrings.homeLabel}
             style={styles.button}
             onClick={() => history.push('/')}
           />
           <RaisedButton
-            label='Previous Page'
+            label={pagenotfoundStrings.previousPageLabel}
             style={styles.button}
             onClick={() => history.goBack()}
           />
