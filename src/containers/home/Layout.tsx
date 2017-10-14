@@ -56,6 +56,7 @@ export default class HomeLayout extends Component<Props, State> {
               overlayStyle={styles.buttonShape}
               style={styles.button}
               fullWidth
+              onClick={() => history.push('/signup')}
             />
           </Paper>
         </div>

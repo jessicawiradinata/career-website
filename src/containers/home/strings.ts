@@ -4,6 +4,6 @@
 export const strings = {
     homeTitle : 'Welcome to Career Website',
     homeSubtitle : 'We help you find the right internship opportunities',
-    findInternship : 'For Job Seekers',
-    employerLabel : 'For Employers',
+    findInternship : 'Find Internships',
+    employerLabel : 'Register as Employer',
 }
