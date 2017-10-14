@@ -115,8 +115,8 @@ export const loginStrings = {
   loginText : 'Login',
   resetPasswordHint : 'Password reset email has been sent to ',
   failedPasswordHint : 'Login failed. Invalid email or password.',
-  registerLink: 'Register Here',
-  registerText: 'Do not have an account? ',
+  registerLink: 'Here',
+  registerText: 'Do not have an account? Register ',
 }
 
 /**
@@ -155,6 +155,6 @@ export const signupStrings = {
   loadingText : 'Loading...',
   signupText : 'Sign Up',
   failedSignup : 'Signup failed. Unable to connect to the server.',
-  logintext: 'Already Have an account? ',
-  loginLink: 'Login Here,',
+  logintext: 'Already Have an account? Login ',
+  loginLink: 'Here',
 }
