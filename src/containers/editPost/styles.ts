@@ -9,9 +9,19 @@ export const styles = {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: '20%',
+    marginRight: '20%',
+    marginTop: '3%',
   },
 
   postForm: {
-    width: '70%',
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+  },
+
+  pageContainer: {
+    paddingBottom: '3%',
   },
 }
