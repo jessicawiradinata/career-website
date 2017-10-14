@@ -1,5 +1,9 @@
-# Career Website API
-This repository contains the front end component for the Career Website. This project is using TS Lint for the maintain the quality of the code. The web service can be found in this repository: https://github.com/jessicawiradinata/career-website-service. 
+# Career Website
+This repository contains the front end component for the Career Website. Career Website is a job vacancies web application specifically designed for internship job opportunities. This project is divided in two, the first one is the front end which is located in this repository and the web service can be found in this repository: https://github.com/jessicawiradinata/career-website-service. This project is using TS Lint for the maintain the quality of the code. 
+
+## Author
+This project is created by Jessica (jessicawiradinata), Kevin (KevinKostnerr), and Stefanus Yoshua (syoshua) which are the students of UTS.
+
 ## Getting Started
 #### 1. Clone this repository and the web service repository using the command in terminal:
 ```
@@ -61,8 +65,6 @@ npm start
 ## Coding Style
 - Braces are required for all control structures
 - Variables are using camelCase
-- Module namespaces may never be named as a direct child of another module's namespace.
-- Filenames should be all lowercase
 - Require statements, grouped together immediately following the module declaration
 - Use four spaces for indenting
 - One statement per line
@@ -71,5 +73,4 @@ npm start
 - Don't abbreviate local variable
 - Ordinary string literals are delimited with single quotes ('), rather than double quotes (").
 - An empty block or block-like construct may be closed immediately after it is opened, with no characters, space, or line break in between (i.e. {}), unless it is a part of a multi-block statement
-- Every statement must be terminated with a semicolon.
 - Prefer to put all function arguments on the same line as the function name. If doing so would exceed the 80-column limit, the arguments must be line-wrapped in a readable way.
