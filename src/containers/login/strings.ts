@@ -14,4 +14,6 @@ export const strings = {
   loginText : 'Login',
   resetPasswordHint : 'Password reset email has been sent to ',
   failedPasswordHint : 'Login failed. Invalid email or password.',
+  registerLink: 'Register Here',
+  registerText: 'Do not have an account? ',
 }
