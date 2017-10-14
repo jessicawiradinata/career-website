@@ -28,7 +28,8 @@ export const styles = {
     color: 'red',
     marginTop: 5,
   },
+
   loginLink: {
     marginTop: 10,
-  }
+  },
 }

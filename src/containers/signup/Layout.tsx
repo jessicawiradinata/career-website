@@ -149,9 +149,8 @@ export default class SignupLayout extends Component<Props, State> {
             errorText={validName || !nameFocused ? '' : strings.nameHint}
           />
           <div style={styles.loginLink}>
-            {strings.logintext} <a href="#" onClick={() => history.push('/signup')}> {strings.loginLink}</a>
+            {strings.logintext} <a href='#' onClick={() => history.push('/login')}> {strings.loginLink}</a>
           </div>
-          
           <RaisedButton
             label={isSignupProcessing ? strings.loadingText : strings.signupText}
             primary={true}
