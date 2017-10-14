@@ -8,6 +8,8 @@ import { History } from 'history'
 import { User } from '../../domain/model/User'
 import { Post } from '../../domain/model/Post'
 import PostCard from '../../components/PostCard/PostCard'
+import { Paper, Divider } from 'material-ui'
+import { styles } from './styles'
 
 /**
  * Props that can be passed to this layout and their types
@@ -42,6 +44,9 @@ export default class MyPostsLayout extends Component<Props, State> {
    */
   renderPostCards = () => {
     const { userPosts, deletePost, history, user } = this.props
+    if (userPosts.length === 0) {
+      return <h4>You haven't posted any internships</h4>
+    }
     return map(userPosts, (post: Post) => {
       return (
         <PostCard
@@ -66,7 +71,13 @@ export default class MyPostsLayout extends Component<Props, State> {
     return (
       <div>
         <Header history={history} isLoggedIn={true} logout={logout} isAdmin={isAdmin} />
-        {this.renderPostCards()}
+        <Paper style={styles.searchContainer} zDepth={0}>
+          <h2>My Posts</h2>
+        </Paper>
+        <Divider style={{marginLeft: '10%', marginRight: '10%'}}/>
+        <div style={{backgroundColor: 'white', padding: '5%', paddingTop: '2.5%', margin: '10%', marginTop: '0%'}}>
+          {this.renderPostCards()}
+        </div>
       </div>
     )
   }

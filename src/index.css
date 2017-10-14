@@ -12,5 +12,8 @@ html {
 }
 
 #root {
-  height: 100%;
+  min-height: 100%;
+  height: 'auto';
+  background: url('./assets/background.jpg');
+  background-attachment: fixed;
 }

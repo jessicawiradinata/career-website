@@ -15,6 +15,7 @@ interface Props {
   history: History
   isLoggedIn: boolean
   isAdmin: boolean
+  isHome?: boolean
   logout?: (history: History) => void
 }
 
@@ -59,12 +60,13 @@ export default class Header extends Component<Props, State> {
    * Renders header component layout
    */
   render() {
-    const { history, isLoggedIn, logout, isAdmin } = this.props
+    const { history, isLoggedIn, logout, isAdmin, isHome } = this.props
     return (
-      <Toolbar>
+      <Toolbar style={isHome ? styles.homeHeaderContainer : styles.headerContainer}>
         <ToolbarGroup firstChild={true}>
           <FlatButton
             label={isAdmin ? headerStrings.adminTitle : headerStrings.userTitle}
+            labelStyle={isHome ? styles.homeWebsiteTitle : styles.websiteTitle as any}
             primary={!isAdmin}
             secondary={isAdmin}
             onClick={() => history.push('/')}
@@ -72,11 +74,9 @@ export default class Header extends Component<Props, State> {
         </ToolbarGroup>
         {isLoggedIn ?
           <ToolbarGroup lastChild={true}>
-            <FlatButton label={headerStrings.internshipText} onClick={() => history.push(headerStrings.internshipRoute)} />
-            <FlatButton
-              onClick={this.handleTouchTap}
-              label={headerStrings.postTitle}
-            />
+            <FlatButton label={headerStrings.internshipText} labelStyle={styles.tabTitle}
+              onClick={() => history.push(headerStrings.internshipRoute)} />
+            <FlatButton label={headerStrings.postTitle} labelStyle={styles.tabTitle}onClick={this.handleTouchTap} />
             <Popover
               open={this.state.open}
               anchorEl={this.state.anchorEl}
@@ -90,13 +90,14 @@ export default class Header extends Component<Props, State> {
                 <MenuItem primaryText={headerStrings.myPost} onClick={() => history.push(headerStrings.mypostsRoute)} />
               </Menu>
             </Popover>
-            <FlatButton label={headerStrings.myAccount} onClick={() => history.push(headerStrings.myaccountRoute)} />
-            <FlatButton label={headerStrings.logout} onClick={() => logout ? logout(history) : ''} />
+            <FlatButton label={headerStrings.myAccount} labelStyle={styles.tabTitle} onClick={() => history.push(headerStrings.myaccountRoute)} />
+            <FlatButton label={headerStrings.logout} labelStyle={styles.tabTitle} onClick={() => logout ? logout(history) : ''} />
           </ToolbarGroup> :
           <ToolbarGroup lastChild={true}>
-            <FlatButton label={headerStrings.internshipText} onClick={() => history.push(headerStrings.internshipRoute)} />
-            <FlatButton label={headerStrings.signup} onClick={() => history.push(headerStrings.signupRoute)} />
-            <FlatButton label={headerStrings.login} onClick={() => history.push(headerStrings.loginRoute)} />
+            <FlatButton label={headerStrings.internshipText} labelStyle={styles.tabTitle}
+              onClick={() => history.push(headerStrings.internshipRoute)} />
+            <FlatButton label={headerStrings.signup} labelStyle={styles.tabTitle} onClick={() => history.push(headerStrings.signupRoute)} />
+            <FlatButton label={headerStrings.login} labelStyle={styles.tabTitle} onClick={() => history.push(headerStrings.loginRoute)} />
           </ToolbarGroup>
         }
       </Toolbar>

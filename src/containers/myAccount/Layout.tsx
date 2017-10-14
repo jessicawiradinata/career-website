@@ -17,6 +17,8 @@ const collaboration = require('../../assets/collaboration.png')
 interface Props {
   history: History
   user: User
+  isChangeNameProcessing: boolean
+  isChangeNameSuccess: boolean
   logout: (history: History) => void
   authenticate: (history: History) => void
   changePassword: (email: string, currentPass: string, newPass: string) => void
@@ -61,7 +63,7 @@ export default class MyAccountLayout extends Component<Props, State> {
    * Renders the My Account page layout
    */
   render() {
-    const { history, logout, user, changePassword, changeName } = this.props
+    const { history, logout, user, changePassword, changeName, isChangeNameSuccess } = this.props
     const { currentPass, newPass, newName } = this.state
     const isAdmin = user ? user.isAdmin : false
 
@@ -70,7 +72,7 @@ export default class MyAccountLayout extends Component<Props, State> {
         <Header history={history} isLoggedIn={true} logout={logout} isAdmin={isAdmin} />
         <div style={styles.profileLayout as any}>
           <Avatar src={collaboration} size={100}/>
-          <h3>{strings.myAccountTitle}</h3>
+          <h3 style={styles.titleColor}>{strings.myAccountTitle}</h3>
         </div>
         <h2 style={styles.titlePaper}>{strings.changePassword}</h2>
         <Paper style={styles.profileContainer as any} zDepth={1}>
@@ -106,6 +108,11 @@ export default class MyAccountLayout extends Component<Props, State> {
         <br/>
         <h2 style={styles.titlePaper}>{strings.contactDetailsHint}</h2>
         <Paper style={styles.profileContainer as any} zDepth={1}>
+          {isChangeNameSuccess &&
+            <div style={styles.notificationBorder}>
+              Success
+            </div>
+          }
           <TextField
             floatingLabelText={strings.nameText}
             floatingLabelFixed={true}

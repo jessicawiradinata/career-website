@@ -28,6 +28,7 @@ export const styles = {
 
   titlePaper: {
     marginLeft: 20,
+    color : '#FFFFFF',
   },
 
   iconText: {
@@ -42,5 +43,11 @@ export const styles = {
 
   textField: {
     width: '35%',
+  },
+  titleColor: {
+    color: '#FFFFFF',
+  },
+  notificationBorder: {
+    color: '#4AD540',
   },
 }
