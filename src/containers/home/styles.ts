@@ -12,7 +12,7 @@ export const styles = {
 
   homeContainer: {
     height: '100%',
-    paddingBottom: '17.5%',
+    paddingBottom: '10%',
   },
 
   welcomeContainer: {

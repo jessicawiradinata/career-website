@@ -35,7 +35,7 @@ export default class HomeLayout extends Component<Props, State> {
 
     return (
       <div style={styles.homeContainer}>
-        <Header history={history} isLoggedIn={isLoggedIn} logout={logout} isAdmin={isAdmin} />
+        <Header history={history} isLoggedIn={isLoggedIn} logout={logout} isAdmin={isAdmin} isHome={true} />
         <div style={styles.welcomeContainer as any}>
           <Paper style={styles.form as any} zDepth={0}>
             <h1 style={styles.titleText as any}>{strings.homeTitle}</h1>
