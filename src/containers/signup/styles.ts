@@ -9,15 +9,19 @@ export const styles = {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: '20%',
+    marginRight: '20%',
+    marginTop: '3%',
   },
 
   textField: {
-    width: '50%',
+    width: '70%',
   },
 
   submitBtn: {
     marginTop: 40,
-    width: '50%',
+    width: '70%',
   },
 
   errorText: {
