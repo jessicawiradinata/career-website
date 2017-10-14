@@ -86,7 +86,7 @@ export default class Header extends Component<Props, State> {
               animation={PopoverAnimationVertical}
             >
               <Menu>
-                <MenuItem primaryText={headerStrings.createPost} onClick={() => history.push(headerStrings.createPost)} />
+                <MenuItem primaryText={headerStrings.createPost} onClick={() => history.push(headerStrings.createPostRoute)} />
                 <MenuItem primaryText={headerStrings.myPost} onClick={() => history.push(headerStrings.mypostsRoute)} />
               </Menu>
             </Popover>

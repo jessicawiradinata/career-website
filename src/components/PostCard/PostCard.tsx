@@ -7,7 +7,7 @@ import { Post } from '../../domain/model/Post'
 import { map, uniqueId } from 'lodash'
 import { History } from 'history'
 import { styles } from './styles'
-import { strings } from './strings'
+import { postcardStrings } from '../../constants/strings'
 import dateformat from 'dateformat'
 
 /**
@@ -48,8 +48,8 @@ export default class PostCard extends Component<Props, State> {
    */
   render() {
     const { post, history, onDelete, showActions, authorName } = this.props
-    const closingDate = dateformat(post.closingDate, strings.dateFormat)
-    const postDate = dateformat(post.createdAt, strings.dateFormat)
+    const closingDate = dateformat(post.closingDate, postcardStrings.dateFormat)
+    const postDate = dateformat(post.createdAt, postcardStrings.dateFormat)
 
     return (
       <Card style={styles.postCard} key={post._id}>
@@ -57,29 +57,29 @@ export default class PostCard extends Component<Props, State> {
           <div style={styles.titleContainer as any}>
             <h2>{post.title}</h2>
             <div style={styles.rightColumn as any}>
-              <FontIcon style={styles.chip} className={strings.classMaterialIcons}>{strings.locationOn}</FontIcon>
+              <FontIcon style={styles.chip} className={postcardStrings.classMaterialIcons}>{postcardStrings.locationOn}</FontIcon>
               <text>{post.location}</text>
             </div>
           </div>
           <div style={styles.titleContainer as any}>
-            <text>{`${strings.postedBy} ${authorName}`}</text>
+            <text>{`${postcardStrings.postedBy} ${authorName}`}</text>
             <text style={styles.rightColumn as any}>{post.remuneration}</text>
           </div>
         </CardTitle>
         <CardText expandable>
           <div style={styles.titleContainer as any}>
             <div style={styles.contentContainer as any}>
-              <h4>{strings.workType}</h4>
+              <h4>{postcardStrings.workType}</h4>
               <text style={styles.chip}>{`${post.workType}`}</text>
             </div>
-            <text style={styles.rightColumn as any}>{`${strings.postedOn} ${postDate}`}</text>
+            <text style={styles.rightColumn as any}>{`${postcardStrings.postedOn} ${postDate}`}</text>
           </div>
           <div style={styles.contentContainer as any}>
-            <h4>{strings.description}</h4>
+            <h4>{postcardStrings.description}</h4>
             <text>{post.description}</text>
           </div>
           <div style={styles.contentContainer as any}>
-            <h4>{strings.howToApply}</h4>
+            <h4>{postcardStrings.howToApply}</h4>
             <text>{post.howToApply}</text>
           </div>
         </CardText>
@@ -87,12 +87,12 @@ export default class PostCard extends Component<Props, State> {
           <div style={styles.chipContainer as any}>
             {this.renderSkillsChip(post.skills)}
           </div>
-          <text>{`${strings.closingOn} ${closingDate}`}</text>
+          <text>{`${postcardStrings.closingOn} ${closingDate}`}</text>
         </div>
         { showActions ?
           <CardActions style={styles.actionsContainer as any}>
-            <FlatButton label={strings.editLabel} primary onClick={() => history.push(`/editpost/${post._id}`)} />
-            <FlatButton label={strings.deleteLabel} secondary onClick={() => onDelete(post._id)} />
+            <FlatButton label={postcardStrings.editLabel} primary onClick={() => history.push(`/editpost/${post._id}`)} />
+            <FlatButton label={postcardStrings.deleteLabel} secondary onClick={() => onDelete(post._id)} />
           </CardActions> :
           <div style={styles.bottomPad} />
         }
