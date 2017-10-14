@@ -6,7 +6,7 @@ import { Paper, TextField, RaisedButton, Checkbox, Snackbar } from 'material-ui'
 import Header from '../../components/Header/Header'
 import { History } from 'history'
 import { styles } from './styles'
-import { strings } from './strings'
+import { loginStrings } from '../../constants/strings'
 
 /**
  * Props that can be passed to this layout and their types
@@ -59,7 +59,7 @@ export default class LoginLayout extends Component<Props, State> {
    */
   emailOnChange = (email: any) => {
     const { validateEmail } = this.props
-    validateEmail(email.target.value, strings.loginConst)
+    validateEmail(email.target.value, loginStrings.loginConst)
     this.setState({ email: email.target.value })
   }
 
@@ -70,7 +70,7 @@ export default class LoginLayout extends Component<Props, State> {
     const { validateEmail } = this.props
     const { email } = this.state
     this.setState({ emailFocused: true })
-    validateEmail(email, strings.loginConst)
+    validateEmail(email, loginStrings.loginConst)
   }
 
   /**
@@ -79,7 +79,7 @@ export default class LoginLayout extends Component<Props, State> {
    */
   passwordOnChange = (password: any) => {
     const { isEmpty } = this.props
-    isEmpty(password.target.value, strings.emailText)
+    isEmpty(password.target.value, loginStrings.emailText)
     this.setState({ password: password.target.value })
   }
 
@@ -90,7 +90,7 @@ export default class LoginLayout extends Component<Props, State> {
     const { isEmpty } = this.props
     const { password } = this.state
     this.setState({ passwordFocused: true })
-    isEmpty(password, strings.loginPassword)
+    isEmpty(password, loginStrings.loginPassword)
   }
 
   /**
@@ -123,44 +123,44 @@ export default class LoginLayout extends Component<Props, State> {
         <Paper style={styles.loginContainer as any} zDepth={1}>
           <h1>Login</h1>
           <TextField
-            floatingLabelText={strings.emailText}
+            floatingLabelText={loginStrings.emailText}
             style={styles.textField}
             onChange={this.emailOnChange}
             onBlur={this.emailOnBlur}
-            errorText={validEmail || !emailFocused ? '' : strings.emailHint}
+            errorText={validEmail || !emailFocused ? '' : loginStrings.emailHint}
           />
           {!isForgot &&
             <TextField
-              floatingLabelText={strings.passwordText}
-              type={strings.passwordText}
+              floatingLabelText={loginStrings.passwordText}
+              type={loginStrings.passwordText}
               style={styles.textField}
               onChange={this.passwordOnChange}
               onBlur={this.passwordOnBlur}
-              errorText={validPassword || !passwordFocused ? '' : strings.passwordHint}
+              errorText={validPassword || !passwordFocused ? '' : loginStrings.passwordHint}
             />
           }
           <Checkbox
-            label={strings.forgotPassword}
+            label={loginStrings.forgotPassword}
             checked={isForgot}
             onCheck={() => this.setState({ isForgot: !isForgot })}
             style={styles.forgotField}
           />
           <div style={styles.registerLink}>
-            {strings.registerText} <a href='#' onClick={() => history.push('/signup')}> {strings.registerLink}</a>
+            {loginStrings.registerText} <a href='#' onClick={() => history.push('/signup')}> {loginStrings.registerLink}</a>
           </div>
           <RaisedButton
-            label={isForgot ? strings.resetPassword : (isLoginProcessing ? strings.loadingText : strings.loginText)}
+            label={isForgot ? loginStrings.resetPassword : (isLoginProcessing ? loginStrings.loadingText : loginStrings.loginText)}
             primary={true}
             style={styles.submitBtn}
             onClick={this.onSubmit}
             disabled={isForgot ? (!validEmail || !emailFocused) : (!validEmail || !validPassword || !emailFocused || !passwordFocused)}
           />
           {!isLoginSuccess &&
-            <text style={styles.errorText}>{strings.failedPasswordHint}</text>
+            <text style={styles.errorText}>{loginStrings.failedPasswordHint}</text>
           }
           <Snackbar
             open={showResetBar}
-            message={`${strings.resetPasswordHint} ${email}`}
+            message={`${loginStrings.resetPasswordHint} ${email}`}
             autoHideDuration={6000}
             onRequestClose={() => this.setState({ showResetBar: false })}
           />

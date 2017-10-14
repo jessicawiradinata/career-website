@@ -7,7 +7,7 @@ import Header from '../../components/Header/Header'
 import { History } from 'history'
 import { User } from '../../domain/model/User'
 import { styles } from './styles'
-import { strings } from './strings'
+import { homeStrings } from '../../constants/strings'
 
 /**
  * Props that can be passed to this layout and their types
@@ -38,10 +38,10 @@ export default class HomeLayout extends Component<Props, State> {
         <Header history={history} isLoggedIn={isLoggedIn} logout={logout} isAdmin={isAdmin} isHome={true} />
         <div style={styles.welcomeContainer as any}>
           <Paper style={styles.form as any} zDepth={0}>
-            <h1 style={styles.titleText as any}>{strings.homeTitle}</h1>
-            <p style={styles.subtitleText}>{strings.homeSubtitle}</p>
+            <h1 style={styles.titleText as any}>{homeStrings.homeTitle}</h1>
+            <p style={styles.subtitleText}>{homeStrings.homeSubtitle}</p>
             <RaisedButton
-              label={strings.findInternship}
+              label={homeStrings.findInternship}
               primary
               buttonStyle={styles.buttonShape}
               overlayStyle={styles.buttonShape}
@@ -50,7 +50,7 @@ export default class HomeLayout extends Component<Props, State> {
               onClick={() => history.push('/internships')}
             />
             <RaisedButton
-              label={strings.employerLabel}
+              label={homeStrings.employerLabel}
               secondary
               buttonStyle={styles.buttonShape}
               overlayStyle={styles.buttonShape}

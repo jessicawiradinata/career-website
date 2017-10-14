@@ -9,7 +9,7 @@ import { Post } from '../../domain/model/Post'
 import { User } from '../../domain/model/User'
 import PostForm from '../../components/PostForm/PostForm'
 import { styles } from './styles'
-import { strings } from './strings'
+import { createpostStrings } from '../../constants/strings'
 
 /**
  * Props that can be passed to this layout and their types
@@ -73,7 +73,7 @@ export default class CreatePostLayout extends Component<Props, State> {
         <Header history={history} isLoggedIn={true} logout={logout} isAdmin={isAdmin} />
         <div style={styles.pageContainer}>
           <Paper style={styles.titleContainer as any} zDepth={0}>
-            <h2>{strings.internshipTitle}</h2>
+            <h2>{createpostStrings.internshipTitle}</h2>
           </Paper>
           <Divider />
           <Paper style={styles.form as any} zDepth={0}>

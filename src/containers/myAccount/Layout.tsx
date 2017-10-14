@@ -7,7 +7,7 @@ import Header from '../../components/Header/Header'
 import { History } from 'history'
 import { User } from '../../domain/model/User'
 import { styles } from './styles'
-import { strings } from './strings'
+import { myAccountStrings } from '../../constants/strings'
 
 /**
  * Props that can be passed to this layout and their types
@@ -70,34 +70,34 @@ export default class MyAccountLayout extends Component<Props, State> {
         <Header history={history} isLoggedIn={true} logout={logout} isAdmin={isAdmin} />
         <div style={styles.pageContainer}>
           <Paper style={styles.profileLayout as any}>
-            <h2>{strings.myAccountTitle}</h2>
+            <h2>{myAccountStrings.myAccountTitle}</h2>
           </Paper>
           <Divider />
           <Paper style={styles.profileContainer as any} zDepth={0}>
-            <h3 style={styles.titlePaper}>{strings.changePassword}</h3>
+            <h3 style={styles.titlePaper}>{myAccountStrings.changePassword}</h3>
             <TextField
-              floatingLabelText={strings.currentPassword}
+              floatingLabelText={myAccountStrings.currentPassword}
               floatingLabelFixed={true}
-              type={strings.password}
+              type={myAccountStrings.password}
               style={styles.textField}
               onChange={(currentPass: any) => this.setState({ currentPass: currentPass.target.value })}
             />
             <TextField
-              floatingLabelText={strings.newPassword}
+              floatingLabelText={myAccountStrings.newPassword}
               floatingLabelFixed={true}
-              type={strings.password}
+              type={myAccountStrings.password}
               style={styles.textField}
               onChange={(newPass: any) => this.setState({ newPass: newPass.target.value })}
             />
             <TextField
-              floatingLabelText={strings.ConfirmPassword}
+              floatingLabelText={myAccountStrings.ConfirmPassword}
               floatingLabelFixed={true}
-              type={strings.password}
+              type={myAccountStrings.password}
               style={styles.textField}
               onChange={(confirmNewPass: any) => this.setState({ confirmNewPass: confirmNewPass.target.value })}
             />
             <RaisedButton
-              label={strings.updateText}
+              label={myAccountStrings.updateText}
               primary={true}
               style={styles.editBtn}
               onClick={() => changePassword(user.email, currentPass, newPass)}
@@ -106,16 +106,16 @@ export default class MyAccountLayout extends Component<Props, State> {
 
           <br/>
           <Paper style={styles.profileContainer as any} zDepth={0}>
-            <h3 style={styles.titlePaper}>{strings.contactDetailsHint}</h3>
+            <h3 style={styles.titlePaper}>{myAccountStrings.contactDetailsHint}</h3>
             <TextField
-              floatingLabelText={strings.nameText}
+              floatingLabelText={myAccountStrings.nameText}
               floatingLabelFixed={true}
               defaultValue={user.name}
               style={styles.textField}
               onChange={(newName: any) => this.setState({ newName: newName.target.value })}
             />
             <RaisedButton
-              label={strings.updateText}
+              label={myAccountStrings.updateText}
               primary={true}
               style={styles.editBtn}
               onClick={() => changeName(newName)}
