@@ -2,13 +2,12 @@
  * Layout for home page
  */
 import React, { Component } from 'react'
-import { Paper, FlatButton } from 'material-ui'
+import { RaisedButton, Paper } from 'material-ui'
 import Header from '../../components/Header/Header'
 import { History } from 'history'
 import { User } from '../../domain/model/User'
 import { styles } from './styles'
 import { strings } from './strings'
-const collaboration = require('../../assets/collaboration.png')
 
 /**
  * Props that can be passed to this layout and their types
@@ -35,15 +34,31 @@ export default class HomeLayout extends Component<Props, State> {
     const isAdmin = user ? user.isAdmin : false
 
     return (
-      <div>
+      <div style={styles.homeContainer}>
         <Header history={history} isLoggedIn={isLoggedIn} logout={logout} isAdmin={isAdmin} />
-        <Paper style={styles.form} zDepth={1}>
-          <h1>{strings.homeTitle}</h1>
-          <img src={collaboration} style={styles.picture} alt={strings.collaboration} />
-          <p>{strings.homeSubtitle}</p>
-          <FlatButton label={strings.findInternship} primary={true} onClick={() => history.push('/internships')} />
-          <FlatButton label={strings.employerLabel} secondary={true} />
-        </Paper>
+        <div style={styles.welcomeContainer as any}>
+          <Paper style={styles.form as any} zDepth={0}>
+            <h1 style={styles.titleText as any}>{strings.homeTitle}</h1>
+            <p style={styles.subtitleText}>{strings.homeSubtitle}</p>
+            <RaisedButton
+              label={strings.findInternship}
+              primary
+              buttonStyle={styles.buttonShape}
+              overlayStyle={styles.buttonShape}
+              style={styles.button}
+              fullWidth
+              onClick={() => history.push('/internships')}
+            />
+            <RaisedButton
+              label={strings.employerLabel}
+              secondary
+              buttonStyle={styles.buttonShape}
+              overlayStyle={styles.buttonShape}
+              style={styles.button}
+              fullWidth
+            />
+          </Paper>
+        </div>
       </div>
     )
   }
