@@ -4,25 +4,18 @@ This repository contains the front end component for the Career Website. This pr
 #### 1. Clone this repository and the web service repository using the command in terminal:
 ```
 git clone https://github.com/jessicawiradinata/career-website.git
-git clone https://github.com/jessicawiradinata/career-website-service.git
 ```
 #### 2. Change the current directory to the file repository using command:
 ```
 cd career-website
 ```
-#### 3. Create a new terminal window and change the current directory to the web service repository using command:
-```
-cd ..
-cd career-website-service
-```
-#### 5. Install the required node modules using command on both terminal window:
+#### 3. Install the required node modules using command on both terminal window:
 ```
 npm install
 ```
-#### 6. Run the project on the server using command on both terminal window:
- ```
- npm start
- ```
+#### 4. Run the project on the server using command on both terminal window:
+```
+npm start
  
  ## Source file
  The source file of this project can be seen on the src folder that contains the component for the application.
@@ -40,7 +33,7 @@ npm install
  * #### ActionType.js
  Contains all the constant for all the action type the user do
  * #### Config.js
- Contains the API endpoint constant to access the web service
+ Contains the API endpoint constant to access the web service, the current API endpoint is pointed into the aws server, you have to change that into your local address if you want to use it with the web service running on your own machine.
  ### containers
  All the User Interface components are stored here. This application has eight pages so there are 8 subfolder that contains the component needed which are Action, Container, Layout, selector, and styles for each of the page . The eight pages are:
  * #### createPost
@@ -59,9 +52,9 @@ npm install
  ### reducer
  Takes a set of states and actions and returns the next state based on the action
  ### routes
- contains routing to the right file for each path URL requested
+ Contains routing to the right file for each path URL requested
  ### store
- 
+ Provides reduux store for the application
  ### index.tsx
  The entry point of the application.
  
