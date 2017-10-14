@@ -13,5 +13,5 @@ export const strings = {
   signupText : 'Sign Up',
   failedSignup : 'Signup failed. Unable to connect to the server.',
   logintext: 'Already Have an account? ',
-  loginLink: 'Login Here,'
+  loginLink: 'Login Here,',
 }

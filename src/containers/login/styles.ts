@@ -34,7 +34,7 @@ export const styles = {
     marginTop: 5,
   },
 
-  registerLink:{
+  registerLink: {
     marginTop: 10,
-  }
+  },
 }
