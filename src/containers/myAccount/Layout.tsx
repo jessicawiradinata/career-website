@@ -2,14 +2,12 @@
  * Layout for My Account page
  */
 import React, { Component } from 'react'
-import { Paper, Avatar, RaisedButton, TextField } from 'material-ui'
+import { RaisedButton, TextField, Divider } from 'material-ui'
 import Header from '../../components/Header/Header'
 import { History } from 'history'
 import { User } from '../../domain/model/User'
 import { styles } from './styles'
 import { strings } from './strings'
-
-const collaboration = require('../../assets/collaboration.png')
 
 /**
  * Props that can be passed to this layout and their types
@@ -68,12 +66,13 @@ export default class MyAccountLayout extends Component<Props, State> {
     return (
       <div>
         <Header history={history} isLoggedIn={true} logout={logout} isAdmin={isAdmin} />
+        <div style={styles.pageContainer}>
         <div style={styles.profileLayout as any}>
-          <Avatar src={collaboration} size={100}/>
-          <h3>{strings.myAccountTitle}</h3>
+          <h2>{strings.myAccountTitle}</h2>
         </div>
-        <h2 style={styles.titlePaper}>{strings.changePassword}</h2>
-        <Paper style={styles.profileContainer as any} zDepth={1}>
+        <Divider />
+        <div style={styles.profileContainer as any}>
+          <h3 style={styles.titlePaper}>{strings.changePassword}</h3>
           <TextField
             floatingLabelText={strings.currentPassword}
             floatingLabelFixed={true}
@@ -101,11 +100,11 @@ export default class MyAccountLayout extends Component<Props, State> {
             style={styles.editBtn}
             onClick={() => changePassword(user.email, currentPass, newPass)}
           />
-        </Paper>
+        </div>
 
         <br/>
-        <h2 style={styles.titlePaper}>{strings.contactDetailsHint}</h2>
-        <Paper style={styles.profileContainer as any} zDepth={1}>
+        <div style={styles.profileContainer as any}>
+          <h3 style={styles.titlePaper}>{strings.contactDetailsHint}</h3>
           <TextField
             floatingLabelText={strings.nameText}
             floatingLabelFixed={true}
@@ -119,7 +118,8 @@ export default class MyAccountLayout extends Component<Props, State> {
             style={styles.editBtn}
             onClick={() => changeName(newName)}
           />
-        </Paper>
+        </div>
+      </div>
       </div>
     )
   }
