@@ -33,4 +33,8 @@ export const styles = {
     color: 'red',
     marginTop: 5,
   },
+
+  registerLink:{
+    marginTop: 10,
+  }
 }

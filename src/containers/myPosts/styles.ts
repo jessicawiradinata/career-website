@@ -11,5 +11,6 @@ export const styles = {
     margin: '10%',
     marginTop: '2.5%',
     marginBottom: '0%',
+    textAlign: 'center',
   },
 }

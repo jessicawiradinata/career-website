@@ -3,16 +3,13 @@
  */
 export const styles = {
   form: {
-    margin: 20,
-    padding: 40,
     display: 'flex',
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: '20%',
-    marginRight: '20%',
-    marginTop: '3%',
+    paddingLeft: '5%',
+    paddingRight: '5%',
   },
 
   postForm: {
@@ -22,6 +19,20 @@ export const styles = {
   },
 
   pageContainer: {
-    paddingBottom: '3%',
+    backgroundColor: 'white',
+    marginTop: '2.5%',
+    paddingBottom: '5%',
+    marginLeft: '20%',
+    marginRight: '20%',
+  },
+
+  titleContainer: {
+    padding: 40,
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
+    backgroundColor: '#f9f9f9',
   },
 }

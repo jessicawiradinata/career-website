@@ -9,6 +9,6 @@ export const strings = {
   ConfirmPassword : 'Confirm New Password',
   updateText : 'Update',
   nameText : 'Name',
-  myAccountTitle : 'Manage your account below',
+  myAccountTitle : 'My Account',
   contactDetailsHint : 'Change Contact Details',
 }

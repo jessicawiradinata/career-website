@@ -2,14 +2,12 @@
  * Layout for My Account page
  */
 import React, { Component } from 'react'
-import { Paper, Avatar, RaisedButton, TextField } from 'material-ui'
+import { RaisedButton, TextField, Divider, Paper } from 'material-ui'
 import Header from '../../components/Header/Header'
 import { History } from 'history'
 import { User } from '../../domain/model/User'
 import { styles } from './styles'
 import { strings } from './strings'
-
-const collaboration = require('../../assets/collaboration.png')
 
 /**
  * Props that can be passed to this layout and their types
@@ -63,70 +61,67 @@ export default class MyAccountLayout extends Component<Props, State> {
    * Renders the My Account page layout
    */
   render() {
-    const { history, logout, user, changePassword, changeName, isChangeNameSuccess } = this.props
+    const { history, logout, user, changePassword, changeName } = this.props
     const { currentPass, newPass, newName } = this.state
     const isAdmin = user ? user.isAdmin : false
 
     return (
       <div>
         <Header history={history} isLoggedIn={true} logout={logout} isAdmin={isAdmin} />
-        <div style={styles.profileLayout as any}>
-          <Avatar src={collaboration} size={100}/>
-          <h3 style={styles.titleColor}>{strings.myAccountTitle}</h3>
-        </div>
-        <h2 style={styles.titlePaper}>{strings.changePassword}</h2>
-        <Paper style={styles.profileContainer as any} zDepth={1}>
-          <TextField
-            floatingLabelText={strings.currentPassword}
-            floatingLabelFixed={true}
-            type={strings.password}
-            style={styles.textField}
-            onChange={(currentPass: any) => this.setState({ currentPass: currentPass.target.value })}
-          />
-          <TextField
-            floatingLabelText={strings.newPassword}
-            floatingLabelFixed={true}
-            type={strings.password}
-            style={styles.textField}
-            onChange={(newPass: any) => this.setState({ newPass: newPass.target.value })}
-          />
-          <TextField
-            floatingLabelText={strings.ConfirmPassword}
-            floatingLabelFixed={true}
-            type={strings.password}
-            style={styles.textField}
-            onChange={(confirmNewPass: any) => this.setState({ confirmNewPass: confirmNewPass.target.value })}
-          />
-          <RaisedButton
-            label={strings.updateText}
-            primary={true}
-            style={styles.editBtn}
-            onClick={() => changePassword(user.email, currentPass, newPass)}
-          />
-        </Paper>
+        <div style={styles.pageContainer}>
+          <Paper style={styles.profileLayout as any}>
+            <h2>{strings.myAccountTitle}</h2>
+          </Paper>
+          <Divider />
+          <Paper style={styles.profileContainer as any} zDepth={0}>
+            <h3 style={styles.titlePaper}>{strings.changePassword}</h3>
+            <TextField
+              floatingLabelText={strings.currentPassword}
+              floatingLabelFixed={true}
+              type={strings.password}
+              style={styles.textField}
+              onChange={(currentPass: any) => this.setState({ currentPass: currentPass.target.value })}
+            />
+            <TextField
+              floatingLabelText={strings.newPassword}
+              floatingLabelFixed={true}
+              type={strings.password}
+              style={styles.textField}
+              onChange={(newPass: any) => this.setState({ newPass: newPass.target.value })}
+            />
+            <TextField
+              floatingLabelText={strings.ConfirmPassword}
+              floatingLabelFixed={true}
+              type={strings.password}
+              style={styles.textField}
+              onChange={(confirmNewPass: any) => this.setState({ confirmNewPass: confirmNewPass.target.value })}
+            />
+            <RaisedButton
+              label={strings.updateText}
+              primary={true}
+              style={styles.editBtn}
+              onClick={() => changePassword(user.email, currentPass, newPass)}
+            />
+          </Paper>
 
-        <br/>
-        <h2 style={styles.titlePaper}>{strings.contactDetailsHint}</h2>
-        <Paper style={styles.profileContainer as any} zDepth={1}>
-          {isChangeNameSuccess &&
-            <div style={styles.notificationBorder}>
-              Success
-            </div>
-          }
-          <TextField
-            floatingLabelText={strings.nameText}
-            floatingLabelFixed={true}
-            defaultValue={user.name}
-            style={styles.textField}
-            onChange={(newName: any) => this.setState({ newName: newName.target.value })}
-          />
-          <RaisedButton
-            label={strings.updateText}
-            primary={true}
-            style={styles.editBtn}
-            onClick={() => changeName(newName)}
-          />
-        </Paper>
+          <br/>
+          <Paper style={styles.profileContainer as any} zDepth={0}>
+            <h3 style={styles.titlePaper}>{strings.contactDetailsHint}</h3>
+            <TextField
+              floatingLabelText={strings.nameText}
+              floatingLabelFixed={true}
+              defaultValue={user.name}
+              style={styles.textField}
+              onChange={(newName: any) => this.setState({ newName: newName.target.value })}
+            />
+            <RaisedButton
+              label={strings.updateText}
+              primary={true}
+              style={styles.editBtn}
+              onClick={() => changeName(newName)}
+            />
+          </Paper>
+        </div>
       </div>
     )
   }

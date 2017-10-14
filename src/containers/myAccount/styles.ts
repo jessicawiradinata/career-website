@@ -3,23 +3,30 @@
  */
 export const styles = {
   profileLayout: {
-    margin: 20,
     padding: 40,
     display: 'flex',
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
     textAlign: 'center',
+    backgroundColor: '#f9f9f9',
+  },
+
+  pageContainer: {
+    backgroundColor: 'white',
+    marginTop: '2.5%',
+    paddingBottom: '5%',
+    marginLeft: '20%',
+    marginRight: '20%',
   },
 
   profileContainer: {
-    margin: 20,
     padding: 40,
+    paddingLeft: '10%',
+    paddingRight: '10%',
     display: 'flex',
-    flex: 1,
     flexDirection: 'column',
-    alignItems: 'left',
-    textAlign: 'left',
+    width: '100%',
   },
 
   divList: {
@@ -27,8 +34,8 @@ export const styles = {
   },
 
   titlePaper: {
-    marginLeft: 20,
-    color : '#FFFFFF',
+    marginLeft: 0,
+    textAlign: 'center',
   },
 
   iconText: {
@@ -42,10 +49,7 @@ export const styles = {
   },
 
   textField: {
-    width: '35%',
-  },
-  titleColor: {
-    color: '#FFFFFF',
+    width: '100%',
   },
   notificationBorder: {
     color: '#4AD540',
