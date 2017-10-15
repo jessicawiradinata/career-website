@@ -62,7 +62,7 @@ export default class UserRepository {
    * @return validToken - false if user token is invalid, null otherwise
    */
   changeName = async(userId: string, newName: string): Promise<any> => {
-    const response = await axios.put(`${Config.API_ENDPOINT}/users/changeName/${userId}`, {
+    const response = await axios.put(`${Config.API_ENDPOINT}/users/${userId}`, {
       name: newName,
     }, Config.HEADER)
 
