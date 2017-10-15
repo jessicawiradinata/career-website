@@ -4,10 +4,9 @@
 import * as ActionTypes from '../../constants/ActionTypes'
 import { Dispatch } from 'redux'
 import AuthenticationService from '../../domain/service/AuthenticationService'
-import UserRepository from '../../domain/service/UserRepository'
+import { dataLoadService } from '../../index'
 
 const authenticationService = new AuthenticationService()
-const userRepository = new UserRepository()
 
 /**
  * Changes a user's password
@@ -19,7 +18,7 @@ export const changePassword = (email: string, currentPass: string, newPass: stri
   dispatch(changePasswordRequested())
   try {
     const response = await authenticationService.changePassword(email, currentPass, newPass)
-    if (response.data !== null) {
+    if (response.data.success) {
       dispatch(changePasswordSuccess())
     } else {
       dispatch(changePasswordFailed())
@@ -31,13 +30,13 @@ export const changePassword = (email: string, currentPass: string, newPass: stri
 
 /**
  * Changes a user's name
- * @param name name of the user account
+ * @param newName new user name
  */
 export const changeName = (newName: string) => (dispatch: Dispatch<any>) => (async () => {
   dispatch(changeNameRequested())
   try {
-    const response = await userRepository.changeName(window.localStorage.id, newName)
-    if (response !== null) {
+    const response = await dataLoadService.getUserRepository().changeName(window.localStorage.id, newName)
+    if (response.data.success) {
       dispatch(changeNameSuccess())
     } else {
       dispatch(changeNameFailed())

@@ -20,9 +20,11 @@ export default class PostRepository {
   /**
    * Requests the server to create a new post
    * @param newPost post to be created
+   * @return success - true if successful, false otherwise
+   * @return validToken - false if user token is invalid, null otherwise
    */
-  createPost = async (newPost: Post) => {
-    await axios.post(`${Config.API_ENDPOINT}/posts`, {
+  createPost = async (newPost: Post): Promise<any> => {
+    const response = await axios.post(`${Config.API_ENDPOINT}/posts`, {
       title: newPost.title,
       remuneration: newPost.remuneration,
       location: newPost.location,
@@ -32,17 +34,24 @@ export default class PostRepository {
       skills: newPost.skills,
       howToApply: newPost.howToApply,
       authorId: newPost.authorId,
-    })
-    this.getPosts()
+    }, Config.HEADER)
+
+    if (response.data.success) {
+      this.getPosts()
+    }
+
+    return response
   }
 
   /**
    * Requests the server to update a post
    * @param postID ID of post to be updated
    * @param newPost contains new values to update post
+   * @return success - true if successful, false otherwise
+   * @return validToken - false if user token is invalid, null otherwise
    */
-  updatePost = async (postId: string, newPost: Post) => {
-    await axios.put(`${Config.API_ENDPOINT}/posts/${postId}`, {
+  updatePost = async (postId: string, newPost: Post): Promise<any> => {
+    const response = await axios.put(`${Config.API_ENDPOINT}/posts/${postId}`, {
       title: newPost.title,
       remuneration: newPost.remuneration,
       location: newPost.location,
@@ -51,15 +60,20 @@ export default class PostRepository {
       description: newPost.description,
       skills: newPost.skills,
       howToApply: newPost.howToApply,
-    })
-    this.updateLocalPost(postId, newPost)
-    this.postsSubject.next(this.posts)
+    }, Config.HEADER)
+
+    if (response.data.success) {
+      this.updateLocalPost(postId, newPost)
+      this.postsSubject.next(this.posts)
+    }
+
+    return response
   }
 
   /**
-   * Updates the local post to be notified by the observable
+   * Updates local post to be notified by the observable
    * @param postId ID of post to be updated
-   * @param newPost contains new values to udpdate post
+   * @param newPost contains new values to update post
    */
   updateLocalPost = (postId: string, newPost: Post) => {
     this.posts = map(this.posts, (post: Post) => {
@@ -87,11 +101,16 @@ export default class PostRepository {
   /**
    * Requests the server to delete a post and notifies the observable that post is removed
    * @param postId ID of post to be deleted
+   * @return success - true if successful, false otherwise
+   * @return validToken - false if user token is invalid, null otherwise
    */
-  deletePost = async (postId: string) => {
-    await axios.delete(`${Config.API_ENDPOINT}/posts/${postId}`)
-    this.posts = filter(this.posts, (post) => post._id !== postId)
-    this.postsSubject.next(this.posts)
+  deletePost = async (postId: string): Promise<any> => {
+    const response = await axios.delete(`${Config.API_ENDPOINT}/posts/${postId}`, Config.HEADER)
+    if (response.data.success) {
+      this.posts = filter(this.posts, (post) => post._id !== postId)
+      this.postsSubject.next(this.posts)
+    }
+    return response
   }
 
   /**

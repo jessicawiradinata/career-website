@@ -16,9 +16,13 @@ import { dataLoadService } from '../../index'
 export const updatePost = (post: Post, history: History, postId: string) => (dispatch: Dispatch<any>) => (async () => {
   dispatch(updatePostRequested())
   try {
-    await dataLoadService.getPostRepository().updatePost(postId, post)
-    dispatch(updatePostSuccess())
-    history.push('/myposts')
+    const response = await dataLoadService.getPostRepository().updatePost(postId, post)
+    if (response.data.success) {
+      dispatch(updatePostSuccess())
+      history.push('/myposts')
+    } else {
+      dispatch(updatePostFailed())
+    }
   } catch (error) {
     dispatch(updatePostFailed())
   }

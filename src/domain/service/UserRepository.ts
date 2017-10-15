@@ -5,6 +5,7 @@ import axios from 'axios'
 import * as Config from '../../constants/config'
 import { User } from '../../domain/model/User'
 import Rx from 'rxjs'
+import { map } from 'lodash'
 
 export default class UserRepository {
   user: User
@@ -56,12 +57,42 @@ export default class UserRepository {
   /**
    * Request the server to update a user's name
    * @param userId the user's account id
-   * @param name the user's newName
+   * @param newName the user's new name
+   * @return success - true if successful, false otherwise
+   * @return validToken - false if user token is invalid, null otherwise
    */
-  changeName = async(userId: string, newName: string) => {
-    await axios.put(`${Config.API_ENDPOINT}/users/changeName/${userId}`, {
+  changeName = async(userId: string, newName: string): Promise<any> => {
+    const response = await axios.put(`${Config.API_ENDPOINT}/users/changeName/${userId}`, {
       name: newName,
+    }, Config.HEADER)
+
+    if (response.data.success) {
+      this.changeNameLocal(userId, newName)
+      this.usersSubject.next(this.users)
+      this.userSubject.next(this.user)
+    }
+
+    return response
+  }
+
+  /**
+   * Updates local user to be notified by the observable
+   * @param userId ID of user to be updated
+   * @param newName new user's name for updating
+   */
+  changeNameLocal = (userId: string, newName: string) => {
+    this.users = map(this.users, (user) => {
+      if (user._id === userId) {
+        const newUser = {
+          _id: userId,
+          email: user.email,
+          name: newName,
+          isAdmin: user.isAdmin,
+        }
+        this.user = newUser
+        return newUser
+      }
+      return user
     })
-    this.getUser(userId)
   }
 }
