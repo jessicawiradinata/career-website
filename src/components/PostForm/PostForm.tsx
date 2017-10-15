@@ -214,7 +214,6 @@ export default class PostForm extends Component<Props, State> {
       howToApply: this.state.howToApply,
       authorId: window.localStorage.id,
     }
-    console.log(this.state.workType)
 
     return (
       <div style={styles.form as any}>

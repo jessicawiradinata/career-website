@@ -125,8 +125,6 @@ export default class LoginLayout extends Component<Props, State> {
   render() {
     const { history, validEmail, validPassword, isLoginProcessing, isLoginSuccess } = this.props
     const { isForgot, showResetBar, email, emailFocused, passwordFocused } = this.state
-    console.log(validEmail)
-    console.log(validPassword)
 
     return (
       <div>
