@@ -18,6 +18,7 @@ interface Props {
   validEmail: boolean
   validPassword: boolean
   validName: boolean
+  authenticateLoggedIn: (history: History) => void
   signup: (email: string, password: string, name: string, history: History) => void
   validateEmail: (email: string, page: string) => void
   validatePassword: (password: string, page: string) => void
@@ -52,6 +53,14 @@ export default class SignupLayout extends Component<Props, State> {
       passwordFocused: false,
       nameFocused: false,
     }
+  }
+
+  /**
+   * Authenticates user when entering Login page and redirects to home if logged in
+   */
+  componentWillMount() {
+    const { authenticateLoggedIn, history } = this.props
+    authenticateLoggedIn(history)
   }
 
   /**

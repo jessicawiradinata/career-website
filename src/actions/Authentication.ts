@@ -37,7 +37,7 @@ export const authenticate = (history: History) => (dispatch: Dispatch<any>) => (
 })()
 
 /**
- * Redirects user to home page if not logged in
+ * Redirects user to home page if logged in
  * @param history navigation
  */
 export const authenticateLoggedIn = (history: History) => (dispatch: Dispatch<any>) => (async () => {
