@@ -41,16 +41,4 @@ export default class AuthenticationService {
       newPassword: newPass,
     })
   )
-
-  /**
-   * Checks whether the user is logged in
-   * @return boolean true if logged in
-   */
-  isLoggedIn = (): boolean => window.localStorage.token !== undefined
-
-  /**
-   * Checks whether the logged in user is owner of a post
-   * @return boolean true if user is owner
-   */
-  isOwner = (authorId: string): boolean => window.localStorage.id === authorId
 }
