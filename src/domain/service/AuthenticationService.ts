@@ -39,6 +39,6 @@ export default class AuthenticationService {
       email: email,
       password: currentPass,
       newPassword: newPass,
-    })
+    }, Config.HEADER as any)
   )
 }

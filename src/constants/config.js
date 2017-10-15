@@ -3,3 +3,8 @@
  */
 
 export const API_ENDPOINT = 'http://192.168.178.40:8080/api'
+export const HEADER = {
+  headers: {
+    'token': window.localStorage.token
+  }
+}

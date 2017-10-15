@@ -19,7 +19,7 @@ export const changePassword = (email: string, currentPass: string, newPass: stri
   dispatch(changePasswordRequested())
   try {
     const response = await authenticationService.changePassword(email, currentPass, newPass)
-    if (response.data !== null) {
+    if (response.data.success) {
       dispatch(changePasswordSuccess())
     } else {
       dispatch(changePasswordFailed())
