@@ -49,6 +49,7 @@ export default class HomeLayout extends Component<Props, State> {
               fullWidth
               onClick={() => history.push('/internships')}
             />
+            {!isLoggedIn &&
             <RaisedButton
               label={homeStrings.employerLabel}
               secondary
@@ -58,6 +59,7 @@ export default class HomeLayout extends Component<Props, State> {
               fullWidth
               onClick={() => history.push('/signup')}
             />
+            }
           </Paper>
         </div>
       </div>
