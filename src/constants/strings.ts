@@ -4,7 +4,7 @@
 export const headerStrings = {
   adminTitle : 'Career Website Admin Zone',
   userTitle : 'Career Website',
-  internshipText : 'Interships',
+  internshipText : 'Internships',
   postTitle : 'Posts',
   createPost : 'Create Post',
   myPost : 'My Posts',

@@ -45,13 +45,16 @@ export default class UserRepository {
    * @param password password of user to be created
    * @param name name of user to be created
    */
-  createUser = async (email: string, password: string, name: string) => {
-    await axios.post(`${Config.API_ENDPOINT}/users`, {
+  createUser = async (email: string, password: string, name: string): Promise<any> => {
+    const response = await axios.post(`${Config.API_ENDPOINT}/users`, {
       email: email,
       password: password,
       name: name,
     })
-    this.getUsers()
+    if (response.data.success) {
+      this.getUsers()
+    }
+    return response
   }
 
   /**
