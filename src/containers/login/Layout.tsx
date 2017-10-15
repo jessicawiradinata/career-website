@@ -17,6 +17,7 @@ interface Props {
   isLoginSuccess: boolean
   validEmail: boolean
   validPassword: boolean
+  authenticateLoggedIn: (history: History) => void
   login: (email: string, password: string, history: History) => void
   resetPassword: (email: string) => void
   validateEmail: (email: string, page: string) => void
@@ -51,6 +52,14 @@ export default class LoginLayout extends Component<Props, State> {
       emailFocused: false,
       passwordFocused: false,
     }
+  }
+
+  /**
+   * Authenticates user when entering Login page and redirects to home if logged in
+   */
+  componentWillMount() {
+    const { authenticateLoggedIn, history } = this.props
+    authenticateLoggedIn(history)
   }
 
   /**
