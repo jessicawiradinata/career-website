@@ -16,9 +16,13 @@ import { dataLoadService } from '../../index'
 export const signup = (email: string, password: string, name: string, history: History) => (dispatch: Dispatch<any>) => (async () => {
   dispatch(signupRequested())
   try {
-    await dataLoadService.getUserRepository().createUser(email, password, name)
-    dispatch(signupSuccess())
-    history.push('/login')
+    const response = await dataLoadService.getUserRepository().createUser(email, password, name)
+    if (response.data.success) {
+      dispatch(signupSuccess())
+      history.push('/login')
+    } else {
+      dispatch(signupFailed())
+    }
   } catch (error) {
     dispatch(signupFailed())
   }

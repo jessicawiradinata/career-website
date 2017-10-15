@@ -45,13 +45,16 @@ export default class UserRepository {
    * @param password password of user to be created
    * @param name name of user to be created
    */
-  createUser = async (email: string, password: string, name: string) => {
-    await axios.post(`${Config.API_ENDPOINT}/users`, {
+  createUser = async (email: string, password: string, name: string): Promise<any> => {
+    const response = await axios.post(`${Config.API_ENDPOINT}/users`, {
       email: email,
       password: password,
       name: name,
     })
-    this.getUsers()
+    if (response.data.success) {
+      this.getUsers()
+    }
+    return response
   }
 
   /**
@@ -62,7 +65,7 @@ export default class UserRepository {
    * @return validToken - false if user token is invalid, null otherwise
    */
   changeName = async(userId: string, newName: string): Promise<any> => {
-    const response = await axios.put(`${Config.API_ENDPOINT}/users/changeName/${userId}`, {
+    const response = await axios.put(`${Config.API_ENDPOINT}/users/${userId}`, {
       name: newName,
     }, Config.HEADER)
 
