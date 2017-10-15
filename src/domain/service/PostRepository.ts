@@ -20,9 +20,11 @@ export default class PostRepository {
   /**
    * Requests the server to create a new post
    * @param newPost post to be created
+   * @return success - true if successful, false otherwise
+   * @return validToken - false if user token is invalid, null otherwise
    */
-  createPost = async (newPost: Post) => {
-    await axios.post(`${Config.API_ENDPOINT}/posts`, {
+  createPost = async (newPost: Post): Promise<any> => {
+    const response = await axios.post(`${Config.API_ENDPOINT}/posts`, {
       title: newPost.title,
       remuneration: newPost.remuneration,
       location: newPost.location,
@@ -32,8 +34,13 @@ export default class PostRepository {
       skills: newPost.skills,
       howToApply: newPost.howToApply,
       authorId: newPost.authorId,
-    })
-    this.getPosts()
+    }, Config.HEADER)
+
+    if (response.data.success) {
+      this.getPosts()
+    }
+
+    return response
   }
 
   /**
