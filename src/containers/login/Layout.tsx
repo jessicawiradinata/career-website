@@ -125,6 +125,8 @@ export default class LoginLayout extends Component<Props, State> {
   render() {
     const { history, validEmail, validPassword, isLoginProcessing, isLoginSuccess } = this.props
     const { isForgot, showResetBar, email, emailFocused, passwordFocused } = this.state
+    console.log(validEmail)
+    console.log(validPassword)
 
     return (
       <div>
@@ -162,7 +164,7 @@ export default class LoginLayout extends Component<Props, State> {
             primary={true}
             style={styles.submitBtn}
             onClick={this.onSubmit}
-            disabled={isForgot ? (!validEmail || !emailFocused) : (!validEmail || !validPassword || !emailFocused || !passwordFocused)}
+            disabled={isForgot ? (!validEmail || !emailFocused) : (!validEmail || !validPassword)}
           />
           {!isLoginSuccess &&
             <text style={styles.errorText}>{loginStrings.failedPasswordHint}</text>

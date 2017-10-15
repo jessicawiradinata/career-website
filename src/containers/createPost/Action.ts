@@ -15,9 +15,13 @@ import { dataLoadService } from '../../index'
 export const createPost = (post: Post, history: History) => (dispatch: Dispatch<any>) => (async () => {
   dispatch(createPostRequested())
   try {
-    await dataLoadService.getPostRepository().createPost(post)
-    dispatch(createPostSuccess())
-    history.push('/myposts')
+    const response = await dataLoadService.getPostRepository().createPost(post)
+    if (response.data.success) {
+      dispatch(createPostSuccess())
+      history.push('/myposts')
+    } else {
+      dispatch(createPostFailed())
+    }
   } catch (error) {
     dispatch(createPostFailed())
   }

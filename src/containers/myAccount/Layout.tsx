@@ -30,7 +30,7 @@ interface State {
   currentPass: string,
   newPass: string,
   confirmNewPass: string,
-  newName: string,
+  name: string,
 }
 
 export default class MyAccountLayout extends Component<Props, State> {
@@ -41,11 +41,12 @@ export default class MyAccountLayout extends Component<Props, State> {
    */
   constructor(props: Props) {
     super(props)
+    const { user } = this.props
     this.state = {
       currentPass: '',
       newPass: '',
       confirmNewPass: '',
-      newName: '',
+      name: user.name,
     }
   }
 
@@ -62,7 +63,7 @@ export default class MyAccountLayout extends Component<Props, State> {
    */
   render() {
     const { history, logout, user, changePassword, changeName, isChangeNameSuccess } = this.props
-    const { currentPass, newPass, newName } = this.state
+    const { currentPass, newPass, name } = this.state
     const isAdmin = user ? user.isAdmin : false
 
     return (
@@ -103,22 +104,21 @@ export default class MyAccountLayout extends Component<Props, State> {
               onClick={() => changePassword(user.email, currentPass, newPass)}
             />
           </Paper>
-
           <br/>
           <Paper style={styles.profileContainer as any} zDepth={0}>
             <h3 style={styles.titlePaper}>{myAccountStrings.contactDetailsHint}</h3>
             <TextField
               floatingLabelText={myAccountStrings.nameText}
               floatingLabelFixed={true}
-              defaultValue={user.name}
               style={styles.textField}
-              onChange={(newName: any) => this.setState({ newName: newName.target.value })}
+              value={name}
+              onChange={(name: any) => this.setState({ name: name.target.value })}
             />
             <RaisedButton
               label={myAccountStrings.updateText}
               primary={true}
               style={styles.editBtn}
-              onClick={() => changeName(newName)}
+              onClick={() => changeName(name)}
             />
             {isChangeNameSuccess &&
               <div style={styles.notificationBorder as any}>Your contact name has been updated</div>
