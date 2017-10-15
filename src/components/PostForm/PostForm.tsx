@@ -188,6 +188,14 @@ export default class PostForm extends Component<Props, State> {
   }
 
   /**
+   * Disables submit button if there are error validation fields
+   */
+  disableSubmit = () => {
+    const { title, location, howToApply } = this.state
+    return isEmpty(title) || isEmpty(location) || isEmpty(howToApply)
+  }
+
+  /**
    * Renders Post Form Component layout
    */
   render() {
@@ -302,7 +310,7 @@ export default class PostForm extends Component<Props, State> {
           label={isCreateNew ? postformStrings.submit : postformStrings.update}
           primary={true}
           style={styles.submitBtn}
-          disabled={!validTitle || !validLocation || !validHowToApply}
+          disabled={this.disableSubmit()}
           onClick={() => isCreateNew ? onSubmit(post, history) : onSubmit(post, history, postDetails._id)}
         />
       </div>
