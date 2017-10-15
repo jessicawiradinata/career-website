@@ -62,7 +62,6 @@ export default class UserRepository {
     await axios.put(`${Config.API_ENDPOINT}/users/changeName/${userId}`, {
       name: newName,
     })
-    this.getUsers()
     this.getUser(userId)
   }
 }
