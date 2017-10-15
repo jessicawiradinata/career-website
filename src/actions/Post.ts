@@ -13,8 +13,12 @@ import { map } from 'lodash'
 export const deletePost = (postId: string) => (dispatch: Dispatch<any>) => (async () => {
   dispatch(deletePostRequested())
   try {
-    await dataLoadService.getPostRepository().deletePost(postId)
-    dispatch(deletePostSuccess())
+    const response = await dataLoadService.getPostRepository().deletePost(postId)
+    if (response.data.success) {
+      dispatch(deletePostSuccess())
+    } else {
+      dispatch(deletePostFailed())
+    }
   } catch (error) {
     dispatch(deletePostFailed())
   }

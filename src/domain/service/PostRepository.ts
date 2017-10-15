@@ -101,11 +101,16 @@ export default class PostRepository {
   /**
    * Requests the server to delete a post and notifies the observable that post is removed
    * @param postId ID of post to be deleted
+   * @return success - true if successful, false otherwise
+   * @return validToken - false if user token is invalid, null otherwise
    */
-  deletePost = async (postId: string) => {
-    await axios.delete(`${Config.API_ENDPOINT}/posts/${postId}`)
-    this.posts = filter(this.posts, (post) => post._id !== postId)
-    this.postsSubject.next(this.posts)
+  deletePost = async (postId: string): Promise<any> => {
+    const response = await axios.delete(`${Config.API_ENDPOINT}/posts/${postId}`, Config.HEADER)
+    if (response.data.success) {
+      this.posts = filter(this.posts, (post) => post._id !== postId)
+      this.postsSubject.next(this.posts)
+    }
+    return response
   }
 
   /**
