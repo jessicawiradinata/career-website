@@ -40,9 +40,11 @@ export default class PostRepository {
    * Requests the server to update a post
    * @param postID ID of post to be updated
    * @param newPost contains new values to update post
+   * @return success - true if successful, false otherwise
+   * @return validToken - false if user token is invalid, null otherwise
    */
-  updatePost = async (postId: string, newPost: Post) => {
-    await axios.put(`${Config.API_ENDPOINT}/posts/${postId}`, {
+  updatePost = async (postId: string, newPost: Post): Promise<any> => {
+    const response = await axios.put(`${Config.API_ENDPOINT}/posts/${postId}`, {
       title: newPost.title,
       remuneration: newPost.remuneration,
       location: newPost.location,
@@ -51,9 +53,14 @@ export default class PostRepository {
       description: newPost.description,
       skills: newPost.skills,
       howToApply: newPost.howToApply,
-    })
-    this.updateLocalPost(postId, newPost)
-    this.postsSubject.next(this.posts)
+    }, Config.HEADER)
+
+    if (response.data.success) {
+      this.updateLocalPost(postId, newPost)
+      this.postsSubject.next(this.posts)
+    }
+
+    return response
   }
 
   /**
