@@ -10,7 +10,7 @@ import { User } from '../../domain/model/User'
 import PostCard from '../../components/PostCard/PostCard'
 import { Paper, TextField, Divider } from 'material-ui'
 import { styles } from './styles'
-import { strings } from './strings'
+import { postsStrings } from '../../constants/strings'
 
 /**
  * Props that can be passed to this layout and their types
@@ -92,7 +92,7 @@ export default class PostsLayout extends Component<Props, State> {
           <Paper style={styles.searchContainer} zDepth={0}>
             <h2>Search Opportunities</h2>
             <TextField
-              hintText={strings.searchText}
+              hintText={postsStrings.searchText}
               style={styles.searchField}
               onChange={(searchText: any) => this.setState({ searchText: searchText.target.value })}
             />

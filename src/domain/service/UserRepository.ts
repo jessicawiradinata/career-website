@@ -58,9 +58,11 @@ export default class UserRepository {
    * @param userId the user's account id
    * @param name the user's newName
    */
-  changeName = (userId: string, newName: string): Promise<any> => (
-    axios.put(`${Config.API_ENDPOINT}/users/changeName/${userId}`, {
+  changeName = async(userId: string, newName: string) => {
+    await axios.put(`${Config.API_ENDPOINT}/users/changeName/${userId}`, {
       name: newName,
     })
-  )
+    this.getUsers()
+    this.getUser(userId)
+  }
 }

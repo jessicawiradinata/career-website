@@ -20,6 +20,10 @@ type changePassAction = {
   type: ActionTypes.CHANGE_PASSWORD_REQUESTED | ActionTypes.CHANGE_PASSWORD_SUCCESS | ActionTypes.CHANGE_PASSWORD_FAILED,
 }
 
+type changeNameAction = {
+  type: ActionTypes.CHANGE_NAME_REQUESTED | ActionTypes.CHANGE_NAME_SUCCESS | ActionTypes.CHANGE_NAME_FAILED,
+}
+
 /**
  * Notifies whether login is currently processing
  * @param state state to be returned
@@ -67,6 +71,23 @@ const isChangePassProcessing = (state: boolean = false, action: changePassAction
     case ActionTypes.CHANGE_PASSWORD_REQUESTED:
       return true
     case ActionTypes.CHANGE_PASSWORD_SUCCESS:
+      return false
+    default:
+      return state
+  }
+}
+
+/**
+ * Notifies whether changeName is currently processing
+ * @param state state to be returned
+ * @param action action which triggers this method
+ * @return boolean true if signup is currently processing, false otherwise
+ */
+const isChangeNameProcessing = (state: boolean = false, action: changeNameAction) => {
+  switch (action.type) {
+    case ActionTypes.CHANGE_NAME_REQUESTED:
+      return true
+    case ActionTypes.CHANGE_NAME_SUCCESS:
       return false
     default:
       return state
@@ -125,6 +146,23 @@ const isChangePassSuccess = (state: boolean = true, action: changePassAction) =>
 }
 
 /**
+ * Notifies whether change name is successful
+ * @param state state to be returned
+ * @param action action which triggers this method
+ * @return boolean true if change password is successful, false otherwise
+ */
+const isChangeNameSuccess = (state: boolean = true, action: changeNameAction) => {
+  switch (action.type) {
+    case ActionTypes.CHANGE_NAME_SUCCESS:
+      return true
+    case ActionTypes.CHANGE_NAME_FAILED:
+      return false
+    default:
+      return false
+  }
+}
+
+/**
  * Specifies all reducers and their return types
  */
 export type AuthenticationContainer = {
@@ -134,6 +172,8 @@ export type AuthenticationContainer = {
   isSignupSuccess: boolean,
   isChangePassProcessing: boolean,
   isChangePassSuccess: boolean,
+  isChangeNameProcessing: boolean,
+  isChangeNameSuccess: boolean,
 }
 
 /**
@@ -146,4 +186,6 @@ export default combineReducers<AuthenticationContainer>({
   isSignupSuccess,
   isChangePassProcessing,
   isChangePassSuccess,
+  isChangeNameProcessing,
+  isChangeNameSuccess,
 })

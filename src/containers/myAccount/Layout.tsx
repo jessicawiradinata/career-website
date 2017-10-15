@@ -7,7 +7,7 @@ import Header from '../../components/Header/Header'
 import { History } from 'history'
 import { User } from '../../domain/model/User'
 import { styles } from './styles'
-import { strings } from './strings'
+import { myAccountStrings } from '../../constants/strings'
 
 /**
  * Props that can be passed to this layout and their types
@@ -15,6 +15,8 @@ import { strings } from './strings'
 interface Props {
   history: History
   user: User
+  isChangeNameProcessing: boolean
+  isChangeNameSuccess: boolean
   logout: (history: History) => void
   authenticate: (history: History) => void
   changePassword: (email: string, currentPass: string, newPass: string) => void
@@ -59,7 +61,7 @@ export default class MyAccountLayout extends Component<Props, State> {
    * Renders the My Account page layout
    */
   render() {
-    const { history, logout, user, changePassword, changeName } = this.props
+    const { history, logout, user, changePassword, changeName, isChangeNameSuccess } = this.props
     const { currentPass, newPass, newName } = this.state
     const isAdmin = user ? user.isAdmin : false
 
@@ -68,34 +70,34 @@ export default class MyAccountLayout extends Component<Props, State> {
         <Header history={history} isLoggedIn={true} logout={logout} isAdmin={isAdmin} />
         <div style={styles.pageContainer}>
           <Paper style={styles.profileLayout as any}>
-            <h2>{strings.myAccountTitle}</h2>
+            <h2>{myAccountStrings.myAccountTitle}</h2>
           </Paper>
           <Divider />
           <Paper style={styles.profileContainer as any} zDepth={0}>
-            <h3 style={styles.titlePaper}>{strings.changePassword}</h3>
+            <h3 style={styles.titlePaper}>{myAccountStrings.changePassword}</h3>
             <TextField
-              floatingLabelText={strings.currentPassword}
+              floatingLabelText={myAccountStrings.currentPassword}
               floatingLabelFixed={true}
-              type={strings.password}
+              type={myAccountStrings.password}
               style={styles.textField}
               onChange={(currentPass: any) => this.setState({ currentPass: currentPass.target.value })}
             />
             <TextField
-              floatingLabelText={strings.newPassword}
+              floatingLabelText={myAccountStrings.newPassword}
               floatingLabelFixed={true}
-              type={strings.password}
+              type={myAccountStrings.password}
               style={styles.textField}
               onChange={(newPass: any) => this.setState({ newPass: newPass.target.value })}
             />
             <TextField
-              floatingLabelText={strings.ConfirmPassword}
+              floatingLabelText={myAccountStrings.ConfirmPassword}
               floatingLabelFixed={true}
-              type={strings.password}
+              type={myAccountStrings.password}
               style={styles.textField}
               onChange={(confirmNewPass: any) => this.setState({ confirmNewPass: confirmNewPass.target.value })}
             />
             <RaisedButton
-              label={strings.updateText}
+              label={myAccountStrings.updateText}
               primary={true}
               style={styles.editBtn}
               onClick={() => changePassword(user.email, currentPass, newPass)}
@@ -104,20 +106,23 @@ export default class MyAccountLayout extends Component<Props, State> {
 
           <br/>
           <Paper style={styles.profileContainer as any} zDepth={0}>
-            <h3 style={styles.titlePaper}>{strings.contactDetailsHint}</h3>
+            <h3 style={styles.titlePaper}>{myAccountStrings.contactDetailsHint}</h3>
             <TextField
-              floatingLabelText={strings.nameText}
+              floatingLabelText={myAccountStrings.nameText}
               floatingLabelFixed={true}
               defaultValue={user.name}
               style={styles.textField}
               onChange={(newName: any) => this.setState({ newName: newName.target.value })}
             />
             <RaisedButton
-              label={strings.updateText}
+              label={myAccountStrings.updateText}
               primary={true}
               style={styles.editBtn}
               onClick={() => changeName(newName)}
             />
+            {isChangeNameSuccess &&
+              <div style={styles.notificationBorder as any}>Your contact name has been updated</div>
+            }
           </Paper>
         </div>
       </div>

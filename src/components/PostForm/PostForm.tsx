@@ -2,14 +2,15 @@
  * A input form component to handle creating and editing of posts
  */
 import React, { Component } from 'react'
-import { TextField, RaisedButton, SelectField, MenuItem, DatePicker, Chip, AutoComplete } from 'material-ui'
+import { TextField, RaisedButton, DatePicker, Chip, AutoComplete } from 'material-ui'
 import { History } from 'history'
 import { Post } from '../../domain/model/Post'
 import { concat, map, uniqueId, pull, find } from 'lodash'
 import { styles } from './styles'
-import { strings } from './strings'
+import { postformStrings } from '../../constants/strings'
 import { dimens } from './dimens'
 import { isEmpty } from './validation'
+import WorkTypeSelectField from '../WorkTypeSelectField/WorkTypeSelectField'
 
 /**
  * Props that can be passed to this component and their types
@@ -58,7 +59,7 @@ export default class PostForm extends Component<Props, State> {
       title,
       remuneration,
       location,
-      workType: workType ? workType : strings.fullTime,
+      workType: workType ? workType : postformStrings.fullTime,
       closingDate: date,
       description,
       skills,
@@ -150,7 +151,7 @@ export default class PostForm extends Component<Props, State> {
    * Pushes a new skill to the skills array when it is entered
    */
   onEnterSkills = (event: any) => {
-    if (event.key === strings.enter) {
+    if (event.key === postformStrings.enter) {
       const { skills, skill } = this.state
       const isExist = find(skills, (skillItem) => skillItem === skill)
       if (!isExist) {
@@ -205,23 +206,24 @@ export default class PostForm extends Component<Props, State> {
       howToApply: this.state.howToApply,
       authorId: window.localStorage.id,
     }
+    console.log(this.state.workType)
 
     return (
       <div style={styles.form as any}>
         <TextField
-          floatingLabelText={strings.titleText}
+          floatingLabelText={postformStrings.titleText}
           floatingLabelFixed
           style={styles.textField}
           value={this.state.title}
           maxLength={dimens.titleLength}
           onChange={this.titleOnChange}
           onBlur={this.titleOnBlur}
-          errorText={validTitle || !titleFocused ? '' : strings.titleHint}
+          errorText={validTitle || !titleFocused ? '' : postformStrings.titleHint}
         />
         <TextField
-          floatingLabelText={strings.remunerationText}
+          floatingLabelText={postformStrings.remunerationText}
           floatingLabelFixed
-          hintText={strings.remunerationHint}
+          hintText={postformStrings.remunerationHint}
           maxLength={dimens.remunerationLength}
           style={styles.textField}
           value={this.state.remuneration}
@@ -229,7 +231,7 @@ export default class PostForm extends Component<Props, State> {
         />
         <div style={styles.textField}>
           <AutoComplete
-            floatingLabelText={strings.locationText}
+            floatingLabelText={postformStrings.locationText}
             floatingLabelFixed
             fullWidth
             searchText={this.state.location}
@@ -238,26 +240,19 @@ export default class PostForm extends Component<Props, State> {
             filter={AutoComplete.caseInsensitiveFilter}
             onUpdateInput={this.onUpdateLocation}
             onBlur={this.locationOnBlur}
-            errorText={validLocation || !locationFocused ? '' : strings.locationHint}
+            errorText={validLocation || !locationFocused ? '' : postformStrings.locationHint}
           />
         </div>
         <div style={styles.textField}>
-          <SelectField
-            floatingLabelText={strings.workType}
-            floatingLabelFixed
-            value={this.state.workType}
-            style={styles.workTypeField}
-            onChange={(event, index, value) => this.setState({ workType: value })}
-          >
-            <MenuItem value={strings.fullTime} primaryText={strings.fullTime} />
-            <MenuItem value={strings.partTime} primaryText={strings.partTime} />
-            <MenuItem value={strings.temporary} primaryText={strings.temporary} />
-            <MenuItem value={strings.casual} primaryText={strings.casual} />
-          </SelectField>
+          <WorkTypeSelectField
+          value={this.state.workType}
+          onChange={(event, index, value) => this.setState({ workType: value })}
+          style={styles.workTypeField}
+          />
           <DatePicker
-            floatingLabelText={strings.closingDate}
+            floatingLabelText={postformStrings.closingDate}
             floatingLabelFixed
-            mode={strings.landScape as any}
+            mode={postformStrings.landScape as any}
             style={styles.datePicker}
             textFieldStyle={styles.datePickerField}
             defaultDate={this.state.closingDate}
@@ -266,7 +261,7 @@ export default class PostForm extends Component<Props, State> {
           />
         </div>
         <TextField
-          floatingLabelText={strings.descriptionText}
+          floatingLabelText={postformStrings.descriptionText}
           floatingLabelFixed
           style={styles.textField}
           multiLine
@@ -275,10 +270,10 @@ export default class PostForm extends Component<Props, State> {
           value={this.state.description}
         />
         <TextField
-          floatingLabelText={strings.requiredSkillText}
+          floatingLabelText={postformStrings.requiredSkillText}
           floatingLabelFixed
           style={styles.textField}
-          hintText={strings.requiredSkillHint}
+          hintText={postformStrings.requiredSkillHint}
           maxLength={dimens.skillLength}
           onChange={(skill) => this.setState({ skill: (skill.target as HTMLTextAreaElement).value })}
           onKeyPress={this.onEnterSkills}
@@ -288,7 +283,7 @@ export default class PostForm extends Component<Props, State> {
           {this.renderSkillsChip(this.state.skills)}
         </div>
         <TextField
-          floatingLabelText={strings.howToApply}
+          floatingLabelText={postformStrings.howToApply}
           floatingLabelFixed
           style={styles.textField}
           multiLine
@@ -296,10 +291,10 @@ export default class PostForm extends Component<Props, State> {
           value={this.state.howToApply}
           onChange={this.howToApplyOnChange}
           onBlur={this.howToApplyOnBlur}
-          errorText={validHowToApply || !howToApplyFocused ? '' : strings.howToApplyHint}
+          errorText={validHowToApply || !howToApplyFocused ? '' : postformStrings.howToApplyHint}
         />
         <RaisedButton
-          label={isCreateNew ? strings.submit : strings.update}
+          label={isCreateNew ? postformStrings.submit : postformStrings.update}
           primary={true}
           style={styles.submitBtn}
           disabled={!validTitle || !validLocation || !validHowToApply}

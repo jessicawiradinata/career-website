@@ -6,6 +6,7 @@ import { FlatButton, ToolbarGroup, Toolbar, Popover, Menu, MenuItem } from 'mate
 import { PopoverAnimationVertical } from 'material-ui/Popover'
 import { History } from 'history'
 import { styles } from './styles'
+import { headerStrings } from '../../constants/strings'
 
 /**
  * Props that can be passed to this component and their types
@@ -64,7 +65,7 @@ export default class Header extends Component<Props, State> {
       <Toolbar style={isHome ? styles.homeHeaderContainer : styles.headerContainer}>
         <ToolbarGroup firstChild={true}>
           <FlatButton
-            label={isAdmin ? 'Career Website Admin Zone' : 'Career Website'}
+            label={isAdmin ? headerStrings.adminTitle : headerStrings.userTitle}
             labelStyle={isHome ? styles.homeWebsiteTitle : styles.websiteTitle as any}
             primary={!isAdmin}
             secondary={isAdmin}
@@ -73,8 +74,9 @@ export default class Header extends Component<Props, State> {
         </ToolbarGroup>
         {isLoggedIn ?
           <ToolbarGroup lastChild={true}>
-            <FlatButton label='Internships' labelStyle={styles.tabTitle} onClick={() => history.push('/internships')} />
-            <FlatButton label='Posts' labelStyle={styles.tabTitle} onClick={this.handleTouchTap} />
+            <FlatButton label={headerStrings.internshipText} labelStyle={styles.tabTitle}
+              onClick={() => history.push(headerStrings.internshipRoute)} />
+            <FlatButton label={headerStrings.postTitle} labelStyle={styles.tabTitle}onClick={this.handleTouchTap} />
             <Popover
               open={this.state.open}
               anchorEl={this.state.anchorEl}
@@ -84,17 +86,18 @@ export default class Header extends Component<Props, State> {
               animation={PopoverAnimationVertical}
             >
               <Menu>
-                <MenuItem primaryText='Create Post' onClick={() => history.push('/createpost')} />
-                <MenuItem primaryText='My Posts' onClick={() => history.push('/myposts')} />
+                <MenuItem primaryText={headerStrings.createPost} onClick={() => history.push(headerStrings.createPostRoute)} />
+                <MenuItem primaryText={headerStrings.myPost} onClick={() => history.push(headerStrings.mypostsRoute)} />
               </Menu>
             </Popover>
-            <FlatButton label='My Account' labelStyle={styles.tabTitle} onClick={() => history.push('/myAccount')} />
-            <FlatButton label='Logout' labelStyle={styles.tabTitle} onClick={() => logout ? logout(history) : ''} />
+            <FlatButton label={headerStrings.myAccount} labelStyle={styles.tabTitle} onClick={() => history.push(headerStrings.myaccountRoute)} />
+            <FlatButton label={headerStrings.logout} labelStyle={styles.tabTitle} onClick={() => logout ? logout(history) : ''} />
           </ToolbarGroup> :
           <ToolbarGroup lastChild={true}>
-            <FlatButton label='Internships' labelStyle={styles.tabTitle} onClick={() => history.push('/internships')} />
-            <FlatButton label='Signup' labelStyle={styles.tabTitle} onClick={() => history.push('/signup')} />
-            <FlatButton label='Login' labelStyle={styles.tabTitle} onClick={() => history.push('/login')} />
+            <FlatButton label={headerStrings.internshipText} labelStyle={styles.tabTitle}
+              onClick={() => history.push(headerStrings.internshipRoute)} />
+            <FlatButton label={headerStrings.signup} labelStyle={styles.tabTitle} onClick={() => history.push(headerStrings.signupRoute)} />
+            <FlatButton label={headerStrings.login} labelStyle={styles.tabTitle} onClick={() => history.push(headerStrings.loginRoute)} />
           </ToolbarGroup>
         }
       </Toolbar>

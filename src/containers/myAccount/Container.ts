@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import MyAccountLayout from './Layout'
 import { bindActionCreators } from 'redux'
 import Selector from './selector'
-import { authenticate } from '../../actions/Authentication'
+import { logout, authenticate } from '../../actions/Authentication'
 import { changePassword } from './Action'
 import { changeName } from './Action'
 
@@ -18,5 +18,6 @@ export default connect(
     authenticate,
     changePassword,
     changeName,
+    logout,
    }, dispatch),
 )(MyAccountLayout as any)

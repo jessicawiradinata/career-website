@@ -37,6 +37,17 @@ export const authenticate = (history: History) => (dispatch: Dispatch<any>) => (
 })()
 
 /**
+ * Redirects user to home page if logged in
+ * @param history navigation
+ */
+export const authenticateLoggedIn = (history: History) => (dispatch: Dispatch<any>) => (async () => {
+  const isLoggedIn = await authenticationService.isLoggedIn()
+  if (isLoggedIn) {
+    history.push('/')
+  }
+})()
+
+/**
  * Redirects user to home page if not owner of post or admin
  * @param history navigation
  * @param authorId user ID of post owner

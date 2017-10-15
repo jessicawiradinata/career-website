@@ -2,4 +2,4 @@
  * Specifies configurations for this app
  */
 
-export const API_ENDPOINT = 'http://172.19.115.185:8080/api'
+export const API_ENDPOINT = 'http://ec2-18-220-149-76.us-east-2.compute.amazonaws.com:8080/api'
