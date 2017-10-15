@@ -43,14 +43,6 @@ export default class AuthenticationService {
   )
 
   /**
-   * Logs the user out by removing the token and user ID from local storage
-   */
-  logout = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('id')
-  }
-
-  /**
    * Checks whether the user is logged in
    * @return boolean true if logged in
    */

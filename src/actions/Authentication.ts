@@ -12,8 +12,9 @@ const authenticationService = new AuthenticationService()
  * Logs out a user from the signed in account
  * @param history navigation
  */
-export const logout = (history: History) => (dispatch: Dispatch<any>) => (async () => {
-  await authenticationService.logout()
+export const logout = (history: History) => (dispatch: Dispatch<any>) => (() => {
+  localStorage.removeItem('token')
+  localStorage.removeItem('id')
   dispatch(logoutAction())
   history.push('/')
 })()
