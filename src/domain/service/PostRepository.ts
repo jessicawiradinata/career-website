@@ -57,9 +57,9 @@ export default class PostRepository {
   }
 
   /**
-   * Updates the local post to be notified by the observable
+   * Updates local post to be notified by the observable
    * @param postId ID of post to be updated
-   * @param newPost contains new values to udpdate post
+   * @param newPost contains new values to update post
    */
   updateLocalPost = (postId: string, newPost: Post) => {
     this.posts = map(this.posts, (post: Post) => {

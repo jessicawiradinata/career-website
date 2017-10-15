@@ -32,7 +32,8 @@ export default class AuthenticationService {
    * @param email the user's email
    * @param currentPass the user's current password
    * @param newPass the user's new password
-   * @return promise from the server
+   * @return success - true if successful, false otherwise
+   * @return validToken - false if user token is invalid, null otherwise
    */
   changePassword = (email: string, currentPass: string, newPass: string): Promise<any> => (
     axios.post(`${Config.API_ENDPOINT}/auth/changepassword`, {
