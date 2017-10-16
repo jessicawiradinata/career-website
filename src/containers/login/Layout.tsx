@@ -7,8 +7,8 @@ import Header from '../../components/Header/Header'
 import { History } from 'history'
 import { styles } from './styles'
 import { loginStrings } from '../../constants/strings'
-import validator from 'validator'
 import ValidationTextField from '../../components/ValidationTextField/ValidationTextField'
+import { validateEmail, validateEmpty } from '../../actions/Validation'
 
 /**
  * Props that can be passed to this layout and their types
@@ -57,28 +57,14 @@ export default class LoginLayout extends Component<Props, State> {
   }
 
   /**
-   * Validates whether the input is a valid email address
-   * @param email email to be validated
-   * @return true if email is valid, false otherwise
-   */
-  validateEmail = (email: string) => validator.isEmail(email)
-
-  /**
-   * Validates whether the password is valid by checking whether it is not empty
-   * @param password password to be validated
-   * @return true if password is not empty, false if password is empty
-   */
-  validatePassword = (password: string) => !validator.isEmpty(password)
-
-  /**
    * Disables submit button if there are error validation fields
    */
   disableSubmit = () => {
     const { email, password, isForgot } = this.state
     if (isForgot) {
-      return !this.validateEmail(email)
+      return !validateEmail(email)
     } else {
-      return !this.validateEmail(email) || !this.validatePassword(password)
+      return !validateEmail(email) || !validateEmpty(password)
     }
   }
 
@@ -117,7 +103,7 @@ export default class LoginLayout extends Component<Props, State> {
             style={styles.textField}
             errorText={loginStrings.emailError}
             onChange={(event: any) => this.setState({ email: event.target.value })}
-            validate={(text: string) => this.validateEmail(email)}
+            validate={(text: string) => validateEmail(email)}
           />
           {!isForgot &&
             <ValidationTextField
@@ -127,7 +113,7 @@ export default class LoginLayout extends Component<Props, State> {
               errorText={loginStrings.passwordError}
               isPassword={true}
               onChange={(event: any) => this.setState({ password: event.target.value })}
-              validate={(text: string) => this.validatePassword(password)}
+              validate={(text: string) => validateEmpty(password)}
             />
           }
           <Checkbox

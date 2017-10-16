@@ -11,7 +11,7 @@ import { postformStrings } from '../../constants/strings'
 import { dimens } from './dimens'
 import WorkTypeSelectField from '../WorkTypeSelectField/WorkTypeSelectField'
 import ValidationTextField from '../ValidationTextField/ValidationTextField'
-import validator from 'validator'
+import { validateEmpty } from '../../actions/Validation'
 
 /**
  * Props that can be passed to this component and their types
@@ -73,7 +73,7 @@ export default class PostForm extends Component<Props, State> {
   locationOnChange = (location: any) => {
     this.setState({
       location: location.target.value,
-      validLocation: this.validateEmpty(location.target.value),
+      validLocation: validateEmpty(location.target.value),
     })
   }
 
@@ -85,7 +85,7 @@ export default class PostForm extends Component<Props, State> {
     const { searchLocation } = this.props
     this.setState({
       location,
-      validLocation: !this.validateEmpty(location),
+      validLocation: validateEmpty(location),
     })
     searchLocation(this.state.location)
   }
@@ -96,16 +96,9 @@ export default class PostForm extends Component<Props, State> {
   locationOnBlur = () => {
     this.setState({
       locationFocused: true,
-      validLocation: this.validateEmpty(this.state.location),
+      validLocation: validateEmpty(this.state.location),
     })
   }
-
-  /**
-   * Validates whether a text is valid by checking whether it is not empty
-   * @param text string to be validated
-   * @return true if text is not empty, false if text is empty
-   */
-  validateEmpty = (text: string) => !validator.isEmpty(text)
 
   /**
    * Pushes a new skill to the skills array when it is entered
@@ -153,7 +146,7 @@ export default class PostForm extends Component<Props, State> {
    */
   disableSubmit = () => {
     const { title, location, howToApply } = this.state
-    return !this.validateEmpty(title) || !this.validateEmpty(location) || !this.validateEmpty(howToApply)
+    return !validateEmpty(title) || !validateEmpty(location) || !validateEmpty(howToApply)
   }
 
   /**
@@ -185,7 +178,7 @@ export default class PostForm extends Component<Props, State> {
           errorText={postformStrings.titleError}
           maxLength={dimens.titleLength}
           onChange={(event: any) => this.setState({ title: event.target.value })}
-          validate={(text: string) => this.validateEmpty(title)}
+          validate={(text: string) => validateEmpty(title)}
         />
         <TextField
           floatingLabelText={postformStrings.remunerationText}
@@ -257,7 +250,7 @@ export default class PostForm extends Component<Props, State> {
           errorText={postformStrings.howToApplyError}
           maxLength={dimens.toApplyLength}
           onChange={(event: any) => this.setState({ howToApply: event.target.value })}
-          validate={(text: string) => this.validateEmpty(howToApply)}
+          validate={(text: string) => validateEmpty(howToApply)}
         />
         <RaisedButton
           label={isCreateNew ? postformStrings.submit : postformStrings.update}

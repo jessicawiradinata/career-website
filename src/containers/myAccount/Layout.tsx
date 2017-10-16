@@ -10,6 +10,7 @@ import { styles } from './styles'
 import { myAccountStrings } from '../../constants/strings'
 import ValidationTextField from '../../components/ValidationTextField/ValidationTextField'
 import validator from 'validator'
+import { validateEmpty, validatePassword, validateName } from '../../actions/Validation'
 
 /**
  * Props that can be passed to this layout and their types
@@ -66,20 +67,6 @@ export default class MyAccountLayout extends Component<Props, State> {
   }
 
   /**
-   * Validates whether the current password is not empty
-   * @param currentPass password to be validated
-   * @return true if current password is not empty, false otherwise
-   */
-  validateCurrentPass = (currentPass: string) => !validator.isEmpty(currentPass)
-
-  /**
-   * Validates whether the input is a valid password
-   * @param newPass password to be validated
-   * @return true if new password is valid, false otherwise
-   */
-  validateNewPass = (newPass: string) => validator.isLength(newPass, { min: 6, max: 20 })
-
-  /**
    * Validates whether the password is equal to new password field
    * @param confirmNewPass password to be validated
    * @return true if the password is valid, false otherwise
@@ -87,18 +74,11 @@ export default class MyAccountLayout extends Component<Props, State> {
   validateConfirmNewPass = (confirmNewPass: string) => validator.equals(confirmNewPass, this.state.newPass)
 
   /**
-   * Validates whether the input is a valid name
-   * @param name name to be validated
-   * @return true if name is valid, false otherwise
-   */
-  validateName = (name: string) => validator.isLength(name, { min: 3, max: 70 })
-
-  /**
    * Disables change password save button if there are error validation fields
    */
   disableChangePassButton = () => {
     const { currentPass, newPass, confirmNewPass } = this.state
-    return !this.validateCurrentPass(currentPass) || !this.validateNewPass(newPass) || !this.validateConfirmNewPass(confirmNewPass)
+    return !validateEmpty(currentPass) || !validatePassword(newPass) || !this.validateConfirmNewPass(confirmNewPass)
   }
 
   /**
@@ -106,7 +86,7 @@ export default class MyAccountLayout extends Component<Props, State> {
    */
   disableChangeNameButton = () => {
     const { name } = this.state
-    return !this.validateName(name)
+    return !validateName(name)
   }
 
   /**
@@ -134,7 +114,7 @@ export default class MyAccountLayout extends Component<Props, State> {
               isPassword={true}
               errorText={myAccountStrings.currentPassError}
               onChange={(event: any) => this.setState({ currentPass: event.target.value })}
-              validate={(currentPass: string) => this.validateCurrentPass(currentPass)}
+              validate={(currentPass: string) => validateEmpty(currentPass)}
             />
             <ValidationTextField
               label={myAccountStrings.newPassword}
@@ -144,7 +124,7 @@ export default class MyAccountLayout extends Component<Props, State> {
               errorText={myAccountStrings.newPassError}
               maxLength='20'
               onChange={(event: any) => this.setState({ newPass: event.target.value })}
-              validate={(newPass: string) => this.validateNewPass(newPass)}
+              validate={(newPass: string) => validatePassword(newPass)}
             />
             <ValidationTextField
               label={myAccountStrings.confirmPassword}
@@ -177,7 +157,7 @@ export default class MyAccountLayout extends Component<Props, State> {
               errorText={myAccountStrings.nameError}
               maxLength='70'
               onChange={(event: any) => this.setState({ name: event.target.value })}
-              validate={(name: string) => this.validateName(name)}
+              validate={(name: string) => validateName(name)}
             />
             <RaisedButton
               label={myAccountStrings.updateText}

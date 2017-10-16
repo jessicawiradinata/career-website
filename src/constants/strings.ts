@@ -109,8 +109,8 @@ export const loginStrings = {
   loginText : 'Login',
   resetPasswordHint : 'Password reset email has been sent to',
   failedPasswordHint : 'Login failed. Invalid email or password.',
-  registerLink: 'Here',
-  registerText: 'Do not have an account? Register ',
+  registerLink: 'Register here',
+  registerText: "Don't have an account? ",
 }
 
 /**
@@ -160,11 +160,11 @@ export const postsStrings = {
 export const signupStrings = {
   signupConst : 'SIGNUP',
   emailText : 'Email',
-  emailHint : 'Please enter a valid email',
+  emailError : 'Please enter a valid email',
   passwordText : 'Password',
-  passwordHint : 'Password length has to be between 6 - 20 characters',
+  passwordError : 'Password length must be between 6 - 20 characters',
   nameText : 'Name',
-  nameHint : 'Name length has to be between 3 - 70 characters',
+  nameError : 'Name field requires a minimum of 3 characters',
   loadingText : 'Loading...',
   signupText : 'Sign Up',
   failedSignup : 'Signup failed. Unable to connect to the server.',
