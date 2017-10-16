@@ -2,12 +2,14 @@
  * Layout for My Account page
  */
 import React, { Component } from 'react'
-import { RaisedButton, TextField, Divider, Paper } from 'material-ui'
+import { RaisedButton, Divider, Paper } from 'material-ui'
 import Header from '../../components/Header/Header'
 import { History } from 'history'
 import { User } from '../../domain/model/User'
 import { styles } from './styles'
 import { myAccountStrings } from '../../constants/strings'
+import ValidationTextField from '../../components/ValidationTextField/ValidationTextField'
+import validator from 'validator'
 
 /**
  * Props that can be passed to this layout and their types
@@ -17,8 +19,7 @@ interface Props {
   user: User
   isChangeNameProcessing: boolean
   isChangeNameSuccess: boolean
-  isChangePasswordSuccess: boolean
-  validConfirmPassword: boolean
+  isChangePassSuccess: boolean
   logout: (history: History) => void
   authenticate: (history: History) => void
   changePassword: (email: string, currentPass: string, newPass: string) => void
@@ -65,11 +66,55 @@ export default class MyAccountLayout extends Component<Props, State> {
   }
 
   /**
+   * Validates whether the current password is not empty
+   * @param currentPass password to be validated
+   * @return true if current password is not empty, false otherwise
+   */
+  validateCurrentPass = (currentPass: string) => !validator.isEmpty(currentPass)
+
+  /**
+   * Validates whether the input is a valid password
+   * @param newPass password to be validated
+   * @return true if new password is valid, false otherwise
+   */
+  validateNewPass = (newPass: string) => validator.isLength(newPass, { min: 6, max: 20 })
+
+  /**
+   * Validates whether the password is equal to new password field
+   * @param confirmNewPass password to be validated
+   * @return true if the password is valid, false otherwise
+   */
+  validateConfirmNewPass = (confirmNewPass: string) => validator.equals(confirmNewPass, this.state.newPass)
+
+  /**
+   * Validates whether the input is a valid name
+   * @param name name to be validated
+   * @return true if name is valid, false otherwise
+   */
+  validateName = (name: string) => validator.isLength(name, { min: 3, max: 70 })
+
+  /**
+   * Disables change password save button if there are error validation fields
+   */
+  disableChangePassButton = () => {
+    const { currentPass, newPass, confirmNewPass } = this.state
+    return !this.validateCurrentPass(currentPass) || !this.validateNewPass(newPass) || !this.validateConfirmNewPass(confirmNewPass)
+  }
+
+  /**
+   * Disables change name save button if there are error validation fields
+   */
+  disableChangeNameButton = () => {
+    const { name } = this.state
+    return !this.validateName(name)
+  }
+
+  /**
    * Renders the My Account page layout
    */
   render() {
-    const { history, logout, user, changePassword, changeName, isChangeNameSuccess, isChangePasswordSuccess } = this.props
-    const { currentPass, newPass, confirmNewPass, name } = this.state
+    const { history, logout, user, changePassword, changeName, isChangeNameSuccess, isChangePassSuccess } = this.props
+    const { currentPass, newPass, name } = this.state
     const isAdmin = user ? user.isAdmin : false
 
     return (
@@ -82,55 +127,67 @@ export default class MyAccountLayout extends Component<Props, State> {
           <Divider />
           <Paper style={styles.profileContainer as any} zDepth={0}>
             <h3 style={styles.titlePaper}>{myAccountStrings.changePassword}</h3>
-            <TextField
-              floatingLabelText={myAccountStrings.currentPassword}
-              floatingLabelFixed={true}
-              type={myAccountStrings.password}
+            <ValidationTextField
+              label={myAccountStrings.currentPassword}
+              isFloatingLabelFixed={true}
               style={styles.textField}
-              onChange={(currentPass: any) => this.setState({ currentPass: currentPass.target.value })}
+              isPassword={true}
+              errorText={myAccountStrings.currentPassError}
+              onChange={(event: any) => this.setState({ currentPass: event.target.value })}
+              validate={(currentPass: string) => this.validateCurrentPass(currentPass)}
             />
-            <TextField
-              floatingLabelText={myAccountStrings.newPassword}
-              floatingLabelFixed={true}
-              type={myAccountStrings.password}
+            <ValidationTextField
+              label={myAccountStrings.newPassword}
+              isFloatingLabelFixed={true}
               style={styles.textField}
-              onChange={(newPass: any) => this.setState({ newPass: newPass.target.value })}
+              isPassword={true}
+              errorText={myAccountStrings.newPassError}
+              maxLength='20'
+              onChange={(event: any) => this.setState({ newPass: event.target.value })}
+              validate={(newPass: string) => this.validateNewPass(newPass)}
             />
-            <TextField
-              floatingLabelText={myAccountStrings.ConfirmPassword}
-              floatingLabelFixed={true}
-              type={myAccountStrings.password}
+            <ValidationTextField
+              label={myAccountStrings.confirmPassword}
+              isFloatingLabelFixed={true}
               style={styles.textField}
-              onChange={(confirmNewPass: any) => this.setState({ confirmNewPass: confirmNewPass.target.value })}
-              errorText={this.confirmpassOnChange(newPass, confirmNewPass) ? '' : myAccountStrings.confirmPasswordHint}
+              isPassword={true}
+              errorText={myAccountStrings.confirmPassError}
+              maxLength='20'
+              onChange={(event: any) => this.setState({ confirmNewPass: event.target.value })}
+              validate={(confirmNewPass: string) => this.validateConfirmNewPass(confirmNewPass)}
             />
             <RaisedButton
               label={myAccountStrings.updateText}
               primary={true}
               style={styles.editBtn}
               onClick={() => changePassword(user.email, currentPass, newPass)}
+              disabled={this.disableChangePassButton()}
             />
-            {isChangePasswordSuccess &&
-              <div style={styles.greenNotification as any}>{myAccountStrings.passSuccessHint}</div>
+            {isChangePassSuccess &&
+              <text style={styles.successText}>{myAccountStrings.passChangeSuccess}</text>
             }
           </Paper>
           <Paper style={styles.profileContainer as any} zDepth={0}>
             <h3 style={styles.titlePaper}>{myAccountStrings.contactDetailsHint}</h3>
-            <TextField
-              floatingLabelText={myAccountStrings.nameText}
-              floatingLabelFixed={true}
+            <ValidationTextField
+              label={myAccountStrings.nameText}
+              isFloatingLabelFixed={true}
               style={styles.textField}
               value={name}
-              onChange={(name: any) => this.setState({ name: name.target.value })}
+              errorText={myAccountStrings.nameError}
+              maxLength='70'
+              onChange={(event: any) => this.setState({ name: event.target.value })}
+              validate={(name: string) => this.validateName(name)}
             />
             <RaisedButton
               label={myAccountStrings.updateText}
               primary={true}
               style={styles.editBtn}
               onClick={() => changeName(name)}
+              disabled={this.disableChangeNameButton()}
             />
             {isChangeNameSuccess &&
-              <div style={styles.greenNotification as any}>{myAccountStrings.nameSuccessHint}</div>
+              <text style={styles.successText}>{myAccountStrings.nameChangeSuccess}</text>
             }
           </Paper>
         </div>

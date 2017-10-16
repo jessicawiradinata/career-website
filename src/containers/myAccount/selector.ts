@@ -8,21 +8,18 @@ import { User } from '../../domain/model/User'
 interface StateProps {
   isChangeNameProcessing: boolean
   isChangeNameSuccess: boolean
-  isChangePasswordSuccess: boolean
-  validConfirmPassword: boolean
+  isChangePassSuccess: boolean
   user: User
 }
 
-const isChangeNameProcessing = (state: State) => state.authentication.isChangeNameProcessing
-const isChangeNameSuccess = (state: State) => state.authentication.isChangeNameSuccess
-const isChangePasswordSuccess = (state: State) => state.authentication.isChangePassSuccess
-const validConfirmPassword = (state: State) => state.validation.loginValidation.validLoginPassword
-
 /**
- * Gets user state from the redux store and maps it to a prop for My Account page
+ * Gets states from the redux store and maps them to props for My Account page
  * @param state state from redux store
  */
 const user = (state: State) => state.user.user
+const isChangeNameProcessing = (state: State) => state.authentication.isChangeNameProcessing
+const isChangeNameSuccess = (state: State) => state.authentication.isChangeNameSuccess
+const isChangePassSuccess = (state: State) => state.authentication.isChangePassSuccess
 
 /**
  * Exports props to be used by My Account page
@@ -31,6 +28,5 @@ export default createStructuredSelector<State, StateProps>({
   user,
   isChangeNameProcessing,
   isChangeNameSuccess,
-  isChangePasswordSuccess,
-  validConfirmPassword,
+  isChangePassSuccess,
 })

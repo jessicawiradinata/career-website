@@ -20,8 +20,6 @@ interface Props {
   authenticateLoggedIn: (history: History) => void
   login: (email: string, password: string, history: History) => void
   resetPassword: (email: string) => void
-  validateEmail: (email: string, page: string) => void
-  isEmpty: (text: string, component: string) => void
 }
 
 /**
@@ -127,6 +125,7 @@ export default class LoginLayout extends Component<Props, State> {
               isFloatingLabelFixed={false}
               style={styles.textField}
               errorText={loginStrings.passwordError}
+              isPassword={true}
               onChange={(event: any) => this.setState({ password: event.target.value })}
               validate={(text: string) => this.validatePassword(password)}
             />

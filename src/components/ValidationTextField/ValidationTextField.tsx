@@ -9,6 +9,7 @@ interface Props {
   errorText: string,
   hintText?: string,
   maxLength?: string,
+  isPassword?: boolean,
   onChange: (event: any) => void
   validate: (text: string) => boolean
 }
@@ -49,7 +50,7 @@ export default class ValidationTextFields extends Component<Props, State> {
   }
 
   render() {
-    const { label, isFloatingLabelFixed, style, hintText, errorText, maxLength } = this.props
+    const { label, isFloatingLabelFixed, style, hintText, errorText, maxLength, isPassword } = this.props
     const { textValue, isValid, isFocused } = this.state
 
     return (
@@ -63,6 +64,7 @@ export default class ValidationTextFields extends Component<Props, State> {
         maxLength={maxLength ? maxLength : ''}
         onChange={this.onTextChange}
         onBlur={this.onTextBlur}
+        type={isPassword ? 'password' : ''}
       />
     )
   }
