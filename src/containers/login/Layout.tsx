@@ -6,7 +6,7 @@ import { Paper, RaisedButton, Checkbox, Snackbar } from 'material-ui'
 import Header from '../../components/Header/Header'
 import { History } from 'history'
 import { styles } from './styles'
-import { loginStrings } from '../../constants/strings'
+import { routeStrings, loginStrings } from '../../constants/strings'
 import ValidationTextField from '../../components/ValidationTextField/ValidationTextField'
 import { validateEmail, validateEmpty } from '../../actions/Validation'
 
@@ -123,7 +123,7 @@ export default class LoginLayout extends Component<Props, State> {
             style={styles.forgotField}
           />
           <div style={styles.registerLink}>
-            {loginStrings.registerText} <a href='#' onClick={() => history.push('/signup')}> {loginStrings.registerLink}</a>
+            {loginStrings.registerText} <a href='#' onClick={() => history.push(routeStrings.signupRoute)}> {loginStrings.registerLink}</a>
           </div>
           <RaisedButton
             label={isForgot ? loginStrings.resetPassword : (isLoginProcessing ? loginStrings.loadingText : loginStrings.loginText)}

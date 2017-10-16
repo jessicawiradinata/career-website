@@ -168,7 +168,7 @@ export const signupStrings = {
   loadingText : 'Loading...',
   signupText : 'Sign Up',
   failedSignup : 'Signup failed. User with the same email already exists.',
-  logintext: 'Already Have an account? Login ',
+  logintext: 'Have an account?',
   loginLink: 'Login here',
 }
 
