@@ -167,7 +167,7 @@ export const signupStrings = {
   nameError : 'Name field requires a minimum of 3 characters',
   loadingText : 'Loading...',
   signupText : 'Sign Up',
-  failedSignup : 'Signup failed. Unable to connect to the server.',
+  failedSignup : 'Signup failed. User with the same email already exists.',
   logintext: 'Already Have an account? Login ',
   loginLink: 'Login here',
 }
