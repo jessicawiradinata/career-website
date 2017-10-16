@@ -2,11 +2,13 @@
  * Layout for Signup page
  */
 import React, { Component } from 'react'
-import { Paper, TextField, RaisedButton } from 'material-ui'
+import { Paper, RaisedButton } from 'material-ui'
 import Header from '../../components/Header/Header'
 import { History } from 'history'
 import { styles } from './styles'
 import { signupStrings } from '../../constants/strings'
+import ValidationTextField from '../../components/ValidationTextField/ValidationTextField'
+import { validateEmail, validatePassword, validateName } from '../../actions/Validation'
 
 /**
  * Props that can be passed to this layout and their types
@@ -20,9 +22,6 @@ interface Props {
   validName: boolean
   authenticateLoggedIn: (history: History) => void
   signup: (email: string, password: string, name: string, history: History) => void
-  validateEmail: (email: string, page: string) => void
-  validatePassword: (password: string, page: string) => void
-  validateName: (name: string, page: string) => void
 }
 
 /**
@@ -32,9 +31,6 @@ interface State {
   email: string
   password: string
   name: string
-  emailFocused: boolean
-  passwordFocused: boolean
-  nameFocused: boolean
 }
 
 export default class SignupLayout extends Component<Props, State> {
@@ -49,9 +45,6 @@ export default class SignupLayout extends Component<Props, State> {
       email: '',
       password: '',
       name: '',
-      emailFocused: false,
-      passwordFocused: false,
-      nameFocused: false,
     }
   }
 
@@ -63,99 +56,49 @@ export default class SignupLayout extends Component<Props, State> {
     authenticateLoggedIn(history)
   }
 
-  /**
-   * Validates email field when text is changed
-   * @param email email text input
-   */
-  emailOnChange = (email: any) => {
-    const { validateEmail } = this.props
-    validateEmail(email.target.value, signupStrings.signupConst)
-    this.setState({ email: email.target.value })
-  }
-
-  /**
-   * Validates email field when it goes out of focus
-   */
-  emailOnBlur = () => {
-    const { validateEmail } = this.props
-    const { email } = this.state
-    this.setState({ emailFocused: true })
-    validateEmail(email, signupStrings.signupConst)
-  }
-
-  /**
-   * Validates password field when text is changed
-   * @param password password text input
-   */
-  passwordOnChange = (password: any) => {
-    const { validatePassword } = this.props
-    validatePassword(password.target.value, signupStrings.signupConst)
-    this.setState({ password: password.target.value })
-  }
-
-  /**
-   * Validates password field when it goes out of focus
-   */
-  passwordOnBlur = () => {
-    const { validatePassword } = this.props
-    const { password } = this.state
-    this.setState({ passwordFocused: true })
-    validatePassword(password, signupStrings.signupConst)
-  }
-
-  /**
-   * Validates name field when text is changed
-   * @param name name text input
-   */
-  nameOnChange = (name: any) => {
-    const { validateName } = this.props
-    validateName(name.target.value, signupStrings.signupConst)
-    this.setState({ name: name.target.value })
-  }
-
-  /**
-   * Validates name field when it goes out of focus
-   */
-  nameOnBlur = () => {
-    const { validateName } = this.props
-    const { name } = this.state
-    this.setState({ nameFocused: true })
-    validateName(name, signupStrings.signupConst)
+  disableSubmitButton = () => {
+    const { email, password, name } = this.state
+    return !validateEmail(email) || !validatePassword(password) || !validateName(name)
   }
 
   /**
    * Renders Signup page layout
    */
   render() {
-    const { signup, history, validEmail, validPassword, validName, isSignupProcessing, isSignupSuccess } = this.props
-    const { emailFocused, passwordFocused, nameFocused } = this.state
+    const { signup, history, isSignupProcessing, isSignupSuccess } = this.props
 
     return (
       <div>
         <Header history={history} isLoggedIn={false} isAdmin={false} />
         <Paper style={styles.signupContainer as any} zDepth={1}>
           <h1>{signupStrings.signupText}</h1>
-          <TextField
-            floatingLabelText={signupStrings.emailText}
+          <ValidationTextField
+            label={signupStrings.emailText}
+            isFloatingLabelFixed={false}
             style={styles.textField}
-            onChange={this.emailOnChange}
-            onBlur={this.emailOnBlur}
-            errorText={validEmail || !emailFocused ? '' : signupStrings.emailHint}
+            errorText={signupStrings.emailError}
+            onChange={(event: any) => this.setState({ email: event.target.value })}
+            validate={(text: string) => validateEmail(text)}
           />
-          <TextField
-            floatingLabelText={signupStrings.passwordText}
-            type={signupStrings.passwordText}
+          <ValidationTextField
+            label={signupStrings.passwordText}
+            isFloatingLabelFixed={false}
             style={styles.textField}
-            onChange={this.passwordOnChange}
-            onBlur={this.passwordOnBlur}
-            errorText={validPassword || !passwordFocused ? '' : signupStrings.passwordHint}
+            isPassword={true}
+            errorText={signupStrings.passwordError}
+            maxLength='20'
+            onChange={(event: any) => this.setState({ password: event.target.value })}
+            validate={(text: string) => validatePassword(text)}
           />
-          <TextField
-            floatingLabelText={signupStrings.nameText}
+          <ValidationTextField
+            label={signupStrings.nameText}
+            isFloatingLabelFixed={false}
             style={styles.textField}
-            onChange={this.nameOnChange}
-            onBlur={this.nameOnBlur}
-            errorText={validName || !nameFocused ? '' : signupStrings.nameHint}
+            value={name}
+            errorText={signupStrings.nameError}
+            maxLength='70'
+            onChange={(event: any) => this.setState({ name: event.target.value })}
+            validate={(text: string) => validateName(text)}
           />
           <div style={styles.loginLink}>
             {signupStrings.logintext} <a href='#' onClick={() => history.push('/login')}> {signupStrings.loginLink}</a>
@@ -165,7 +108,7 @@ export default class SignupLayout extends Component<Props, State> {
             primary={true}
             style={styles.submitBtn}
             onClick={() => signup(this.state.email, this.state.password, this.state.name, this.props.history)}
-            disabled={!validEmail || !validPassword || !validName || !emailFocused || !passwordFocused || !nameFocused}
+            disabled={this.disableSubmitButton()}
           />
           {!isSignupSuccess &&
             <text style={styles.errorText}>{signupStrings.failedSignup}</text>
