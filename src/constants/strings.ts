@@ -53,11 +53,11 @@ export const postcardStrings = {
  */
 export const postformStrings = {
   enter : 'Enter',
-  titleText : 'Title*',
-  titleHint : 'Title field cannot be empty',
+  titleText : 'Title (required)',
+  titleError : 'Title field cannot be empty',
   remunerationText : 'Remuneration',
   remunerationHint : 'e.g. $20 - $25 per hour',
-  locationText : 'Location*',
+  locationText : 'Location (required)',
   locationHint : 'Location field cannot be empty',
   workType : 'Work Type',
   fullTime : 'Full Time',
@@ -69,8 +69,8 @@ export const postformStrings = {
   descriptionText : 'Description',
   requiredSkillText : 'Required Skills',
   requiredSkillHint : 'Enter skill name and press Enter',
-  howToApply : 'How to Apply*',
-  howToApplyHint : 'How to Apply field cannot be empty',
+  howToApply : 'How to Apply (required)',
+  howToApplyError : 'How to Apply field cannot be empty',
   submit : 'Submit',
   update : 'Update',
 }
