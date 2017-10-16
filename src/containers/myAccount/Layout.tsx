@@ -106,6 +106,29 @@ export default class MyAccountLayout extends Component<Props, State> {
           </Paper>
           <Divider />
           <Paper style={styles.profileContainer as any} zDepth={0}>
+            <h3 style={styles.titlePaper}>{myAccountStrings.contactDetailsHint}</h3>
+            <ValidationTextField
+              label={myAccountStrings.nameText}
+              isFloatingLabelFixed={true}
+              style={styles.textField}
+              value={name}
+              errorText={myAccountStrings.nameError}
+              maxLength='70'
+              onChange={(event: any) => this.setState({ name: event.target.value })}
+              validate={(name: string) => validateName(name)}
+            />
+            <RaisedButton
+              label={myAccountStrings.updateText}
+              primary={true}
+              style={styles.editBtn}
+              onClick={() => changeName(name)}
+              disabled={this.disableChangeNameButton()}
+            />
+            {isChangeNameSuccess &&
+              <text style={styles.successText}>{myAccountStrings.nameChangeSuccess}</text>
+            }
+          </Paper>
+          <Paper style={styles.profileContainer as any} zDepth={0}>
             <h3 style={styles.titlePaper}>{myAccountStrings.changePassword}</h3>
             <ValidationTextField
               label={myAccountStrings.currentPassword}
@@ -145,29 +168,6 @@ export default class MyAccountLayout extends Component<Props, State> {
             />
             {isChangePassSuccess &&
               <text style={styles.successText}>{myAccountStrings.passChangeSuccess}</text>
-            }
-          </Paper>
-          <Paper style={styles.profileContainer as any} zDepth={0}>
-            <h3 style={styles.titlePaper}>{myAccountStrings.contactDetailsHint}</h3>
-            <ValidationTextField
-              label={myAccountStrings.nameText}
-              isFloatingLabelFixed={true}
-              style={styles.textField}
-              value={name}
-              errorText={myAccountStrings.nameError}
-              maxLength='70'
-              onChange={(event: any) => this.setState({ name: event.target.value })}
-              validate={(name: string) => validateName(name)}
-            />
-            <RaisedButton
-              label={myAccountStrings.updateText}
-              primary={true}
-              style={styles.editBtn}
-              onClick={() => changeName(name)}
-              disabled={this.disableChangeNameButton()}
-            />
-            {isChangeNameSuccess &&
-              <text style={styles.successText}>{myAccountStrings.nameChangeSuccess}</text>
             }
           </Paper>
         </div>
