@@ -51,11 +51,10 @@ export const styles = {
   textField: {
     width: '100%',
   },
-  notificationBorder: {
-    color: '#4AD540',
+
+  successText: {
+    color: 'green',
+    marginTop: 5,
     textAlign: 'center',
-    marginTop: 20,
-    fontWeight: 'bold',
-    fontSize: 15,
   },
 }

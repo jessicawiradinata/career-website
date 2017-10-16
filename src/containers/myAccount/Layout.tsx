@@ -19,6 +19,7 @@ interface Props {
   user: User
   isChangeNameProcessing: boolean
   isChangeNameSuccess: boolean
+  isChangePassSuccess: boolean
   logout: (history: History) => void
   authenticate: (history: History) => void
   changePassword: (email: string, currentPass: string, newPass: string) => void
@@ -108,7 +109,7 @@ export default class MyAccountLayout extends Component<Props, State> {
    * Renders the My Account page layout
    */
   render() {
-    const { history, logout, user, changePassword, changeName, isChangeNameSuccess } = this.props
+    const { history, logout, user, changePassword, changeName, isChangeNameSuccess, isChangePassSuccess } = this.props
     const { currentPass, newPass, name } = this.state
     const isAdmin = user ? user.isAdmin : false
 
@@ -158,6 +159,9 @@ export default class MyAccountLayout extends Component<Props, State> {
               onClick={() => changePassword(user.email, currentPass, newPass)}
               disabled={this.disableChangePassButton()}
             />
+            {isChangePassSuccess &&
+              <text style={styles.successText}>{myAccountStrings.passChangeSuccess}</text>
+            }
           </Paper>
           <br/>
           <Paper style={styles.profileContainer as any} zDepth={0}>
@@ -180,7 +184,7 @@ export default class MyAccountLayout extends Component<Props, State> {
               disabled={this.disableChangeNameButton()}
             />
             {isChangeNameSuccess &&
-              <div style={styles.notificationBorder as any}>Your contact name has been updated</div>
+              <text style={styles.successText}>{myAccountStrings.nameChangeSuccess}</text>
             }
           </Paper>
         </div>
