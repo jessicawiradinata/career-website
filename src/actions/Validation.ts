@@ -1,5 +1,6 @@
-// TODO: might delete this file, validation may not need to involve reducers
-import * as ActionTypes from '../constants/ActionTypes'
+/**
+ * A collection of methods to validate input
+ */
 import validator from 'validator'
 
 /**
@@ -29,54 +30,3 @@ export const validateName = (text: string) => validator.isLength(text, { min: 3,
  * @return true if text is not empty, false if text is empty
  */
 export const validateEmpty = (text: string) => !validator.isEmpty(text)
-
-export const isEmpty = (text: string, component: string) => {
-  const isEmpty = validator.isEmpty(text)
-  switch (component) {
-    case 'LOGIN_PASSWORD':
-      return isEmpty ? invalidLoginPassword() : validLoginPassword()
-    default:
-      console.log(Error)
-      return Error
-  }
-}
-
-export const validLoginEmail = () => {
-  return { type: ActionTypes.VALID_LOGIN_EMAIL }
-}
-
-export const validLoginPassword = () => {
-  return { type: ActionTypes.VALID_LOGIN_PASSWORD }
-}
-
-export const invalidLoginEmail = () => {
-  return { type: ActionTypes.INVALID_LOGIN_EMAIL }
-}
-
-export const invalidLoginPassword = () => {
-  return { type: ActionTypes.INVALID_LOGIN_PASSWORD }
-}
-
-export const validSignupEmail = () => {
-  return { type: ActionTypes.VALID_SIGNUP_EMAIL }
-}
-
-export const validSignupPassword = () => {
-  return { type: ActionTypes.VALID_SIGNUP_PASSWORD }
-}
-
-export const validSignupName = () => {
-  return { type: ActionTypes.VALID_SIGNUP_NAME }
-}
-
-export const invalidSignupEmail = () => {
-  return { type: ActionTypes.INVALID_SIGNUP_EMAIL }
-}
-
-export const invalidSignupPassword = () => {
-  return { type: ActionTypes.INVALID_SIGNUP_PASSWORD }
-}
-
-export const invalidSignupName = () => {
-  return { type: ActionTypes.INVALID_SIGNUP_NAME }
-}

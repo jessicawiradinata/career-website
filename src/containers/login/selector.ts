@@ -10,8 +10,6 @@ import { State } from '../../store/State'
 interface StateProps {
   isLoginProcessing: boolean
   isLoginSuccess: boolean
-  validEmail: boolean
-  validPassword: boolean
 }
 
 /**
@@ -20,15 +18,11 @@ interface StateProps {
  */
 const isLoginProcessing = (state: State) => state.authentication.isLoginProcessing
 const isLoginSuccess = (state: State) => state.authentication.isLoginSuccess
-const validEmail = (state: State) => state.validation.loginValidation.validLoginEmail
-const validPassword = (state: State) => state.validation.loginValidation.validLoginPassword
 
 /**
  * Exports props to be used by the login page
  */
 export default createStructuredSelector<State, StateProps>({
-  validEmail,
-  validPassword,
   isLoginProcessing,
   isLoginSuccess,
 })
