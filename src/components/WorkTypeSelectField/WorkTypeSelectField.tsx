@@ -4,8 +4,8 @@ import { postformStrings } from '../../constants/strings'
 
 interface Props {
   value: string
-  onChange: (event: any, index: any, value: string) => void
   style: any
+  onChange: (event: any, index: any, value: string) => void
 }
 
 interface State {
@@ -29,16 +29,16 @@ export default class WorkTypeSelectField extends Component<Props, State> {
     return (
       <div>
         <SelectField
-        floatingLabelText={postformStrings.workType}
-        floatingLabelFixed
-        value={this.state.workType}
-        onChange={this.onValueChange}
-        style={this.props.style}>
-        <MenuItem value={postformStrings.fullTime} primaryText={postformStrings.fullTime} />
-        <MenuItem value={postformStrings.partTime} primaryText={postformStrings.partTime} />
-        <MenuItem value={postformStrings.temporary} primaryText={postformStrings.temporary} />
-        <MenuItem value={postformStrings.casual} primaryText={postformStrings.casual} />
-      </SelectField>
+          floatingLabelText={postformStrings.workType}
+          floatingLabelFixed
+          value={this.state.workType}
+          onChange={this.onValueChange}
+          style={this.props.style}>
+          <MenuItem value={postformStrings.fullTime} primaryText={postformStrings.fullTime} />
+          <MenuItem value={postformStrings.partTime} primaryText={postformStrings.partTime} />
+          <MenuItem value={postformStrings.temporary} primaryText={postformStrings.temporary} />
+          <MenuItem value={postformStrings.casual} primaryText={postformStrings.casual} />
+        </SelectField>
       </div>
     )
   }

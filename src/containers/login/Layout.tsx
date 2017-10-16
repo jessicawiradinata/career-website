@@ -2,11 +2,13 @@
  * Layout for login page
  */
 import React, { Component } from 'react'
-import { Paper, TextField, RaisedButton, Checkbox, Snackbar } from 'material-ui'
+import { Paper, RaisedButton, Checkbox, Snackbar } from 'material-ui'
 import Header from '../../components/Header/Header'
 import { History } from 'history'
 import { styles } from './styles'
 import { loginStrings } from '../../constants/strings'
+import validator from 'validator'
+import ValidationTextField from '../../components/ValidationTextField/ValidationTextField'
 
 /**
  * Props that can be passed to this layout and their types
@@ -15,8 +17,6 @@ interface Props {
   history: History
   isLoginProcessing: boolean
   isLoginSuccess: boolean
-  validEmail: boolean
-  validPassword: boolean
   authenticateLoggedIn: (history: History) => void
   login: (email: string, password: string, history: History) => void
   resetPassword: (email: string) => void
@@ -32,8 +32,6 @@ interface State {
   password: string
   isForgot: boolean
   showResetBar: boolean
-  emailFocused: boolean
-  passwordFocused: boolean
 }
 
 export default class LoginLayout extends Component<Props, State> {
@@ -49,8 +47,6 @@ export default class LoginLayout extends Component<Props, State> {
       password: '',
       isForgot: false,
       showResetBar: false,
-      emailFocused: false,
-      passwordFocused: false,
     }
   }
 
@@ -63,43 +59,29 @@ export default class LoginLayout extends Component<Props, State> {
   }
 
   /**
-   * Validates email field when text is changed
-   * @param email email text input
+   * Validates whether the input is a valid email address
+   * @param email email to be validated
+   * @return true if email is valid, false otherwise
    */
-  emailOnChange = (email: any) => {
-    const { validateEmail } = this.props
-    validateEmail(email.target.value, loginStrings.loginConst)
-    this.setState({ email: email.target.value })
-  }
+  validateEmail = (email: string) => validator.isEmail(email)
 
   /**
-   * Validates email field when it goes out of focus
+   * Validates whether the password is valid by checking whether it is not empty
+   * @param password password to be validated
+   * @return true if password is not empty, false if password is empty
    */
-  emailOnBlur = () => {
-    const { validateEmail } = this.props
-    const { email } = this.state
-    this.setState({ emailFocused: true })
-    validateEmail(email, loginStrings.loginConst)
-  }
+  validatePassword = (password: string) => !validator.isEmpty(password)
 
   /**
-   * Validates password field when text is changed
-   * @param password password text input
+   * Disables submit button if there are error validation fields
    */
-  passwordOnChange = (password: any) => {
-    const { isEmpty } = this.props
-    isEmpty(password.target.value, loginStrings.emailText)
-    this.setState({ password: password.target.value })
-  }
-
-  /**
-   * Validates password field when it goes out of focus
-   */
-  passwordOnBlur = () => {
-    const { isEmpty } = this.props
-    const { password } = this.state
-    this.setState({ passwordFocused: true })
-    isEmpty(password, loginStrings.loginPassword)
+  disableSubmit = () => {
+    const { email, password, isForgot } = this.state
+    if (isForgot) {
+      return !this.validateEmail(email)
+    } else {
+      return !this.validateEmail(email) || !this.validatePassword(password)
+    }
   }
 
   /**
@@ -123,31 +105,30 @@ export default class LoginLayout extends Component<Props, State> {
    * Renders the login page layout
    */
   render() {
-    const { history, validEmail, validPassword, isLoginProcessing, isLoginSuccess } = this.props
-    const { isForgot, showResetBar, email, emailFocused, passwordFocused } = this.state
-    console.log(validEmail)
-    console.log(validPassword)
+    const { history, isLoginProcessing, isLoginSuccess } = this.props
+    const { isForgot, showResetBar, email, password } = this.state
 
     return (
       <div>
         <Header history={history} isLoggedIn={false} isAdmin={false} />
         <Paper style={styles.loginContainer as any} zDepth={1}>
           <h1>Login</h1>
-          <TextField
-            floatingLabelText={loginStrings.emailText}
+          <ValidationTextField
+            label={loginStrings.emailText}
+            isFloatingLabelFixed={false}
             style={styles.textField}
-            onChange={this.emailOnChange}
-            onBlur={this.emailOnBlur}
-            errorText={validEmail || !emailFocused ? '' : loginStrings.emailHint}
+            errorText={loginStrings.emailError}
+            onChange={(event: any) => this.setState({ email: event.target.value })}
+            validate={(text: string) => this.validateEmail(email)}
           />
           {!isForgot &&
-            <TextField
-              floatingLabelText={loginStrings.passwordText}
-              type={loginStrings.passwordText}
+            <ValidationTextField
+              label={loginStrings.passwordText}
+              isFloatingLabelFixed={false}
               style={styles.textField}
-              onChange={this.passwordOnChange}
-              onBlur={this.passwordOnBlur}
-              errorText={validPassword || !passwordFocused ? '' : loginStrings.passwordHint}
+              errorText={loginStrings.passwordError}
+              onChange={(event: any) => this.setState({ password: event.target.value })}
+              validate={(text: string) => this.validatePassword(password)}
             />
           }
           <Checkbox
@@ -164,7 +145,7 @@ export default class LoginLayout extends Component<Props, State> {
             primary={true}
             style={styles.submitBtn}
             onClick={this.onSubmit}
-            disabled={isForgot ? (!validEmail || !emailFocused) : (!validEmail || !validPassword)}
+            disabled={this.disableSubmit()}
           />
           {!isLoginSuccess &&
             <text style={styles.errorText}>{loginStrings.failedPasswordHint}</text>

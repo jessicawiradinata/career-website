@@ -9,8 +9,9 @@ import { concat, map, uniqueId, pull, find } from 'lodash'
 import { styles } from './styles'
 import { postformStrings } from '../../constants/strings'
 import { dimens } from './dimens'
-import { isEmpty } from './validation'
 import WorkTypeSelectField from '../WorkTypeSelectField/WorkTypeSelectField'
+import ValidationTextField from '../ValidationTextField/ValidationTextField'
+import validator from 'validator'
 
 /**
  * Props that can be passed to this component and their types
@@ -37,12 +38,8 @@ interface State {
   skills: string[]
   howToApply: string
   skill: string
-  validTitle: boolean
-  titleFocused: boolean
   validLocation: boolean
   locationFocused: boolean
-  validHowToApply: boolean
-  howToApplyFocused: boolean
 }
 
 export default class PostForm extends Component<Props, State> {
@@ -56,7 +53,7 @@ export default class PostForm extends Component<Props, State> {
     const { title, remuneration, location, workType, closingDate, description, skills, howToApply } = this.props.postDetails
     const date = new Date(closingDate)
     this.state = {
-      title,
+      title: title ? title : '',
       remuneration,
       location,
       workType: workType ? workType : postformStrings.fullTime,
@@ -65,33 +62,9 @@ export default class PostForm extends Component<Props, State> {
       skills,
       howToApply,
       skill: '',
-      validTitle: false,
-      titleFocused: false,
       validLocation: false,
       locationFocused: false,
-      validHowToApply: false,
-      howToApplyFocused: false,
     }
-  }
-
-  /**
-   * Validates title field on change
-   */
-  titleOnChange = (title: any) => {
-    this.setState({
-      title: title.target.value,
-      validTitle: !isEmpty(title.target.value),
-    })
-  }
-
-  /**
-   * Validates title field on blur (out of focus)
-   */
-  titleOnBlur = () => {
-    this.setState({
-      titleFocused: true,
-      validTitle: !isEmpty(this.state.title),
-    })
   }
 
   /**
@@ -100,7 +73,7 @@ export default class PostForm extends Component<Props, State> {
   locationOnChange = (location: any) => {
     this.setState({
       location: location.target.value,
-      validLocation: !isEmpty(location.target.value),
+      validLocation: this.validateEmpty(location.target.value),
     })
   }
 
@@ -112,7 +85,7 @@ export default class PostForm extends Component<Props, State> {
     const { searchLocation } = this.props
     this.setState({
       location,
-      validLocation: !isEmpty(location),
+      validLocation: !this.validateEmpty(location),
     })
     searchLocation(this.state.location)
   }
@@ -123,29 +96,16 @@ export default class PostForm extends Component<Props, State> {
   locationOnBlur = () => {
     this.setState({
       locationFocused: true,
-      validLocation: !isEmpty(this.state.location),
+      validLocation: this.validateEmpty(this.state.location),
     })
   }
 
   /**
-   * Validates how to apply field on change
+   * Validates whether a text is valid by checking whether it is not empty
+   * @param text string to be validated
+   * @return true if text is not empty, false if text is empty
    */
-  howToApplyOnChange = (howToApply: any) => {
-    this.setState({
-      howToApply: howToApply.target.value,
-      validHowToApply: !isEmpty(howToApply.target.value),
-    })
-  }
-
-  /**
-   * Validates how to apply field on blur (out of focus)
-   */
-  howToApplyOnBlur = (howToApply: any) => {
-    this.setState({
-      howToApplyFocused: true,
-      validHowToApply: !isEmpty(this.state.howToApply),
-    })
-  }
+  validateEmpty = (text: string) => !validator.isEmpty(text)
 
   /**
    * Pushes a new skill to the skills array when it is entered
@@ -193,7 +153,7 @@ export default class PostForm extends Component<Props, State> {
    */
   disableSubmit = () => {
     const { title, location, howToApply } = this.state
-    return isEmpty(title) || isEmpty(location) || isEmpty(howToApply)
+    return !this.validateEmpty(title) || !this.validateEmpty(location) || !this.validateEmpty(howToApply)
   }
 
   /**
@@ -201,7 +161,7 @@ export default class PostForm extends Component<Props, State> {
    */
   render() {
     const { isCreateNew, onSubmit, postDetails, history, locations } = this.props
-    const { validTitle, titleFocused, validLocation, locationFocused, validHowToApply, howToApplyFocused } = this.state
+    const { validLocation, locationFocused, title, remuneration, howToApply, location, workType, closingDate, description, skill } = this.state
     const post: Post = {
       _id: '',
       title: this.state.title,
@@ -214,19 +174,18 @@ export default class PostForm extends Component<Props, State> {
       howToApply: this.state.howToApply,
       authorId: window.localStorage.id,
     }
-    console.log(this.state.workType)
 
     return (
       <div style={styles.form as any}>
-        <TextField
-          floatingLabelText={postformStrings.titleText}
-          floatingLabelFixed
+        <ValidationTextField
+          label={postformStrings.titleText}
+          isFloatingLabelFixed={true}
+          value={title}
           style={styles.textField}
-          value={this.state.title}
+          errorText={postformStrings.titleError}
           maxLength={dimens.titleLength}
-          onChange={this.titleOnChange}
-          onBlur={this.titleOnBlur}
-          errorText={validTitle || !titleFocused ? '' : postformStrings.titleHint}
+          onChange={(event: any) => this.setState({ title: event.target.value })}
+          validate={(text: string) => this.validateEmpty(title)}
         />
         <TextField
           floatingLabelText={postformStrings.remunerationText}
@@ -234,7 +193,7 @@ export default class PostForm extends Component<Props, State> {
           hintText={postformStrings.remunerationHint}
           maxLength={dimens.remunerationLength}
           style={styles.textField}
-          value={this.state.remuneration}
+          value={remuneration}
           onChange={(remuneration: any) => this.setState({ remuneration: remuneration.target.value })}
         />
         <div style={styles.textField}>
@@ -242,7 +201,7 @@ export default class PostForm extends Component<Props, State> {
             floatingLabelText={postformStrings.locationText}
             floatingLabelFixed
             fullWidth
-            searchText={this.state.location}
+            searchText={location}
             maxLength={dimens.locationLength}
             dataSource={locations}
             filter={AutoComplete.caseInsensitiveFilter}
@@ -253,9 +212,9 @@ export default class PostForm extends Component<Props, State> {
         </div>
         <div style={styles.textField}>
           <WorkTypeSelectField
-          value={this.state.workType}
-          onChange={(event, index, value) => this.setState({ workType: value })}
-          style={styles.workTypeField}
+            value={workType}
+            onChange={(event, index, value) => this.setState({ workType: value })}
+            style={styles.workTypeField}
           />
           <DatePicker
             floatingLabelText={postformStrings.closingDate}
@@ -263,7 +222,7 @@ export default class PostForm extends Component<Props, State> {
             mode={postformStrings.landScape as any}
             style={styles.datePicker}
             textFieldStyle={styles.datePickerField}
-            defaultDate={this.state.closingDate}
+            defaultDate={closingDate}
             minDate={new Date()}
             onChange={(event, value) => this.setState({ closingDate: value })}
           />
@@ -274,8 +233,8 @@ export default class PostForm extends Component<Props, State> {
           style={styles.textField}
           multiLine
           maxLength={dimens.descriptionLength}
-          onChange={(description) => this.setState({ description: (description.target as HTMLTextAreaElement).value })}
-          value={this.state.description}
+          onChange={(description: any) => this.setState({ description: description.target.value })}
+          value={description}
         />
         <TextField
           floatingLabelText={postformStrings.requiredSkillText}
@@ -283,23 +242,22 @@ export default class PostForm extends Component<Props, State> {
           style={styles.textField}
           hintText={postformStrings.requiredSkillHint}
           maxLength={dimens.skillLength}
-          onChange={(skill) => this.setState({ skill: (skill.target as HTMLTextAreaElement).value })}
+          onChange={(skill: any) => this.setState({ skill: skill.target.value })}
           onKeyPress={this.onEnterSkills}
-          value={this.state.skill}
+          value={skill}
         />
         <div style={styles.chipWrapper as any}>
           {this.renderSkillsChip(this.state.skills)}
         </div>
-        <TextField
-          floatingLabelText={postformStrings.howToApply}
-          floatingLabelFixed
+        <ValidationTextField
+          label={postformStrings.howToApply}
+          isFloatingLabelFixed={true}
+          value={howToApply}
           style={styles.textField}
-          multiLine
+          errorText={postformStrings.howToApplyError}
           maxLength={dimens.toApplyLength}
-          value={this.state.howToApply}
-          onChange={this.howToApplyOnChange}
-          onBlur={this.howToApplyOnBlur}
-          errorText={validHowToApply || !howToApplyFocused ? '' : postformStrings.howToApplyHint}
+          onChange={(event: any) => this.setState({ howToApply: event.target.value })}
+          validate={(text: string) => this.validateEmpty(howToApply)}
         />
         <RaisedButton
           label={isCreateNew ? postformStrings.submit : postformStrings.update}
