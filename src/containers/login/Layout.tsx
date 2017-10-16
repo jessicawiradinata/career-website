@@ -112,7 +112,7 @@ export default class LoginLayout extends Component<Props, State> {
       <div>
         <Header history={history} isLoggedIn={false} isAdmin={false} />
         <Paper style={styles.loginContainer as any} zDepth={1}>
-          <h1>Login</h1>
+          <h1>{loginStrings.loginText}</h1>
           <ValidationTextField
             label={loginStrings.emailText}
             isFloatingLabelFixed={false}

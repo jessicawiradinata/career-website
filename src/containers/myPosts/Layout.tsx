@@ -10,6 +10,7 @@ import { Post } from '../../domain/model/Post'
 import PostCard from '../../components/PostCard/PostCard'
 import { Paper, Divider } from 'material-ui'
 import { styles } from './styles'
+import { myPostsStrings } from '../../constants/strings'
 
 /**
  * Props that can be passed to this layout and their types
@@ -45,7 +46,7 @@ export default class MyPostsLayout extends Component<Props, State> {
   renderPostCards = () => {
     const { userPosts, deletePost, history, user } = this.props
     if (userPosts.length === 0) {
-      return <h4>You haven't posted any internships</h4>
+      return <h4 style={styles.noPostcardStyle}>{myPostsStrings.myPostsTitle}</h4>
     }
     return map(userPosts, (post: Post) => {
       return (
@@ -72,7 +73,7 @@ export default class MyPostsLayout extends Component<Props, State> {
       <div>
         <Header history={history} isLoggedIn={true} logout={logout} isAdmin={isAdmin} />
         <Paper style={styles.searchContainer} zDepth={0}>
-          <h2>My Posts</h2>
+          <h2>{myPostsStrings.myPostsText}</h2>
         </Paper>
         <Divider style={styles.postcardDivider}/>
         <div style={styles.postcardStyle}>

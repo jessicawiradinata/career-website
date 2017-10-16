@@ -6,7 +6,7 @@ import { FlatButton, ToolbarGroup, Toolbar, Popover, Menu, MenuItem } from 'mate
 import { PopoverAnimationVertical } from 'material-ui/Popover'
 import { History } from 'history'
 import { styles } from './styles'
-import { headerStrings } from '../../constants/strings'
+import { routeStrings, headerStrings } from '../../constants/strings'
 
 /**
  * Props that can be passed to this component and their types
@@ -75,7 +75,7 @@ export default class Header extends Component<Props, State> {
         {isLoggedIn ?
           <ToolbarGroup lastChild={true}>
             <FlatButton label={headerStrings.internshipText} labelStyle={styles.tabTitle}
-              onClick={() => history.push(headerStrings.internshipRoute)} />
+              onClick={() => history.push(routeStrings.internshipRoute)} />
             <FlatButton label={headerStrings.postTitle} labelStyle={styles.tabTitle}onClick={this.handleTouchTap} />
             <Popover
               open={this.state.open}
@@ -86,18 +86,18 @@ export default class Header extends Component<Props, State> {
               animation={PopoverAnimationVertical}
             >
               <Menu>
-                <MenuItem primaryText={headerStrings.createPost} onClick={() => history.push(headerStrings.createPostRoute)} />
-                <MenuItem primaryText={headerStrings.myPost} onClick={() => history.push(headerStrings.mypostsRoute)} />
+                <MenuItem primaryText={headerStrings.createPost} onClick={() => history.push(routeStrings.createPostRoute)} />
+                <MenuItem primaryText={headerStrings.myPost} onClick={() => history.push(routeStrings.mypostsRoute)} />
               </Menu>
             </Popover>
-            <FlatButton label={headerStrings.myAccount} labelStyle={styles.tabTitle} onClick={() => history.push(headerStrings.myaccountRoute)} />
+            <FlatButton label={headerStrings.myAccount} labelStyle={styles.tabTitle} onClick={() => history.push(routeStrings.myaccountRoute)} />
             <FlatButton label={headerStrings.logout} labelStyle={styles.tabTitle} onClick={() => logout ? logout(history) : ''} />
           </ToolbarGroup> :
           <ToolbarGroup lastChild={true}>
             <FlatButton label={headerStrings.internshipText} labelStyle={styles.tabTitle}
-              onClick={() => history.push(headerStrings.internshipRoute)} />
-            <FlatButton label={headerStrings.signup} labelStyle={styles.tabTitle} onClick={() => history.push(headerStrings.signupRoute)} />
-            <FlatButton label={headerStrings.login} labelStyle={styles.tabTitle} onClick={() => history.push(headerStrings.loginRoute)} />
+              onClick={() => history.push(routeStrings.internshipRoute)} />
+            <FlatButton label={headerStrings.signup} labelStyle={styles.tabTitle} onClick={() => history.push(routeStrings.signupRoute)} />
+            <FlatButton label={headerStrings.login} labelStyle={styles.tabTitle} onClick={() => history.push(routeStrings.loginRoute)} />
           </ToolbarGroup>
         }
       </Toolbar>

@@ -7,7 +7,7 @@ import Header from '../../components/Header/Header'
 import { History } from 'history'
 import { User } from '../../domain/model/User'
 import { styles } from './styles'
-import { homeStrings } from '../../constants/strings'
+import { routeStrings, homeStrings } from '../../constants/strings'
 
 /**
  * Props that can be passed to this layout and their types
@@ -47,7 +47,7 @@ export default class HomeLayout extends Component<Props, State> {
               overlayStyle={styles.buttonShape}
               style={styles.button}
               fullWidth
-              onClick={() => history.push('/internships')}
+              onClick={() => history.push(routeStrings.internshipRoute)}
             />
             {!isLoggedIn &&
             <RaisedButton
@@ -57,7 +57,7 @@ export default class HomeLayout extends Component<Props, State> {
               overlayStyle={styles.buttonShape}
               style={styles.button}
               fullWidth
-              onClick={() => history.push('/signup')}
+              onClick={() => history.push(routeStrings.signupRoute)}
             />
             }
           </Paper>

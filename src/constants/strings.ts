@@ -12,12 +12,6 @@ export const headerStrings = {
   logout : 'Logout',
   signup : 'Signup',
   login : 'Login',
-  internshipRoute : '/internships',
-  createPostRoute : '/createpost',
-  mypostsRoute : '/myposts',
-  myaccountRoute : '/myAccount',
-  signupRoute : '/signup',
-  loginRoute : '/login',
 }
 
 /**
@@ -132,6 +126,17 @@ export const myAccountStrings = {
   nameText : 'Name',
   myAccountTitle : 'My Account',
   contactDetailsHint : 'Change Contact Details',
+  confirmPasswordHint: 'password does not match',
+  passSuccessHint: 'Your password has been changed',
+  nameSuccessHint: 'Your contact name has been updated',
+}
+
+/**
+ * A collection of strings for the myPosts page
+ */
+export const myPostsStrings = {
+  myPostsTitle : 'You haven\'t posted any internships',
+  myPostsText : 'My Posts',
 }
 
 /**
@@ -139,6 +144,8 @@ export const myAccountStrings = {
  */
 export const postsStrings = {
   searchText : 'Enter search keywords',
+  noPostsText : 'No posts found',
+  postsTitle : 'Search Opportunities',
 }
 
 /**
@@ -157,4 +164,16 @@ export const signupStrings = {
   failedSignup : 'Signup failed. Unable to connect to the server.',
   logintext: 'Already Have an account? Login ',
   loginLink: 'Here',
+}
+
+/**
+ * A collection of strings for router
+ */
+export const routeStrings = {
+  internshipRoute : '/internships',
+  createPostRoute : '/createpost',
+  mypostsRoute : '/myposts',
+  myaccountRoute : '/myAccount',
+  signupRoute : '/signup',
+  loginRoute : '/login',
 }

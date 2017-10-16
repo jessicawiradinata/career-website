@@ -102,7 +102,7 @@ export default class MyAccountLayout extends Component<Props, State> {
               type={myAccountStrings.password}
               style={styles.textField}
               onChange={(confirmNewPass: any) => this.setState({ confirmNewPass: confirmNewPass.target.value })}
-              errorText={this.confirmpassOnChange(newPass, confirmNewPass) ? '' : 'password does not match'}
+              errorText={this.confirmpassOnChange(newPass, confirmNewPass) ? '' : myAccountStrings.confirmPasswordHint}
             />
             <RaisedButton
               label={myAccountStrings.updateText}
@@ -111,7 +111,7 @@ export default class MyAccountLayout extends Component<Props, State> {
               onClick={() => changePassword(user.email, currentPass, newPass)}
             />
             {isChangePasswordSuccess &&
-              <div style={styles.greenNotification as any}>Your password has been changed</div>
+              <div style={styles.greenNotification as any}>{myAccountStrings.passSuccessHint}</div>
             }
           </Paper>
           <Paper style={styles.profileContainer as any} zDepth={0}>
@@ -130,7 +130,7 @@ export default class MyAccountLayout extends Component<Props, State> {
               onClick={() => changeName(name)}
             />
             {isChangeNameSuccess &&
-              <div style={styles.greenNotification as any}>Your contact name has been updated</div>
+              <div style={styles.greenNotification as any}>{myAccountStrings.nameSuccessHint}</div>
             }
           </Paper>
         </div>

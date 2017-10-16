@@ -61,7 +61,7 @@ export default class PostsLayout extends Component<Props, State> {
     const filteredPosts = this.filterPosts(posts, searchText)
 
     if (filteredPosts.length === 0)
-      return <h4 style={styles.notFoundContainer}>No posts found</h4>
+      return <h4 style={styles.notFoundContainer}>{postsStrings.noPostsText}</h4>
 
     return map(filteredPosts, (post: any) => {
       return (
@@ -90,7 +90,7 @@ export default class PostsLayout extends Component<Props, State> {
         <Header history={history} isLoggedIn={isLoggedIn} logout={logout} isAdmin={isAdmin} />
         <div style={styles.pageContainer}>
           <Paper style={styles.searchContainer} zDepth={0}>
-            <h2>Search Opportunities</h2>
+            <h2>{postsStrings.postsTitle}</h2>
             <TextField
               hintText={postsStrings.searchText}
               style={styles.searchField}

@@ -6,7 +6,7 @@ import { Paper, TextField, RaisedButton } from 'material-ui'
 import Header from '../../components/Header/Header'
 import { History } from 'history'
 import { styles } from './styles'
-import { signupStrings } from '../../constants/strings'
+import { routeStrings, signupStrings } from '../../constants/strings'
 
 /**
  * Props that can be passed to this layout and their types
@@ -158,7 +158,7 @@ export default class SignupLayout extends Component<Props, State> {
             errorText={validName || !nameFocused ? '' : signupStrings.nameHint}
           />
           <div style={styles.loginLink}>
-            {signupStrings.logintext} <a href='#' onClick={() => history.push('/login')}> {signupStrings.loginLink}</a>
+            {signupStrings.logintext} <a href='#' onClick={() => history.push(routeStrings.loginRoute)}> {signupStrings.loginLink}</a>
           </div>
           <RaisedButton
             label={isSignupProcessing ? signupStrings.loadingText : signupStrings.signupText}

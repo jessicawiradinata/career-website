@@ -26,4 +26,12 @@ export const styles = {
     marginLeft: '10%',
     marginRight: '10%',
   },
+  noPostcardStyle: {
+    backgroundColor: 'white',
+    padding: '5%',
+    paddingTop: '2.5%',
+    margin: '10%',
+    marginTop: '0%',
+    textAlign: 'center',
+  },
 }
