@@ -17,6 +17,8 @@ interface Props {
   user: User
   isChangeNameProcessing: boolean
   isChangeNameSuccess: boolean
+  isChangePasswordSuccess: boolean
+  validConfirmPassword: boolean
   logout: (history: History) => void
   authenticate: (history: History) => void
   changePassword: (email: string, currentPass: string, newPass: string) => void
@@ -50,6 +52,10 @@ export default class MyAccountLayout extends Component<Props, State> {
     }
   }
 
+  confirmpassOnChange = (newPass: any, confirmNewPass: any) => {
+    return newPass === confirmNewPass
+  }
+
   /**
    * Authenticates user when entering My Account page and redirects to home if not logged in
    */
@@ -62,8 +68,8 @@ export default class MyAccountLayout extends Component<Props, State> {
    * Renders the My Account page layout
    */
   render() {
-    const { history, logout, user, changePassword, changeName, isChangeNameSuccess } = this.props
-    const { currentPass, newPass, name } = this.state
+    const { history, logout, user, changePassword, changeName, isChangeNameSuccess, isChangePasswordSuccess } = this.props
+    const { currentPass, newPass, confirmNewPass, name } = this.state
     const isAdmin = user ? user.isAdmin : false
 
     return (
@@ -96,6 +102,7 @@ export default class MyAccountLayout extends Component<Props, State> {
               type={myAccountStrings.password}
               style={styles.textField}
               onChange={(confirmNewPass: any) => this.setState({ confirmNewPass: confirmNewPass.target.value })}
+              errorText={this.confirmpassOnChange(newPass, confirmNewPass) ? '' : 'password does not match'}
             />
             <RaisedButton
               label={myAccountStrings.updateText}
@@ -103,8 +110,10 @@ export default class MyAccountLayout extends Component<Props, State> {
               style={styles.editBtn}
               onClick={() => changePassword(user.email, currentPass, newPass)}
             />
+            {isChangePasswordSuccess &&
+              <div style={styles.greenNotification as any}>Your password has been changed</div>
+            }
           </Paper>
-          <br/>
           <Paper style={styles.profileContainer as any} zDepth={0}>
             <h3 style={styles.titlePaper}>{myAccountStrings.contactDetailsHint}</h3>
             <TextField
@@ -121,7 +130,7 @@ export default class MyAccountLayout extends Component<Props, State> {
               onClick={() => changeName(name)}
             />
             {isChangeNameSuccess &&
-              <div style={styles.notificationBorder as any}>Your contact name has been updated</div>
+              <div style={styles.greenNotification as any}>Your contact name has been updated</div>
             }
           </Paper>
         </div>

@@ -141,7 +141,7 @@ const isChangePassSuccess = (state: boolean = true, action: changePassAction) =>
     case ActionTypes.CHANGE_PASSWORD_FAILED:
       return false
     default:
-      return true
+      return false
   }
 }
 
