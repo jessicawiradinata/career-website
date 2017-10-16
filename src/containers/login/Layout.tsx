@@ -20,8 +20,6 @@ interface Props {
   authenticateLoggedIn: (history: History) => void
   login: (email: string, password: string, history: History) => void
   resetPassword: (email: string) => void
-  validateEmail: (email: string, page: string) => void
-  isEmpty: (text: string, component: string) => void
 }
 
 /**
