@@ -13,4 +13,17 @@ export const styles = {
     marginBottom: '0%',
     textAlign: 'center',
   },
+  postcardStyle: {
+    backgroundColor: 'white',
+    padding: '5%',
+    paddingBottom: '0%',
+    paddingTop: '2.5%',
+    margin: '10%',
+    marginTop: '0%',
+    marginBottom: '0%',
+  },
+  postcardDivider: {
+    marginLeft: '10%',
+    marginRight: '10%',
+  },
 }

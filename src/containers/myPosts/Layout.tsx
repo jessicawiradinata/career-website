@@ -74,8 +74,8 @@ export default class MyPostsLayout extends Component<Props, State> {
         <Paper style={styles.searchContainer} zDepth={0}>
           <h2>My Posts</h2>
         </Paper>
-        <Divider style={{marginLeft: '10%', marginRight: '10%'}}/>
-        <div style={{backgroundColor: 'white', padding: '5%', paddingTop: '2.5%', margin: '10%', marginTop: '0%'}}>
+        <Divider style={styles.postcardDivider}/>
+        <div style={styles.postcardStyle}>
           {this.renderPostCards()}
         </div>
       </div>
