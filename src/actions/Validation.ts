@@ -23,6 +23,13 @@ export const validatePassword = (text: string) => validator.isLength(text, { min
  */
 export const validateName = (text: string) => validator.isLength(text, { min: 3, max: 70 })
 
+/**
+ * Validates whether a text is valid by checking whether it is not empty
+ * @param text string to be validated
+ * @return true if text is not empty, false if text is empty
+ */
+export const validateEmpty = (text: string) => !validator.isEmpty(text)
+
 export const isEmpty = (text: string, component: string) => {
   const isEmpty = validator.isEmpty(text)
   switch (component) {
