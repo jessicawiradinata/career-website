@@ -169,7 +169,7 @@ export const signupStrings = {
   signupText : 'Sign Up',
   failedSignup : 'Signup failed. Unable to connect to the server.',
   logintext: 'Already Have an account? Login ',
-  loginLink: 'Here',
+  loginLink: 'Login here',
 }
 
 /**
