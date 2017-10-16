@@ -13,6 +13,8 @@ html {
 
 #root {
   min-height: 100%;
+  min-width: 100%;
+  width: 'auto';
   height: 'auto';
   background: url('./assets/background.jpg');
   background-attachment: fixed;
