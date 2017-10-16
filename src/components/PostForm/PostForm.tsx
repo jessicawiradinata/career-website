@@ -9,7 +9,6 @@ import { concat, map, uniqueId, pull, find } from 'lodash'
 import { styles } from './styles'
 import { postformStrings } from '../../constants/strings'
 import { dimens } from './dimens'
-import { isEmpty } from './validation'
 import WorkTypeSelectField from '../WorkTypeSelectField/WorkTypeSelectField'
 import ValidationTextField from '../ValidationTextField/ValidationTextField'
 import validator from 'validator'
@@ -74,7 +73,7 @@ export default class PostForm extends Component<Props, State> {
   locationOnChange = (location: any) => {
     this.setState({
       location: location.target.value,
-      validLocation: !isEmpty(location.target.value),
+      validLocation: this.validateEmpty(location.target.value),
     })
   }
 
@@ -86,7 +85,7 @@ export default class PostForm extends Component<Props, State> {
     const { searchLocation } = this.props
     this.setState({
       location,
-      validLocation: !isEmpty(location),
+      validLocation: !this.validateEmpty(location),
     })
     searchLocation(this.state.location)
   }
@@ -97,7 +96,7 @@ export default class PostForm extends Component<Props, State> {
   locationOnBlur = () => {
     this.setState({
       locationFocused: true,
-      validLocation: !isEmpty(this.state.location),
+      validLocation: this.validateEmpty(this.state.location),
     })
   }
 
