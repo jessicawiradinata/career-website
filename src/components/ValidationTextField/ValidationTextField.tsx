@@ -4,11 +4,11 @@ import { TextField } from 'material-ui'
 interface Props {
   label: string,
   isFloatingLabelFixed: boolean,
-  value: string,
+  value?: string,
   style?: any,
   errorText: string,
   hintText?: string,
-  maxLength: string,
+  maxLength?: string,
   onChange: (event: any) => void
   validate: (text: string) => boolean
 }
@@ -22,8 +22,9 @@ interface State {
 export default class ValidationTextFields extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
+    const { value } = this.props
     this.state = {
-      textValue: this.props.value,
+      textValue: value ? value : '',
       isValid: false,
       isFocused: false,
     }
@@ -59,7 +60,7 @@ export default class ValidationTextFields extends Component<Props, State> {
         style={style ? style : ''}
         hintText={hintText ? hintText : ''}
         errorText={isValid || !isFocused ? '' : errorText}
-        maxLength={maxLength}
+        maxLength={maxLength ? maxLength : ''}
         onChange={this.onTextChange}
         onBlur={this.onTextBlur}
       />
