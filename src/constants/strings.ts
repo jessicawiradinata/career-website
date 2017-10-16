@@ -127,11 +127,15 @@ export const myAccountStrings = {
   changePassword : 'Change Password',
   password : 'password',
   newPassword : 'New Password',
-  ConfirmPassword : 'Confirm New Password',
+  confirmPassword : 'Confirm New Password',
   updateText : 'Update',
   nameText : 'Name',
   myAccountTitle : 'My Account',
   contactDetailsHint : 'Change Contact Details',
+  currentPassError: 'Current password cannot be empty',
+  newPassError: 'Password length must be between 6 - 20 characters',
+  confirmPassError: 'Confirm password must be equal to new password',
+  nameError: 'Name field has a minimum of 3 characters',
 }
 
 /**

@@ -125,6 +125,7 @@ export default class LoginLayout extends Component<Props, State> {
               isFloatingLabelFixed={false}
               style={styles.textField}
               errorText={loginStrings.passwordError}
+              isPassword={true}
               onChange={(event: any) => this.setState({ password: event.target.value })}
               validate={(text: string) => this.validatePassword(password)}
             />
